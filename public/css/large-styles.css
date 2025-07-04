@@ -1,0 +1,18 @@
+@media screen and (min-width:64.1rem) {
+    /*Main Section Design*/
+    .hero .hero-content {
+        margin-left: 2rem;
+        padding: 2rem;
+    }
+    .hero-content h2 {
+        font-size: 2.5rem;
+    }
+    .hero-content .cta {
+        text-align: center;
+        margin: 2rem 0.5rem;
+    }
+    .hero .hero-content .cta a {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+    }
+}

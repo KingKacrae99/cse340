@@ -1,6 +1,163 @@
 /******* Change Box Model ***************/
+:root{
+  --accent:#007bff;
+}
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+/**body {
+}**/
+/** Layout Section Design**/
+#wrapper {
+  background-color: #fff;
+}
+
+/** Header Section Design **/
+#top-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0rem;
+}
+#top-header a{
+  color: rgba(0 0 0 /80%);
+  font-weight: bold;
+}
+#top-header .siteName{
+  font-size: 2em;
+}
+a{
+  text-decoration: none;
+}
+/* Navigation Section */
+nav{
+  width: 100%;
+  padding:1rem;
+  background: rgba(0 0 0 /90%);
+}
+nav ul{
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0%;
+  justify-content: space-around;
+  gap: 1rem;
+  list-style: none;
+}
+nav ul li{
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+}
+
+/*** Main Section ***/
+
+/* Hero */
+main .hero{
+  background: url("/images/vehicles/delorean-tn.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0%;
+  min-height: 250px;
+}
+.hero h1{
+  font-size: large;
+  margin: 2rem 0;
+}
+.hero .hero-content{
+  background-color: rgba(255, 255, 255, 0.7);
+  width: fit-content;
+  /*color: lightskyblue;*/
+  color: var(--accent);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 1rem;
+  padding: .5rem;
+}
+.hero-content h2{
+  font-size: larger;
+  font-weight: bold;
+  margin: 0;
+} 
+.hero-content p{
+  margin: 0%;
+  font-size: 1rem;
+}
+.hero-content .cta{
+  margin: .5rem;
+}
+.hero .hero-content .cta a{
+  background: var(--accent);
+  padding: 0.3rem .5rem;
+  color: #000;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Row Section */
+.row {
+  display: grid;
+  grid-template-areas: 
+  "a"
+  "b";
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.row .col-1 {
+  grid-area: b;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.row .col-1 h2{
+  margin: 1rem 0;
+}
+.row .col-1 .upgrade{
+  grid-template-areas: 
+  "a b";
+  display: grid;
+  gap: .5rem;
+}
+.col-1 .upgrade figure{
+  margin: 1rem 0;
+}
+.col-1 .upgrade figure .upgrade-imgs{
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border: 2px solid #ccc;
+  width: 100%;
+}
+.col-1 .upgrade figure figcaption{
+  font-weight: 700;
+  text-align: center;
+  font-size: large;
+} 
+
+.row .col-2 {
+  grid-area: a;
+}
+.row .col-2 h2{
+  margin: 1.5rem 0;
+}
+.col-2 ul li{
+  margin: 2rem 0;
+  font-size: large;
+}
+
+/*footer design*/
+footer{
+  margin-top: 1rem;
+  padding: 1rem;
+}
+footer p{
+  margin: 0%;
 }

@@ -7,8 +7,9 @@
 *:after {
   box-sizing: border-box;
 }
-/**body {
-}**/
+body {
+  font-family: 'Roboto', sans-serif;
+}
 /** Layout Section Design**/
 #wrapper {
   background-color: #fff;

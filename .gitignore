@@ -15,4 +15,7 @@ node_modules
 # .DS_Store is only for Mac users
 **/.DS_Store
 
+# the inventory-data file
+inventory-data.txt
+
 README.md

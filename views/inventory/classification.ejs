@@ -1,0 +1,9 @@
+<% if (title) { %> <!-- EJS block to contain a JavaScript. Checks if a title variable exists-->
+<h1><%= title %></h1> <!-- Display variable -->
+<% } else { 
+    res.redirect('/') 
+} %><!-- else redirect the reponse object to the default index route(renders the home view)-->
+
+<%# messages () %>
+
+<%- grid %>

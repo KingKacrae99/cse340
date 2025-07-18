@@ -58,4 +58,14 @@ Util.buildClassificationGrid = async function(data) {
     return grid
 }
 
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ * Util.handleErrors = - declares the property which is appended to the "Util" object.
+ * fn => (req, res, next) => accepts request, response, and next as parameters along with another arrow function.
+ * Promise.resolve(fn(req, res, next)) a "wrapper" accepts a function as a parameter of the "Promise.resolve" function
+ **************************************** */
+Util.handlerErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next).catch(next))
+
 module.exports = Util

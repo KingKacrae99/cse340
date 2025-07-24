@@ -9,10 +9,11 @@
 }
 body {
   font-family: 'Roboto', sans-serif;
+  background-color: #f5f7fa;
 }
 /** Layout Section Design**/
 #wrapper {
-  background-color: #fff;
+  background-color: #f5f7fa;
 }
 
 /** Header Section Design **/
@@ -53,6 +54,14 @@ nav ul li{
   text-decoration: none;
   color: #fff;
 }
+nav ul li a{
+  color: #007bff;
+}
+nav ul li :active{
+  border-bottom: 3px solid #007bff;
+  color: #f5f7fa;
+}
+
 
 /*** Main Section ***/
 
@@ -63,6 +72,9 @@ main .hero{
   background-position: center;
   margin: 0%;
   min-height: 250px;
+}
+main h1{
+  color: #333;
 }
 .hero h1{
   font-size: large;
@@ -154,11 +166,145 @@ main .hero{
   font-size: large;
 }
 
+/* Inventory By Classification */
+#inv-display{
+  display: grid;
+  list-style: none;
+  grid-template-rows: auto;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+#inv-display li{
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0px 0px 0.3rem 0px;
+  display: flex;
+  flex-direction: column;
+}
+#inv-display li img{
+  justify-self: center;
+  align-self: center;
+  width: 100%;
+  padding: 0%;
+  margin: 0;
+  height: 100%;
+}
+#inv-display li .namePrice{
+  margin-top: 0;
+  padding-top: 0;
+  height: 100%;
+  background: #f5f7fa;
+  display: flex;
+  flex-direction: column;
+}
+li .namePrice hr{
+  margin: 0;
+  padding: 0;
+}
+li .namePrice h2{
+  font-size: larger;
+  text-align: center;
+  color: #333;
+}
+li .namePrice a{
+  color: #333;
+  text-align: center;
+}
+li .namePrice span{
+  align-self: center;
+  color: #333;
+  padding-bottom: 1rem;
+  font-size: large;
+}
+
+
+/******Inventory Details Page**********/
+.inv-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+  border-radius: 12px;
+  max-width: 800px;
+  /*border: 1px solid #ccc;
+  border-radius: 5%;
+  box-shadow: 0px .3px 0.3rem 1px;*/
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #fff;
+
+}
+.inv-card picture, .inv-card .inv-card-img{
+  display: block;
+  border-radius: 8px;
+  margin: 0 auto;
+  max-width: 100%;
+  padding-top:1rem ;
+}
+.inv-card .inv-card-info{
+  padding: 1rem;
+   h2 {
+      font-size: 1.5rem;
+      margin-top: 2rem;
+      color: #333;
+    }
+    p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+  .inv-spec {
+    padding: 1rem 0.2rem;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+  }
+}
+/**** Error Page ****/
+.err-container{
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7),rgba(0,0,0,0.5)),url("../images/site/bg-error.webp");
+  min-height: 100vh;
+  max-height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 1rem;
+  padding: 2rem;
+  color: #fff;
+}
+.err-container h1{
+  text-shadow: 1px 2px 2px #fff;
+  color: #fff;
+}
+.err-container section{
+  margin-top: 2rem;
+}
+.err-container h2{
+  text-align: left;
+}
+
+.err-container  a{
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 8px;
+  color: #fff;
+}
+
 /*footer design*/
 footer{
   margin-top: 1rem;
   padding: 1rem;
+
 }
 footer p{
   margin: 0%;
+  color: #333;
+}
+
+footer .btn{
+  margin: 1rem;
+  color: #007bff;
 }

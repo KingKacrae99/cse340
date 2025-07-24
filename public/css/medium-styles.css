@@ -81,4 +81,25 @@
     .row .col-2{
         grid-area: b;
     }
+
+    /* Inventory By Classification */
+    main #inv-display {
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    /****** Inventory details page ******/
+    .inv-spec {
+        padding: 1.5rem 0;
+    }
+
+    /**** Error Page ****/
+    .err-container {
+        font-size: 1.5rem;
+    }
+
+    .err-container a {
+        padding: 0.5rem 1rem;
+
+    }
 }

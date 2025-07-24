@@ -34,15 +34,15 @@ Util.buildClassificationGrid = async function(data) {
         grid = '<ul id="inv-display">'
         data.forEach(vehicle => {
             grid += '<li>'
-            grid += '<a href="../../inv/detail/' + vehicle.inv_id
+            grid += '<a href="../inv/inv/detail/' + vehicle.inv_id
             + '" title="View ' + vehicle.inv_make + ' ' + vehicle.inv_model
-            + 'details"><img src="' + vehicle.inv_thumbnail
+            + 'details"><img src="/' + vehicle.inv_thumbnail
             + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model
             + ' on CSE Motors" /></a>'
             grid += '<div class="namePrice">'
             grid += '<hr/>'
             grid += '<h2>'
-            grid += '<a href="../../inv/detail/' + vehicle.inv_id + '" title="View '
+            grid += '<a href="../inv/inv/detail/' + vehicle.inv_id + '" title="View '
             + vehicle.inv_make + ' ' + vehicle.inv_model + 'details">'
             + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
             grid += '</h2>'
@@ -56,6 +56,46 @@ Util.buildClassificationGrid = async function(data) {
         grid += '<p class="notice"> Sorry, no matching vehicles could be found.</p>'
     }
     return grid
+}
+
+Util.buildInventDetails = async function (data) {
+    let container
+    console.log(data.inv_image)
+    if (data) {
+        container = `<section class="inv-card">
+        <div class="inv-card-img">
+        <picture>
+            <source srcset="/${data.inv_image}" media="(min-width: 735px)">
+            <img src="/${data.inv_thumbnail}" alt="${data.inv_year} ${data.inv_make} ${data.inv_model}">
+        </picture>
+        </div>
+
+        <div class="inv-card-info">
+            <h2>${data.inv_make} ${data.inv_model} details</h2>
+            <p class="inv-spec"><strong>Price:</strong>
+                ${addCommasAndCurrency(data.inv_price)}
+            </p>
+            <p class="inv-describe"><strong>Description:</strong>
+               ${data.inv_description}
+            </p>
+            <p class="inv-spec"><strong>Color:</strong>
+               ${data.inv_color}
+            </p>
+            <p class="inv-describe"><strong>Miles:</strong>
+               ${data.inv_miles}
+            </p>
+        </div>
+        </section>`
+    }
+    return container
+}
+
+function addCommasAndCurrency(dataprice){
+    price = Number(dataprice).toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    })
+    return price;
 }
 
 /* ****************************************

@@ -31,7 +31,7 @@ app.use("/inv", inventoryRoute)
 
 //Index route
 app.get("/", utilities.handlerErrors(baseController.buildHome))
-
+app.get("/error/err/test", utilities.handlerErrors(baseController.quick))
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status:404, message:'Sorry we appear to have lost the page!'})
@@ -43,6 +43,7 @@ app.use(async (req, res, next) => {
 *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
+  //let message
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
   if (err.status == 404){message = err.message} else{message='Oh no! There was a crash. Maybe try a different route?'}
   res.render("errors/error", {

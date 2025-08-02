@@ -1,3 +1,4 @@
+const { name } = require("ejs")
 const invModel = require("../models/inventory-model")
 const Util = {}
 
@@ -88,6 +89,24 @@ Util.buildInventDetails = async function (data) {
         </section>`
     }
     return container
+}
+Util.buildDropdown = async function (data) {
+    let select
+    if (data.length > 0) {
+        select = `<select id="classification_id" name="classification_id" required>
+                  <option value="">Choose a Classification</option>`
+        data.forEach(row => {
+            select += '<option value="'+ row.classification_id + '">'
+            + row.classification_name +
+            '</option >'
+        })
+        select += '</select>'
+    } else {
+        select = `<select id="classification_id" disabled>
+        <option> No options available </option>
+        </select>`
+    }
+    return select
 }
 
 function addCommasAndCurrency(dataprice){

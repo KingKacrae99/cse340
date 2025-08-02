@@ -1,0 +1,49 @@
+<div class="register">
+<h1 id="reg-head">
+    <%= title %>
+</h1>
+<%- messages() %>
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error=> { %>
+            <li>
+                <%= error.msg %>
+            </li>
+            <% }) %>
+    </ul>
+<% } %>
+    <form action="/account/register" method="post" id="reg-form">
+        <label for="first_name" id="account_firstname"> First Name </label>
+        <br>
+        <input type="text" id="first_name" name="account_firstname" 
+        autocomplete="first-name" required value="<%= locals.account_firstname %>">
+        <br>
+        <label for="last_name" id="account_lastname"> Last Name </label><br>
+        <input type="text" id="last_name" name="account_lastname" 
+        autocomplete="last-name" required value="<%= locals.account_lastname %>">
+        <br>
+        <label for="email" id="eaddress"> Email Address </label><br>
+        <input type="email" id="email" name="account_email" autocomplete="email"
+         required placeholder="Enter a valid email address"
+         value="<%= locals.account_email %>"
+         >
+        <br>
+        <label for="pswrd" id="pwrd"> Password </label><br>
+        <div class="pass-msg">
+            <small>Password must be at least 12 characters long, with at least 1 uppercase letter, 1 digit, and 1 special
+                character.
+            </small>
+        </div>
+        <input type="password" id="pswrd" name="account_password"
+        autocomplete="new-password"
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+        required>
+
+       <span id="shwpwrd">Show Password</span>
+        <div class="logbtn-div">
+            <button type="submit" id="reg-btn">Create Account</button>
+        </div>
+        <p class="have-account">Already have an account? <a href="/account/login">Login</a></p>
+    </form>
+</>
+<script src="../../js/register.js" defer></script>

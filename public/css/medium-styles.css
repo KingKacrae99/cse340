@@ -102,4 +102,24 @@
         padding: 0.5rem 1rem;
 
     }
+
+    /*********Login Form **********/
+    .login-section #login-form {
+        max-width: 400px;
+    }
+    .register {
+        min-width: 400px;
+        width: 50%;
+    }
+}
+/*******************************************
+* Add Inventory 
+********************************************/
+.add-inv {
+    & fieldset{
+        grid-template-areas:
+        "a a";
+        grid-template-columns: 1fr 1fr;
+
+    }
 }

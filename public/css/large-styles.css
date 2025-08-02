@@ -39,4 +39,12 @@
         background: #f5f7fa;
         padding: 1rem;
     }
+    /*********Login Form **********/
+    .login-section #login-form {
+        max-width: 500px;
+    }
+    .register {
+        min-width: 500px;
+        width: 50%;
+    }
 }

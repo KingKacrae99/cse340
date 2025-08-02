@@ -42,6 +42,7 @@ nav{
 nav ul{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   padding: 0;
   margin: 0%;
   justify-content: space-around;
@@ -312,6 +313,7 @@ li .namePrice span{
   font-weight: 800;
 }
 
+
 /*********Login Form **********/
 .login-section{
   display: flex;
@@ -363,7 +365,7 @@ li .namePrice span{
   color: #007bff;
   text-align: center;
   font-size: 1.1rem;
-  & a{
+  a{
     color: #007bff;
   }
 }
@@ -387,17 +389,16 @@ main #reg-head{
   padding: 2rem;
   width: 100%;
   align-self: center;
-  & input{
+  input{
     padding: 0.7rem;
     width: 100%;
     border-radius: 5px;
     border: 1px solid #ccc;
     margin-bottom: 1rem;
   }
-  & label{
+ label{
     color: #007bff;
   }
-  &
   #reg-btn{
     background-color: #007bff;
     color: #fff;
@@ -406,12 +407,12 @@ main #reg-head{
     padding: 0.8rem 1rem;
     width: 60%;
   }
-  & .have-account {
+  .have-account {
     color: #555;
     font-size: 1.1rem;
     margin-top: 1rem;
 
-    & a {
+  a {
       color: #007bff;
     }
   }
@@ -457,7 +458,7 @@ Add classification view
     box-shadow: 0px 1px 0.3rem 0px;
     border-radius: 5px;
     padding: 2rem;
-    & label{
+    label{
       color: #007bff;
     }
     input{
@@ -489,15 +490,15 @@ Add classification view
   display: flex;
   justify-content: center;
   align-items: center;
-  & h1{
+  h1{
     margin-bottom: 0.5rem;
     font-size: 1.35rem;
     color: #007bff;
   }
-  & p{
+  p{
     color: #007bff;
   }
-  & #inv-form{
+  #inv-form{
     display: grid;
     grid-template-areas: 
     "a"
@@ -505,30 +506,30 @@ Add classification view
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
     padding: 1rem 1.5rem;
     grid-template-columns: 1fr;
-    & fieldset{
+    fieldset{
       grid-area: a;
       display: grid;
       border: none;
       gap: 1rem;
     }
-    & label{
+    label{
       color: #555;
     }
-    & input{
+    input{
       width: 100%;
       padding: 0.6rem;
       border-radius: 5px;
       border: 1px solid #555;
       outline: none;
     }
-    & select {
+    select {
       color: #555;
       border-radius: 5px;
       padding: 0.5rem;
       outline: none;
       width: 100%;
     }
-    & textarea{
+    textarea{
       width: 100%;
       outline: none;
     }

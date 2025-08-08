@@ -125,6 +125,8 @@ invCont.processAddClassification = async function (req, res, next) {
 }
 invCont.processAddInventory = async function (req, res, next) {
     const nav = await utilities.getNav()
+    const data = await invModel.getClassificationName()
+    const select = await utilities.buildDropdown(data)
     const { classification_id, inv_make, inv_model, inv_year,
         inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color } = req.body
     
@@ -149,7 +151,8 @@ invCont.processAddInventory = async function (req, res, next) {
              req.flash("notice", "Failed to add inventory")
             res.status(400).render("inventory/add-inventory", {
                 title: "Add Inventory",
-                nav
+                nav,
+                select
             })
         }
      } catch (err) {

@@ -24,7 +24,9 @@ invValidate.addInventoryRules = () => {
         
         body("inv_year")
             .trim()
-            .isLength({ max: 4, min:4 })
+            .isLength({ max: 4, min: 4 })
+            .isInt({ min: 1900, max: new Date().getFullYear() })
+            .withMessage(`Year must be between 1900 and ${new Date().getFullYear()}`)
             .notEmpty()
             .withMessage("Please enter valid year")
             .toInt(),

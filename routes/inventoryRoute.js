@@ -14,6 +14,9 @@ router.get("/create-classification", utilities.handlerErrors(invController.build
 router.get("/create-inv", utilities.handlerErrors(invController.buildAddInventory));
 
 router.post("/add-classification", invController.processAddClassification)
-router.post("/add-inventory",invValidate.addInventoryRules(), utilities.handlerErrors(invController.processAddInventory))
+router.post("/add-inventory", invValidate.addInventoryRules(), utilities.handlerErrors(invController.processAddInventory))
+router.get("/getInventory/:classification_id", utilities.handlerErrors(invController.getInventoryJSON))
+router.get("/edit/:inv_id", utilities.handlerErrors(invController.editInventoryView))
+router.post("/update/", invValidate.updateInventoryRules(), utilities.handlerErrors(invController.updateInventory))
 
 module.exports = router;

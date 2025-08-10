@@ -19,6 +19,7 @@ const pool = require('./database/')
 // bodyParser make the application aware of that functionality
 // In order to colloect the values from the incoming
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 /* ***********************
  * Middleware
@@ -53,6 +54,8 @@ stored in the request object's body. The "extended: true" object is a configurat
  objects and arrays to be parsed. The final part is an inline comment pertaining to the entire line.
 */
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates

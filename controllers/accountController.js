@@ -1,6 +1,8 @@
 const utilities = require("../utilities/")
 const accountModel = require("../models/account-model");
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 /*************************************************
  * Deliver login view
@@ -78,34 +80,72 @@ async function registerAccount(req, res) {
 async function processLogin(req, res) {
   const nav = await utilities.getNav()
   const { account_email, account_password } = req.body
-  const loginResult = await accountModel.loginAccount(account_email, account_password)
+  const loginResult = await accountModel.getAccountByEmail(account_email)
 
   try {
-    if (loginResult) {
-      req.flash(
-        "notice",
-        `You've Logged In. Welcome ${loginResult.account_firstname}`
-      )
-      res.status(200).render("index", {
-        title: "Home",
-        nav,
-      })
+    if (bcrypt.compare(account_password, loginResult.account_password)) {
+      delete loginResult.account_password
+      const accessToken = jwt.sign(loginResult, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+      if (process.env.NODE_ENV === 'development') {
+        res.cookie("jwt",accessToken,{ httpOnly: true, maxAge: 3600 * 1000})
+      } else {
+        res.cookie("jwt", accessToken,{httpOnly:true, secure: true, maxAge: 3600 * 1000})
+      }
+      return res.redirect("/account/")
     } else {
-      req.flash("notice", "Sorry, no account exist with those credentials.")
-      res.status(401).render("account/login", {
+      res.flash("notice", "Please check your credentials and try again.")
+      res.status(400).render("account/login", {
         title: "Login",
         nav,
+        errors: null,
+        account_email
       })
     }
+    // if (loginResult) {
+    //   req.flash(
+    //     "notice",
+    //     `You've Logged In. Welcome ${loginResult.account_firstname}`
+    //   )
+    //   res.status(200).render("index", {
+    //     title: "Home",
+    //     nav,
+
+    //   })
+    // } else {
+    //   req.flash("notice", "Sorry, no account exist with those credentials.")
+    //   res.status(400).render("account/login", {
+    //     title: "Login",
+    //     nav,
+    //     errors: null,
+    //     account_email,
+    //   })
+    // }
   } catch (error) {
-    console.error("Login error:", error)
-    req.flash("notice", "Login failed due to a server error.")
-    res.status(500).render("account/login", {
-      title: "Login",
-      nav,
-      account_email
-    })
+    throw new Error('Access Forbidden')
+    // req.flash("notice", "Login failed due to a server error.")
+    // res.status(500).render("account/login", {
+    //   title: "Login",
+    //   nav,
+    //   account_email
+    // })
   }
 }
 
-module.exports = { buildLogin, buildRegister,registerAccount, processLogin}
+/**********************************************************************
+ *  Delivers the Default Account View
+ **********************************************************************/
+async function defaultAccount(req, res, next) {
+  try {
+    const nav = await utilities.getNav()
+    req.flash("confirmation", "You're logged in")
+    res.status(200).render("account/account", {
+      title: "User Account",
+      nav,
+      errors: null
+    })
+  } catch (err) {
+    next(err)
+  }
+}
+
+module.exports = { buildLogin, buildRegister,registerAccount, processLogin, defaultAccount}

@@ -305,6 +305,12 @@ li .namePrice span{
   color: #fff;
 }
 
+.confirmation{
+  list-style: none;
+  padding-left: 0%;
+  color: aqua;
+  font-weight: 800;
+}
 
 /**** Flash Messages ****/
 .notice{
@@ -444,6 +450,30 @@ main #reg-head{
     color: #153557;
   }
 }
+
+.mgt-container #classification_id{
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  outline: none;
+  color: #333;
+  border-radius: 5px;
+}
+.mgt-container #inventoryDisplay{
+  margin: 2rem 1rem;
+}
+thead tr th{
+  text-align: center;
+  padding: 1rem;
+}
+tbody tr td{
+  padding: 0.5rem 1rem;
+}
+.mgt-container tbody tr td a{
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.3rem;
+  border-radius: 5px;
+}
 /*********************************
 Add classification view
 **********************************/
@@ -549,6 +579,63 @@ Add classification view
     }
   }
 
+}
+#updateForm {
+  display: grid;
+  grid-template-areas:
+    "a"
+    "c";
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 1rem 1.5rem;
+  grid-template-columns: 1fr;
+
+  fieldset {
+    grid-area: a;
+    display: grid;
+    border: none;
+    gap: 1rem;
+  }
+
+  label {
+    color: #555;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 5px;
+    border: 1px solid #555;
+    outline: none;
+  }
+
+  select {
+    color: #555;
+    border-radius: 5px;
+    padding: 0.5rem;
+    outline: none;
+    width: 100%;
+  }
+
+  textarea {
+    width: 100%;
+    outline: none;
+  }
+
+  #inv-btn {
+    text-align: center;
+    margin: 1.5rem 0;
+    grid-area: c;
+
+    & button {
+      color: #fff;
+      background: #007bff;
+      padding: 0.8rem 1rem;
+      width: 80%;
+      outline: none;
+      border: 1px solid #007bff;
+      border-radius: 5px;
+    }
+  }
 }
 /*footer design*/
 footer{

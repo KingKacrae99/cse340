@@ -74,9 +74,34 @@ async function updatePassword(account_id,account_password) {
     throw new Error("Change Password Error: " + error.message)
   }
 }
+
+/******************************************************
+ *   Retrieve first 5 Recent Login from the Login Table
+ ******************************************************/
+async function getRecentLogins(account_id) {
+  const sql = "SELECT login_time, ip_address FROM public.login_history WHERE account_id = $1 ORDER BY login_time DESC LIMIT 5";
+  const result = await pool.query(sql, [account_id]);
+  return result.rows;
+}
+
+/******************************************************
+ *  Add Login to Login History Table
+ *****************************************************/
+async function addLoginHistory(account_id, ip_address) {
+  const sql = `
+    INSERT INTO login_history (account_id, ip_address)
+    VALUES ($1, $2)
+    RETURNING *;
+  `;
+  const result = await pool.query(sql, [account_id, ip_address]);
+  return result.rows[0];
+}
+
+
 module.exports = {
   registerAccount, checkExistingEmail,
   getAccountByEmail, getAccountById,
   checkUpdateEmail, updateAccount,
-  updatePassword
+  updatePassword, getRecentLogins,
+  addLoginHistory
 }

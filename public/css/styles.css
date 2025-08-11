@@ -455,7 +455,7 @@ Profile settings
     color: #007bff;
   }
 
-  #reg-btn {
+  #change-pswrd-btn {
     background-color: #007bff;
     color: #fff;
     border-radius: 8px;
@@ -473,6 +473,7 @@ Profile settings
       color: #007bff;
     }
   }
+  
 
   #shwpwrd {
     border: 2px solid #ccc;
@@ -484,7 +485,7 @@ Profile settings
   }
 }
 /**************************
-Profile settings
+End Profile settings
 **************************/
 
 .mgt-container{

@@ -85,7 +85,9 @@ async function processLogin(req, res) {
   try {
     if (bcrypt.compare(account_password, loginResult.account_password)) {
       delete loginResult.account_password
+      await accountModel.addLoginHistory(loginResult.account_id, req.ip);
       const accessToken = jwt.sign(loginResult, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+
       if (process.env.NODE_ENV === 'development') {
         res.cookie("jwt",accessToken,{ httpOnly: true, maxAge: 3600 * 1000})
       } else {
@@ -139,18 +141,25 @@ async function defaultAccount(req, res, next) {
     const nav = await utilities.getNav()
     //req.flash("confirmation", "You're logged in")
     let isStaff = false;
+    let isAdmin = false;
     const accountData = res.locals.accountData
+    const recentLogins = await accountModel.getRecentLogins(accountData.account_id);
     if (accountData.account_type == "Employee" ||
       accountData.account_type == "Admin") {
       isStaff = true;
       console.log( "ACCOUNT TYPE :" ,accountData.account_type)
-    }    
+    }
+    if (accountData.account_type == "Admin") {
+      isAdmin = true;
+    }
     console.log("Account page:", res.locals)
     res.status(200).render("account/account", {
       title: "User Account",
       nav,
       isStaff,
+      isAdmin,
       accountData,
+      recentLogins,
       errors: null
     })
   } catch (err) {
@@ -288,6 +297,8 @@ async function logout(req, res, next) {
     res.redirect("account/login")
   }
 }
+
+
 
 module.exports = {
   buildLogin, buildRegister, registerAccount,

@@ -16,6 +16,26 @@
                 </div>
             <%}%>
         <% } %>
-        <div class=""></div>
+        <% if (isAdmin) { %>
+            <div class="recentLog">
+                <h3>Recent Login History</h3>
+                <table>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>IP Address</th>
+                    </tr>
+                    <% recentLogins.forEach(login=> { %>
+                        <tr>
+                            <td>
+                                <%= login.login_time %>
+                            </td>
+                            <td>
+                                <%= login.ip_address %>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </table>
+            </div>
+        <% } %>
     </section>
 </div>

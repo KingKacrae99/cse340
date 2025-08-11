@@ -182,5 +182,30 @@ Util.checkLogin = (req, res, next) => {
         return res.redirect("/account/login")
     }
 }
+Util.checkRights = (req, res, next) => {
+    const staff = ['Employee', 'Admin']
+    console.log("account type :", res.locals.accountData.account_type)
+    const account_type = res.locals.accountData.account_type
+    console.log("account type result:",account_type) 
+    if (isStaff(account_type)) {
+        next()
+    } else {
+        if (res.locals.loggedin) {
+            req.flash("unauthorized", "Unauthorized Access!")
+            return res.redirect("/account/")
+        } else {
+           req.flash("notice", "Access Denied! Please log in.")
+           return res.redirect("/account/login") 
+        }
+    }
+}
+function isStaff(accountType){
+    const role = ['Employee', 'Admin']
+    let staff = false;
+    if (role.includes(accountType)) {
+     staff = true;
+    }
+    return staff
+}
 
 module.exports = Util

@@ -23,6 +23,15 @@ async function getAccountByEmail(account_email) {
       return new Error("No matching email found!")
     }
 }
+async function getAccountById(account_id) {
+    try {
+      const sql = "SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_id = $1"
+      const data = await pool.query(sql, [account_id])
+      return data.rows[0]
+    } catch (error) {
+      return new Error("No account found!")
+    }
+}
 
 /* **********************
  *   Check for existing email
@@ -36,5 +45,38 @@ async function checkExistingEmail(account_email){
     return error.message
   }
 }
+async function checkUpdateEmail(account_id, account_email){
+  try {
+    const sql = "SELECT * FROM public.account WHERE account_id != $1 AND account_email = $2"
+    const email = await pool.query(sql, [account_id,account_email])
+    return email.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
 
-module.exports = {registerAccount, checkExistingEmail, getAccountByEmail}
+async function updateAccount(account_id,account_firstname,account_lastname,account_email) {
+  try {
+    const sql = "UPDATE public.account SET account_firstname = $2, account_lastname = $3, account_email = $4 WHERE account_id = $1 RETURNING *"
+    const data = await pool.query(sql, [account_id, account_firstname, account_lastname, account_email])
+    return data.rows[0];
+  } catch (error) {
+    new Error("Account Update Error: "+ error.message)
+  }
+}
+
+async function updatePassword(account_id,account_password) {
+  try {
+    const sql = "UPDATE public.account SET account_password = $2 WHERE account_id = $1"
+    const result = await pool.query(sql, [account_id, account_password])
+    return result.rowCount > 0
+  } catch (error) {
+    throw new Error("Change Password Error: " + error.message)
+  }
+}
+module.exports = {
+  registerAccount, checkExistingEmail,
+  getAccountByEmail, getAccountById,
+  checkUpdateEmail, updateAccount,
+  updatePassword
+}

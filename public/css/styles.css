@@ -435,6 +435,58 @@ main #reg-head{
   color: #555;
 }
 
+/**************************
+Profile settings
+**************************/
+#change-pswrd{
+  padding: 2rem;
+  width: 100%;
+  align-self: center;
+
+  input {
+    padding: 0.7rem;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+  }
+
+  label {
+    color: #007bff;
+  }
+
+  #reg-btn {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 8px;
+    border: 1px solid #007bff;
+    padding: 0.8rem 1rem;
+    width: 60%;
+  }
+
+  .have-account {
+    color: #555;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+
+    a {
+      color: #007bff;
+    }
+  }
+
+  #shwpwrd {
+    border: 2px solid #ccc;
+    background: #f5f7fa;
+    padding: 0.4rem;
+    margin-bottom: 1rem;
+    color: #333;
+    border: 5px;
+  }
+}
+/**************************
+Profile settings
+**************************/
+
 .mgt-container{
   margin: 3rem 1rem;
   section{

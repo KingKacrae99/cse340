@@ -182,6 +182,10 @@ Util.checkLogin = (req, res, next) => {
         return res.redirect("/account/login")
     }
 }
+
+/***********************************************
+ * Check Rights 
+************************************************/
 Util.checkRights = (req, res, next) => {
     const staff = ['Employee', 'Admin']
     console.log("account type :", res.locals.accountData.account_type)
@@ -199,6 +203,10 @@ Util.checkRights = (req, res, next) => {
         }
     }
 }
+
+/********************************************
+ * Checks account role
+********************************************/
 function isStaff(accountType){
     const role = ['Employee', 'Admin']
     let staff = false;

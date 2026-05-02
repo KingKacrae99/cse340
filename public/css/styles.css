@@ -1,19 +1,26 @@
 /******* Change Box Model ***************/
 :root{
-  --accent:#007bff;
+  --primary:#000000;
+  --secondary:#E60012;
+  --accent:#FFFFFF;
 }
 *,
 *:before,
 *:after {
   box-sizing: border-box;
 }
+*{
+  margin: 0;
+  padding: 0;
+}
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #f5f7fa;
+  background-color:var(--accent);
+
 }
 /** Layout Section Design**/
 #wrapper {
-  background-color: #f5f7fa;
+  background-color: var(--accent);
 }
 
 /** Header Section Design **/
@@ -21,23 +28,20 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 2rem 0rem;
+  background: var(--primary);
+  width: 100%;
+  padding: 0 3rem;
 }
 #top-header a{
-  color: rgba(0 0 0 /80%);
-  font-weight: bold;
-}
-#top-header .siteName{
-  font-size: 2em;
+  color:var(--accent);
 }
 a{
   text-decoration: none;
 }
 /* Navigation Section */
 nav{
-  width: 100%;
-  padding:1rem;
-  background: rgba(0 0 0 /90%);
+  width: 60%;
+  padding:.5rem;
 }
 nav ul{
   display: flex;
@@ -46,21 +50,22 @@ nav ul{
   padding: 0;
   margin: 0%;
   justify-content: space-around;
-  gap: 1rem;
   list-style: none;
 }
 nav ul li{
   flex: 1;
   text-align: center;
   text-decoration: none;
-  color: #fff;
+  color: var(--accent);
 }
 nav ul li a{
-  color: #007bff;
+  color:var(--accent);
 }
-nav ul li :active{
-  border-bottom: 3px solid #007bff;
-  color: #f5f7fa;
+nav ul li a:hover{
+  color: var(--secondary);
+}
+#tools a{
+  padding: 0.5rem 1rem;
 }
 
 

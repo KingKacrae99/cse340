@@ -1,25 +1,18 @@
 @media screen and (min-width:40.1rem) {
     /*variable */
     :root {
-            --accent: #007bff;
+           --primary:#000000;
+           --secondary:#E60012;
+           --accent:#FFFFFF;
         }
         
     body{
-        background: url("/images/site/small_check.jpg");
         background-position: center;
-        background-size: cover;
-        display: flex;
-        align-items: center;
     }
     /* Layout Section Design */
     #wrapper{
-        width: 80%;
-        margin: 0 auto;
-        border: 5px solid var(--accent);
-        border-radius: 10px;
+        width: 100%;
         background-color: #fff;
-        align-self: center;
-        padding: 1rem;
     }
     /*#top-header {
 

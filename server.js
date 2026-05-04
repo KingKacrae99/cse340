@@ -23,6 +23,11 @@ const bodyParser = require("body-parser")
 /* ***********************
  * Middleware
  * ************************/
+app.use((req, res, next) => {
+  res.locals.currentPath = req.originalUrl
+  next()
+})
+
 app.use(session({
    // refering to where the session data will be stored
   store: new (require('connect-pg-simple')(session))({
@@ -79,6 +84,8 @@ app.get("/error/err/test", utilities.handlerErrors(baseController.quick))
 app.use(async (req, res, next) => {
   next({status:404, message:'Sorry we appear to have lost the page!'})
 })
+
+
 
 /* ***********************
 * Express Error Handler

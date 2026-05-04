@@ -1,0 +1,143 @@
+<section class="relative w-full rounded-lg overflow-hidden bg-[var(--primary)]">
+    
+    <!-- Slides container -->
+    <div id="carousel" class=" flex transition-transform duration-500">
+    
+        <!-- Slide 1 -->
+        <div class="relative w-full flex-shrink-0">
+            <div class="absolute inset-10 p-6">
+                <h1 class="text-3xl font-bold text-[var(--accent)]">Welcome to CSE Motors!</h1>
+                <div class="mt-1 flex gap-4">
+                    <span class="bg-white/60 px-3 py-1 rounded">Low Rates</span>
+                    <span class="bg-white/60 px-3 py-1 rounded">Fast Approval</span>
+                    <span class="bg-white/60 px-3 py-1 rounded">Trusted Dealers</span>
+                </div>
+                <div class="text-[var(--accent)]">
+                    <h2 class="text-2xl font-bold mt-4">Mercedes GLS 2025</h2>
+                    <p class="text-lg">Black Crystal SUV <br> LARTE Design Mercedes</p>
+                </div>
+                <div class="cta mt-4">
+                    <a href="" class="bg-[var(--secondary)] text-[var(--accent)] px-4 py-2 rounded-md font-bold hover:bg-[var(--accent)] hover:text-[var(--primary)]">Own Today</a>
+                </div>
+            </div>
+            <picture>
+                <source media="(max-width: 600px)" srcset="/images/vehicles/firstslidemercedes.webp">
+                <source media="(min-width: 601px)" srcset="/images/vehicles/firstslidemercedes-bg.webp">
+                <img src="/images/vehicles/firstslidemercedes-tn.webp" alt="Maybach" class=" w-full h-full object-cover ">
+            </picture>
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="bento-container w-full h-[450px] flex-shrink-0">
+            <div class="bento-grid">
+                <!-- Featured Vehicle - Large -->
+                <div class="bento-item bento-large">
+                    <img src="/images/vehicles/lexus.webp" alt="Featured Vehicle">
+                    <div class="bento-overlay">
+                        <h3>Classic Rides</h3>
+                        <p>Iconic Vehicles</p>
+                    </div>
+                </div>
+                
+                <!-- Feature Cards -->
+                <div class="bento-item">
+                    <img src="/images/vehicles/kia-black-car-tn.webp" alt="Modern Performance">
+                    <div class="bento-overlay">
+                        <h4>Performance</h4>
+                    </div>
+                </div>
+                
+                <div class="bento-item">
+                    <img src="/images/vehicles/hyundai-grandeur-tn.webp" alt="Adventure">
+                    <div class="bento-overlay">
+                        <h4>Adventure</h4>
+                    </div>
+                </div>
+                
+                <div class="bento-item">
+                    <img src="/images/vehicles/red-small-benz-tn.webp" alt="Luxury">
+                    <div class="bento-overlay">
+                        <h4>Luxury</h4>
+                    </div>
+                </div>
+                
+                <div class="bento-item">
+                    <img src="/images/vehicles/yellow-car -tn.webp" alt="Unique">
+                    <div class="bento-overlay">
+                        <h4>Unique</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="w-full h-[450px] inset-10 flex-shrink-0 bg-[var(--primary)] justify-center flex-col item-center text-white p-6">
+
+            <!-- Title -->
+            <h2 class="text-2xl font-bold mb-3 text-center">
+                Explore Top Brands
+            </h2>
+
+            <!-- Grid -->
+            <div class="grid grid-cols-3 gap-4 h-[100%]">
+                 <div class="rounded-lg overflow-hidden relative">
+                    <img src="/images/vehicles/bmw-tn.webp" class="w-full h-full object-cover">
+                    <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                        BMW
+                    </div>
+                </div>
+                <div class="rounded-lg overflow-hidden relative">
+                    <img src="/images/brand-icon/tesla.webp" class="w-full h-full object-cover">
+                    <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                        Tesla
+                    </div>
+                </div>
+
+                <div class="rounded-lg overflow-hidden relative">
+                    <img src="/images/vehicles/black-audi-tn.webp" class="w-full h-full object-cover">
+                    <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                        Audi
+                    </div>
+                </div>
+
+                <div class="rounded-lg overflow-hidden relative">
+                    <img src="/images/brand-icon/ferrari.webp" class="w-full h-full object-cover">
+                    <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                        Ferrari
+                    </div>
+                </div>
+
+                <div class="rounded-lg overflow-hidden relative">
+                    <img src="/images/vehicles/g-wagon-tn.webp" class="w-full h-full object-cover">
+                    <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                        Mercedes
+                    </div>
+                </div>
+                <div class="rounded-lg overflow-hidden relative">
+                    <img src="/images/brand-icon/bmw-logo.webp" class="w-full h-full object-cover">
+                    <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                        BMW
+                    </div>
+                </div>
+             </div>
+             
+              <!-- CTA -->
+            <div class="text-center mt-2">
+                <a href="/inventory" class="bg-[var(--accent)] text-[var(--primary)] px-4 py-2 rounded-md font-bold">
+                Browse All Cars
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Navigation Controls -->
+     <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
+        <button class="dot w-3 h-3 rounded-full bg-[var(--accent)]" data-index="0"></button>
+        <button class="dot w-3 h-3 rounded-full bg-[var(--accent)]/50" data-index="1"></button>
+        <button class="dot w-3 h-3 rounded-full bg-[var(--accent)]/50" data-index="2"></button>
+     </div>
+
+
+</section>

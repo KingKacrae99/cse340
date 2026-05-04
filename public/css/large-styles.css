@@ -16,6 +16,17 @@
         font-size: 1.2rem;
     }
 
+    /* Bento Grid - Large */
+    .bento-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .bento-large {
+        grid-column: span 2;
+        grid-row: span 2;
+        height: auto;
+    }
+
     /* Inventory By Classification */
     main #inv-display {
         grid-template-columns: 1fr 1fr 1fr;

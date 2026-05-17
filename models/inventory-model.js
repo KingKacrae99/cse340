@@ -89,6 +89,15 @@ async function addInventory(inv_make, inv_model, inv_year, inv_description, inv_
     }
 }
 
+async function getLikedInventorybyClass() {
+    try {
+        const sql = `SELECT * FROM public.inventory `
+        const result = await pool.query(sql, [inv_make, inv_model, inv_year])
+        return result.rows
+    } catch(error){
+        next(error)
+    }
+}
 
 module.exports = {
     getClassifications, getInventoryByClassificationId,

@@ -66,10 +66,10 @@ invCont.buildMgt = async function (req, res, next) {
 }
 invCont.buildAddClassification = async function (req, res, next) {
     try {
-        const nav = await utilities.getNav()
+        //const nav = await utilities.getNav()
         res.render("inventory/add-classification", {
-            title: "Add Classification",
-            nav
+            title: "Add Classification"
+            //nav
         })
     } catch (err) {
         next(err)
@@ -93,7 +93,7 @@ invCont.buildAddInventory = async function (req, res, next) {
 
 invCont.processAddClassification = async function (req, res, next) {
     const nav = await utilities.getNav()
-    const { classification_name } = req.body
+    const { classification_name, icon_class } = req.body
     
     const isValid = /^[A-Za-z0-9]+$/.test(classification_name)
     if (!isValid) {
@@ -106,7 +106,7 @@ invCont.processAddClassification = async function (req, res, next) {
             })   
     }
     try {
-        const result = await invModel.addClassification(classification_name)
+        const result = await invModel.addClassification(classification_name, icon_class)
         if (result) {
             req.flash(
             "confirmation", "Classification added successfully ✅."
@@ -159,5 +159,6 @@ invCont.processAddInventory = async function (req, res, next) {
         next(err)
     }
 }
+
 
 module.exports = invCont

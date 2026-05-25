@@ -49,10 +49,10 @@ async function getInventoryRowById(inv_id) {
 /*******************************************************************
  *  Add Classification
  *******************************************************************/
-async function addClassification(classification_name) {
+async function addClassification(classification_name, icon_class) {
     try {
-         const sql = "INSERT INTO public.classification(classification_name) VALUES($1) RETURNING *"
-         return await pool.query(sql,[classification_name])   
+         const sql = "INSERT INTO public.classification(classification_name, icon_class) VALUES($1, $2) RETURNING *"
+         return await pool.query(sql,[classification_name, icon_class])   
     } catch (error) {
         console.error("addClassification error" + error.message)
     }
@@ -91,16 +91,25 @@ async function addInventory(inv_make, inv_model, inv_year, inv_description, inv_
 
 async function getLikedInventorybyClass() {
     try {
-        const sql = `SELECT * FROM public.inventory `
-        const result = await pool.query(sql, [inv_make, inv_model, inv_year])
+        const sql = `SELECT DISTINCT ON (c.classification_name) 
+        i.*, c.classification_name 
+        FROM public.inventory AS i 
+        JOIN public.classification AS c 
+        ON i.classification_id = c.classification_id
+        ORDER BY c.classification_name,
+        i.likes_count DESC
+        LIMIT 6`
+        const result = await pool.query(sql)
         return result.rows
+        console.log("getLikedInventorybyClass result", result.rows)
     } catch(error){
-        next(error)
+        console.error("getlikedInventorybyClass error" + error)
     }
 }
 
 module.exports = {
     getClassifications, getInventoryByClassificationId,
     getInventoryRowById, addClassification,
-    getClassificationName, addInventory
+    getClassificationName, addInventory,
+    getLikedInventorybyClass
 }

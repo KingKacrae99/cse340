@@ -12,8 +12,16 @@
             required
             value="<%= locals.classification_name %>">
         </div>
+        <div>
+            <label for="icon_class">Icon Class (e.g., fa-car): </label>
+            <input type="text" id="icon_class" name="icon_class" 
+            
+            title="Icon class must letters and must fontawesome class. No spaces"
+            required
+            value="<%= locals.icon_class %>">
+        </div>
         <div class="class-btn">
-            <button type="submit">Add Name</button>
+            <button type="submit">Add Classification</button>
         </div>
     </form>
 </div>

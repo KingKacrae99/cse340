@@ -35,12 +35,19 @@ CREATE TABLE IF NOT EXISTS public.account (
 );
 
 -- Data for the classification table.
-INSERT INTO public.classification (classification_name)
-VALUES ('Custom'),
-    ('Sport'),
-    ('SUV'),
-    ('Truck'),
-    ('Sedan');
+INSERT INTO public.classification (classification_name, icon_class)
+VALUES ('Custom','fa-crown'),
+    ('Sport','fa-gauge-high'),
+    ('SUV', 'fa-truck-monster'),
+    ('Truck' 'fa-truck'),
+    ('Sedan', 'fa-car-side'),
+    ('Van', 'fa-shuttle-van'),
+    ('Coupe', 'fa-car'),
+    ('Hybrid','fa-leaf'),
+    ('Electric','fa-bolt'),
+    ('Luxury','fa-gem'),
+    ('Motorcycle','fa-motorcycle'),
+    ('Classic','fa-clock-rotate-left');
     
 -- Data for table `inventory`
 INSERT INTO public.inventory (
@@ -65,91 +72,99 @@ VALUES (
         25000,
         101222,
         'Silver',
-        2
+        2,
+        32
     ),
     (
         'Batmobile',
         'Custom',
-        '2007',
-        'Ever want to be a super hero? now you can with the batmobile. This car allows you to switch to bike mode allowing you to easily maneuver through traffic during rush hour.',
+        '1966',
+        'Iconic television vehicle custom-built by George Barris from a 1955 Lincoln Futura concept car body shell.',
         '/images/batmobile.jpg',
         '/images/batmobile-tn.jpg',
-        65000,
+        4600000,
         29887,
         'Black',
-        1
+        1,
+        31
     ),
     (
-        'FBI',
-        'Surveillance Van',
-        '2016',
-        'Do you like police shows? You will feel right at home driving this van, comes complete with survalence equipments for and extra fee of $2,000 a month.',
-        '/images/survan.jpg',
-        '/images/survan-tn.jpg',
-        20000,
-        19851,
-        'Brown',
-        1
+        'Toyota',
+        'Hilux BEV Concept',
+        '2024',
+        'Fully electric single-cab mid-size pickup truck prototype designed for commercial fleet use.',
+        '/images/toyota_hilux_bev_2026.webp',
+        '/images/toyota_hilux_bev_2026-tn.webp',
+        55000,
+        0,
+        'white',
+        1,
+        21
     ),
     (
-        'Dog ',
-        'Car',
-        '1997',
-        'Do you like dogs? Well this car is for you straight from the 90s from Aspen, Colorado we have the orginal Dog Car complete with fluffy ears.',
-        '/images/dog-car.jpg',
-        '/images/dog-car-tn.jpg',
-        35000,
-        71632,
-        'White',
-        1
+        'Toyota',
+        'Hilux GR Sport II',
+        '2024',
+        'Performance-oriented mid-size dual-cab pickup truck featuring Gazoo Racing off-road suspension and wide-track styling.',
+        '/images/toyota_hilux_gr_sportII_2024.webp',
+        '/images/toyota_hilux_gr_sportII_2024-tn.webp',
+        65000,
+        0,
+        'Red',
+        4,
+        44
     ),
     (
-        'Jeep',
-        'Wrangler',
-        '2019',
-        'The Jeep Wrangler is small and compact with enough power to get you where you want to go. Its great for everyday driving as well as offroading weather that be on the the rocks or in the mud!',
-        '/images/wrangler.jpg',
-        '/images/wrangler-tn.jpg',
-        28045,
+        'Toyota',
+        'Hilux Double Cab 48V',
+        '2024',
+        'Mid-size dual-cab pickup utility vehicle equipped with a 48V mild-hybrid diesel powertrain for improved efficiency.',
+        '/images/toyota_hilux Hybrid_48v_2025.webp',
+        '/images/toyota_hilux Hybrid_48v_2025-tn-.webp',
+        50000,
         41205,
-        'Yellow',
-        3
+        'Bronze',
+        8,
+        38
     ),
     (
         'Lamborghini',
         'Adventador',
-        '2016',
+        '2018',
         'This V-12 engine packs a punch in this sporty car. Make sure you wear your seatbelt and obey all traffic laws. ',
         '/images/adventador.jpg',
         '/images/adventador-tn.jpg',
-        417650,
+        417000,
         71003,
-        'Blue',
-        2
+        'White',
+        2,
+        22
     ),
     (
-        'Aerocar International',
-        'Aerocar',
-        '1963',
-        'Are you sick of rushhour trafic? This car converts into an airplane to get you where you are going fast. Only 6 of these were made, get them while they last!',
-        '/images/aerocar.jpg',
-        '/images/aerocar-tn.jpg',
-        700000,
+        'Toyota',
+        '4Runner Limited',
+        '2025',
+        'Sixth-generation rugged mid-size SUV built on a durable body-on-frame platform.',
+        '/images/Toyota_4runner_2025.webp',
+        '/images/Toyota_4runner_2025-tn.webp',
+        52000,
         18956,
-        'Red',
-        1
+        'Heritage Blue',
+        3,
+        33
     ),
     (
-        'Monster',
-        'Truck',
-        '1995',
-        'Most trucks are for working, this one is for fun. This beast comes with 60 inch tires giving you traction needed to jump and roll in the mud.',
-        '/images/monster-truck.jpg',
-        '/images/monster-truck-tn.jpg',
-        150000,
+        'Toyota',
+        'RAV4 Prime XSE',
+        '2021',
+        'High-performance plug-in hybrid compact crossover SUV with dual-tone styling.',
+        '/images/toyota_rav4_hybrid_2024.webp',
+        '/images/toyota_rav4_hybrid_2024-tn.webp',
+        43000,
         3998,
-        'purple',
-        1
+        'Red',
+        8,
+        28
     ),
     (
         'Cadillac',
@@ -161,7 +176,8 @@ VALUES (
         75195,
         41958,
         'Black',
-        4
+        4,
+        18
     ),
     (
         'GM',
@@ -173,68 +189,142 @@ VALUES (
         58800,
         56564,
         'Yellow',
-        4
+        4,
+        12
     ),
     (
-        'Mechanic',
-        'Special',
-        '1964',
-        'Not sure where this car came from. however with a little tlc it will run as good a new.',
-        '/images/mechanic.jpg',
-        '/images/mechanic-tn.jpg',
-        100,
+        'Toyota',
+        'bZ4X',
+        '2023',
+        'All-electric compact crossover utility vehicle built on a dedicated EV platform.',
+        '/images/toyota_bz4x_2025.webp',
+        '/images/toyota_bz4x_2025-tn.webp',
+        44000,
         200125,
-        'Rust',
-        5
+        'Silver',
+        9,
+        39
     ),
     (
-        'Ford',
-        'Model T',
-        '1921',
-        'The Ford Model T can be a bit tricky to drive. It was the first car to be put into production. You can get it in any color you want as long as it is black.',
-        '/images/model-t.jpg',
-        '/images/model-t-tn.jpg',
-        30000,
+        'Toyota',
+        'Hilux Invincible',
+        '2021',
+        'Mid-size double-cab diesel pickup truck featuring premium comfort trims and robust payload capacity.',
+        '/images/truck.webp',
+        '/images/truck-tn.webp',
+        48000,
         26357,
-        'Black',
-        5
+        'Dark Gray',
+        4,
+        55
     ),
     (
-        'Mystery',
-        'Machine',
-        '1999',
-        'Scooby and the gang always found luck in solving their mysteries because of there 4 wheel drive Mystery Machine. This Van will help you do whatever job you are required to with a success rate of 100%.',
-        '/images/mystery-van.jpg',
-        '/images/mystery-van-tn.jpg',
-        10000,
+        'Tesla',
+        'Model 3',
+        '2024',
+        'All-electric compact luxury sedan featuring the refined "Highland" aerodynamic facelift.',
+        '/images/tesla_model_3_2025.webp',
+        '/images/tesla_model_3_2025-tn.webp',
+        39000,
         128564,
-        'Green',
-        1
+        'Stealth Gray',
+        9,
+        23
     ),
     (
-        'Spartan',
-        'Fire Truck',
+        'Tesla',
+        'Model S',
         '2012',
-        'Emergencies happen often. Be prepared with this Spartan fire truck. Comes complete with 1000 ft. of hose and a 1000 gallon tank.',
-        '/images/fire-truck.jpg',
-        '/images/fire-truck-tn.jpg',
-        50000,
+        'Premium all-electric full-size luxury liftback sedan showcasing the original pre-facelift nosecone design.',
+        '/images/tesla_model_s_2016.webp',
+        '/images/tesla_model_s_2016-tn.webp',
+        75000,
         38522,
-        'Red',
-        4
+        'Metallic Charcoal',
+        10,
+        24
+    ),
+    (
+        'Audi',
+        'R8 Coupe',
+        '2014',
+        'First-generation mid-engine luxury sports car featuring signature LED DRL headlights and sideblades.',
+        '/images/black-audi.webp',
+        '/images/black-audi-tn.webp',
+        115000,
+        108247,
+        'Matte Black',
+        2,
+        34
     ),
     (
         'Ford',
-        'Crown Victoria',
+        'Mustang GT Custom',
         '2013',
-        'After the police force updated their fleet these cars are now available to the public! These cars come equiped with the siren which is convenient for college students running late to class.',
-        '/images/crwn-vic.jpg',
-        '/images/crwn-vic-tn.jpg',
-        10000,
-        108247,
-        'White',
-        5
-    );
+        'Heavily customized performance muscle coupe featuring an aftermarket body kit, slammed suspension, and deep-dish wheels.',
+        '/images/black-coupe.webp',
+        '/images/black-coupe-tn.webp',
+        35000,
+        0,
+        'Black',
+        1,
+        20
+    ),
+    (
+        'BMW',
+        '4 Series Coupe (F32)',
+        '2015',
+        'Sleek luxury compact executive sports coupe featuring an M-Sport aerodynamic package.',
+        '/images/bmw.webp',
+        '/images/bmw-tn.webp',
+        42000
+        23000,
+        'Black',
+        7,
+        45
+    ),
+    (
+        'BMW',
+        '3 Series Sedan (F30)',
+        '2013',
+        'Compact executive four-door luxury sports sedan styled with a blacked-out kidney grille treatment.',
+        '/images/bmw-sedan.webp',
+        '/images/bmw-sedan-tn.webp',
+        33000,
+        45000,
+        'Black',
+        5,
+        35
+    ),
+    (
+        'Hyundai',
+        'Grandeur'
+        '2023',
+        'Seventh-generation full-size flagship luxury sedan featuring futuristic seamless horizon LED light bars.',
+        '/images/hyundai-grandeur.webp',
+        '/images/hyundai-grandeur-tn.webp',
+        45000,
+        15000,
+        'Silver',
+        10,
+        23
+    ),(
+        'Mercedes-Benz',
+        'GLS 63 AMG Custom (Larte Design)',
+        '2017',
+        'Luxury full-size high-performance SUV upgraded with an aggressive widebody carbon fiber aero kit by Larte Design.',
+        '/images/firstslidemercedes.webp',
+        '/images/firstslidemercedes-tn.webp',
+        140000,
+        5000,
+        'Black',
+        1,
+        25
+    ),
+    (
+        'Mercedes-Benz',
+    )
+    ;
 
 ---- Query 4 ----
 -- Update GM Hummer data from the `inventory table`

@@ -1,118 +1,271 @@
-<div>
-    <section class="search-section my-4 flex justify-center items-center py-4 px-4 gap-3">
-        <div class="border border-transparent rounded-lg inset-shadow-sm shadow-lg sm:py-2 sm:px-3 lg:py-3 lg:px-4">
-            <i class="search"></i>
-            <input type="text" id="make" placeholder="make" class="search-bar outline-none text-center">|
-            <input type="text" id="model" placeholder="model" class="search-bar outline-none text-center">|
-            <input type="text" id="year" placeholder="year" class="search-bar outline-none text-center">
-        </div>
-        <div>
-            <button class="search-btn bg-[var(--secondary)] sm:py-2 sm:px-3 lg:py-3 lg:px-4  text-white rounded-lg hover:bg-red-700" id="search-btn" type="button">Browser Now</button>
-        </div>
-    </section>
-    <div class="rowy p-5 inset-shadow-sm shadow-lg rounded-lg">
-        <section class="featuredInv">
-            <div class="mb-6">
-    
-                <span class="inline-block border-b-3 border-[var(--secondary)] text-sm font-medium uppercase tracking-wide  text-[var(--secondary)]">
-                    New
-                </span>
+<main class="mt-5 grid grid-cols-1 lg:grid-cols-[1fr_3fr_1fr] gap-4">
+    <div class="border mx-2">
+    </div>
+    <div>
+        <!----Hero Section---->
+        <section class="relative w-full rounded-lg overflow-hidden bg-[var(--primary)]">
+        
+            <!-- Slides container -->
+            <div id="carousel" class=" flex transition-transform duration-500">
+            
+                <!-- Slide 1 -->
+                <div class="relative w-full flex-shrink-0">
+                    <div class="absolute inset-10 p-6">
+                        <h1 class="text-3xl font-bold text-[var(--accent)]">Welcome to CSE Motors!</h1>
+                        <div class="mt-1 flex gap-4">
+                            <span class="bg-white/60 px-3 py-1 rounded">Low Rates</span>
+                            <span class="bg-white/60 px-3 py-1 rounded">Fast Approval</span>
+                            <span class="bg-white/60 px-3 py-1 rounded">Trusted Dealers</span>
+                        </div>
+                        <div class="text-[var(--accent)]">
+                            <h2 class="text-2xl font-bold mt-4">Mercedes GLS 2025</h2>
+                            <p class="text-lg">Black Crystal SUV <br> LARTE Design Mercedes</p>
+                        </div>
+                        <div class="cta mt-4">
+                            <a href="" class="bg-[var(--secondary)] text-[var(--accent)] px-4 py-2 rounded-md font-bold hover:bg-[var(--accent)] hover:text-[var(--primary)]">Own Today</a>
+                        </div>
+                    </div>
+                    <picture>
+                        <source media="(max-width: 600px)" srcset="/images/vehicles/firstslidemercedes.webp">
+                        <source media="(min-width: 601px)" srcset="/images/vehicles/firstslidemercedes-bg.webp">
+                        <img src="/images/vehicles/firstslidemercedes-tn.webp" alt="Maybach" class=" w-full h-full object-cover ">
+                    </picture>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="bento-container w-full h-[450px] flex-shrink-0">
+                    <div class="bento-grid">
+                        <!-- Featured Vehicle - Large -->
+                        <div class="bento-item bento-large">
+                            <img src="/images/vehicles/lexus.webp" alt="Featured Vehicle">
+                            <div class="bento-overlay">
+                                <h3>Classic Rides</h3>
+                                <p>Iconic Vehicles</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Feature Cards -->
+                        <div class="bento-item">
+                            <img src="/images/vehicles/kia-black-car-tn.webp" alt="Modern Performance">
+                            <div class="bento-overlay">
+                                <h4>Performance</h4>
+                            </div>
+                        </div>
+                        
+                        <div class="bento-item">
+                            <img src="/images/vehicles/hyundai-grandeur-tn.webp" alt="Adventure">
+                            <div class="bento-overlay">
+                                <h4>Adventure</h4>
+                            </div>
+                        </div>
+                        
+                        <div class="bento-item">
+                            <img src="/images/vehicles/red-small-benz-tn.webp" alt="Luxury">
+                            <div class="bento-overlay">
+                                <h4>Luxury</h4>
+                            </div>
+                        </div>
+                        
+                        <div class="bento-item">
+                            <img src="/images/vehicles/yellow-car -tn.webp" alt="Unique">
+                            <div class="bento-overlay">
+                                <h4>Unique</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <h2 class="text-2xl font-bold mt-2 text-[var(--primary)]">
-                    Featured Inventory
-                </h2>
+                <!-- Slide 3 -->
+                <div class="w-full h-[450px] inset-10 flex-shrink-0 bg-[var(--primary)] justify-center flex-col item-center text-white p-6">
+
+                    <!-- Title -->
+                    <h2 class="text-2xl font-bold mb-3 text-center">
+                        Explore Top Brands
+                    </h2>
+
+                    <!-- Grid -->
+                    <div class="grid grid-cols-3 gap-4 h-[100%]">
+                        <div class="rounded-lg overflow-hidden relative">
+                            <img src="/images/vehicles/bmw-tn.webp" class="w-full h-full object-cover">
+                            <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                                BMW
+                            </div>
+                        </div>
+                        <div class="rounded-lg overflow-hidden relative">
+                            <img src="/images/brand-icon/tesla.webp" class="w-full h-full object-cover">
+                            <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                                Tesla
+                            </div>
+                        </div>
+
+                        <div class="rounded-lg overflow-hidden relative">
+                            <img src="/images/vehicles/black-audi-tn.webp" class="w-full h-full object-cover">
+                            <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                                Audi
+                            </div>
+                        </div>
+
+                        <div class="rounded-lg overflow-hidden relative">
+                            <img src="/images/brand-icon/ferrari.webp" class="w-full h-full object-cover">
+                            <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                                Ferrari
+                            </div>
+                        </div>
+
+                        <div class="rounded-lg overflow-hidden relative">
+                            <img src="/images/vehicles/g-wagon-tn.webp" class="w-full h-full object-cover">
+                            <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                                Mercedes
+                            </div>
+                        </div>
+                        <div class="rounded-lg overflow-hidden relative">
+                            <img src="/images/brand-icon/bmw-logo.webp" class="w-full h-full object-cover">
+                            <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                                BMW
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- CTA -->
+                    <div class="text-center mt-2">
+                        <a href="/inventory" class="bg-[var(--accent)] text-[var(--primary)] px-4 py-2 rounded-md font-bold">
+                        Browse All Cars
+                        </a>
+                    </div>
+
+                </div>
 
             </div>
-            <div class="flex gap-2">
-                <div href="" class="shadow rounded-lg h-[200px] w-[250px] ">
-                    <div>
-                        <img src="/images/vehicles/hyundai-grandeur-tn.webp" alt="Featured Inventory" class="w-full h-full object-cover rounded-lg ">
-                    </div>
-                    <div class="w-[200px] max-h-[-75px] bg-accent absolute -mt-7 ml-6 rounded-lg p-4 text-[var(--primary)] shadow-lg inset-shadow-sm">
-                        <h2 class="text-base font-bold">2020 Hyundai Grandeur</h2>
-                        <p class="text-gray-600">20,000 miles</p>
-                        <div class="flex justify-between items-center">
-                            <a href="" class=" bg-[var(--primary)] text-white text-sm py-1 px-3 rounded-lg hover:bg-[var(--secondary)]">View</a>
-                            <p class="text-base font-bold text-right">$25,000</p>
-                        </div>
-                    </div>
-                </div>
-                <div href="" class="shadow rounded-lg h-[200px] w-[250px] ">
-                    <div>
-                        <img src="/images/vehicles/hyundai-grandeur-tn.webp" alt="Featured Inventory" class="w-full h-full object-cover rounded-lg ">
-                    </div>
-                    <div class="w-[200px] max-h-[-75px] bg-accent absolute -mt-7 ml-6 rounded-lg p-4 text-[var(--primary)] shadow-lg inset-shadow-sm">
-                        <h2 class="text-base font-bold">2020 Hyundai Grandeur</h2>
-                        <p class="text-gray-600">20,000 miles</p>
-                        <div class="flex justify-between items-center">
-                            <a href="" class=" bg-[var(--primary)] text-white text-sm py-1 px-3 rounded-lg hover:bg-[var(--secondary)]">View</a>
-                            <p class="text-base font-bold text-right">$25,000</p>
-                        </div>
-                    </div>
-                </div>
-                <div href="" class="shadow rounded-lg h-[200px] w-[250px] ">
-                    <div>
-                        <img src="/images/vehicles/hyundai-grandeur-tn.webp" alt="Featured Inventory" class="w-full h-full object-cover rounded-lg ">
-                    </div>
-                    <div class="w-[200px] max-h-[-75px] bg-accent absolute -mt-7 ml-6 rounded-lg p-4 text-[var(--primary)] shadow-lg inset-shadow-sm">
-                        <h2 class="text-base font-bold">2020 Hyundai Grandeur</h2>
-                        <p class="text-gray-600">20,000 miles</p>
-                        <div class="flex justify-between items-center">
-                            <a href="" class=" bg-[var(--primary)] text-white text-sm py-1 px-3 rounded-lg hover:bg-[var(--secondary)]">View</a>
-                            <p class="text-base font-bold text-right">$25,000</p>
-                        </div>
-                    </div>
-                </div>
+
+            <!-- Navigation Controls -->
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
+                <button class="dot w-3 h-3 rounded-full bg-[var(--accent)]" data-index="0"></button>
+                <button class="dot w-3 h-3 rounded-full bg-[var(--accent)]/50" data-index="1"></button>
+                <button class="dot w-3 h-3 rounded-full bg-[var(--accent)]/50" data-index="2"></button>
+            </div>
+
+
         </section>
-        <section class="col-1 display-none">
-            <h2>Delorean Upgrades</h2>
-            <div class="upgrade">
-                <figure>
-                    <div class="upgrade-imgs">
-                        <img src="/images/upgrades/flux-cap.png" alt="flux-capacitor">
-                    </div>
-                    <figcaption>
-                        <a href="">Flux-Capacitor</a>
-                    </figcaption>
-                </figure>
-                <figure>
-                    <div class="upgrade-imgs">
-                        <img src="/images/upgrades/flame.jpg" alt="flame-decals">
-                    </div>
-                    <figcaption>
-                        <a href="">flame Decals</a>
-                    </figcaption>
-                </figure>
-                <figure>
-                    <div class="upgrade-imgs">
-                        <img src="/images/upgrades/bumper_sticker.jpg" alt="bumper-sticker">
-                    </div>
-                    <figcaption>
-                        <a href="">bumper sticker</a>
-                    </figcaption>
-                </figure>
-                <figure>
-                    <div class="upgrade-imgs">
-                        <img src="/images/upgrades/hub-cap.jpg" alt="hub-cap">
-                    </div>
-                    <figcaption>
-                        <a href="">hub cap</a>
-                    </figcaption>
-                </figure>
+
+        <!---- Search Section ----->
+        <section class="search-section my-4 flex justify-center items-center py-4 px-4 gap-3">
+            <div class="border border-transparent rounded-lg inset-shadow-sm shadow-lg sm:py-2 sm:px-3 lg:py-3 lg:px-4">
+                <i class="search"></i>
+                <input type="text" id="make" placeholder="make" class="search-bar outline-none text-center">|
+                <input type="text" id="model" placeholder="model" class="search-bar outline-none text-center">|
+                <input type="text" id="year" placeholder="year" class="search-bar outline-none text-center">
+            </div>
+            <div>
+                <button class="search-btn bg-[var(--secondary)] sm:py-2 sm:px-3 lg:py-3 lg:px-4  text-white rounded-lg hover:bg-red-700" id="search-btn" type="button">Browser Now</button>
             </div>
         </section>
-        <section class="col-2">
-            <h2>DMC Delorean Reviews</h2>
-            <ul>
-                <li>"So fast it's almost like traveling in time" (4/5)</li>
-                <li>"Coolest ride on the road." (4/5)</li>
-                <li>"I'm feeling McFly!"(5/5)</li>
-                <li>"The most futuristic ride of our day"(4.5/5)</li>
-                <li>"80's livin and I love it!"(5/5)</li>
-            </ul>
-        </section>
+        <div class="p-5 inset-shadow-sm shadow-lg rounded-lg">
+            <section class="featuredInv">
+                <div class="mb-6">
+        
+                    <span class="inline-block border-b-3 border-[var(--secondary)] text-sm font-medium uppercase tracking-wide  text-[var(--secondary)]">
+                        New
+                    </span>
+
+                    <h2 class="text-2xl font-bold mt-2 text-[var(--primary)]">
+                        Featured Inventory
+                    </h2>
+
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-3">
+                    <% featuredCars.forEach( car => { %>
+                    <div href="" class="relative border border-gray-300 shadow rounded-lg w-[250px] mb-20 tansition-transform duration-300 hover:scale-105">
+                        <div class="h-[200px] overflow-hidden rounded-lg">
+                            <img src="<%= car.inv_image %>" alt="<%= car.inv_make %>" class="w-full h-full object-cover object-center">
+                        </div>
+                        <div class="w-[230px] bg-white absolute left-1/2 -translate-x-1/2 -bottom-20 rounded-lg p-4 text-[var(--primary)] shadow-lg">
+                            <h2 class="text-base font-bold"> 
+                                <%= car.inv_year %>
+                                <%= car.inv_make %>
+                                <%= car.inv_model %> 
+                            </h2>
+                            <p class="text-gray-600 text-sm">
+                                <%= car.inv_miles.toLocaleString() %> miles
+                            </p>
+                            <div class="flex justify-between items-center mt-2">
+                                <a href="" class="bg-[var(--primary)] text-white text-sm py-1 px-3 rounded-lg hover:bg-[var(--secondary)]">
+                                    View
+                                </a>
+                                <p class="text-base font-bold text-right">
+                                    <%= Number(car.inv_price).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <% })%>
+                </div>    
+            </section>
+            <section class="mt-10 mb-5">
+                <div>
+                    <h2 class="text-2xl font-bold mt-2 text-[var(--primary)] text-center">
+                        Explore Categories
+                    </h2>
+                </div>
+                <div class="grid xs:grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 mt-4 ">
+                    <% classification.rows.forEach( category => { %>
+                        <a href="/inv/<%= category.classification_name %>/<%= category.classification_id %>" class="inline-block shadow rounded-lg inset-shadow-sm border text-center text-[var(--primary)] border-gray-300 p-4 mr-4 mt-4 hover:bg-[var(--primary)] hover:text-white transition-colors duration-300">
+                            <i class="<%= category.icon_class %> fa-solid"></i>
+                            <p class="py-1 px-2">
+                                <%= category.classification_name %>
+                            </p>
+                        </a>
+                    <% })%>
+                </div>
+            </section>
+            <section class="col-1 display-none">
+                <h2>Delorean Upgrades</h2>
+                <div class="upgrade">
+                    <figure>
+                        <div class="upgrade-imgs">
+                            <img src="/images/upgrades/flux-cap.png" alt="flux-capacitor">
+                        </div>
+                        <figcaption>
+                            <a href="">Flux-Capacitor</a>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <div class="upgrade-imgs">
+                            <img src="/images/upgrades/flame.jpg" alt="flame-decals">
+                        </div>
+                        <figcaption>
+                            <a href="">flame Decals</a>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <div class="upgrade-imgs">
+                            <img src="/images/upgrades/bumper_sticker.jpg" alt="bumper-sticker">
+                        </div>
+                        <figcaption>
+                            <a href="">bumper sticker</a>
+                        </figcaption>
+                    </figure>
+                    <figure>
+                        <div class="upgrade-imgs">
+                            <img src="/images/upgrades/hub-cap.jpg" alt="hub-cap">
+                        </div>
+                        <figcaption>
+                            <a href="">hub cap</a>
+                        </figcaption>
+                    </figure>
+                </div>
+            </section>
+            <section class="col-2">
+                <h2>DMC Delorean Reviews</h2>
+                <ul>
+                    <li>"So fast it's almost like traveling in time" (4/5)</li>
+                    <li>"Coolest ride on the road." (4/5)</li>
+                    <li>"I'm feeling McFly!"(5/5)</li>
+                    <li>"The most futuristic ride of our day"(4.5/5)</li>
+                    <li>"80's livin and I love it!"(5/5)</li>
+                </ul>
+            </section>
+        </div>
     </div>
-    <div class="hero ">
-        <%- nav %>
+    <div class="border mx-2">
     </div>
-</div>
+</main>

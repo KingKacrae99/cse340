@@ -1,10 +1,12 @@
 const utilities = require("../utilities/")
 const baseController = {}
+const invmodel = require("../models/inventory-model")
 
 baseController.buildHome = async function (req, res) {
-    const nav = await utilities.getNav()
+    const classification = await invmodel.getClassifications();
+    const featuredCars = await invmodel.getLikedInventorybyClass();
     //req.flash("notice", "This is a flash message.")
-   res.render("index", {title: "Home", nav, currentPath: req.originalUrl}) 
+   res.render("index", {title: "Home", classification, featuredCars, currentPath: req.originalUrl}) 
 }
 baseController.quick = async (req, res, next) => {
     try {

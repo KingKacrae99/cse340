@@ -64,8 +64,7 @@ CREATE TABLE IF NOT EXISTS public.orders(
     status status_type NOT NULL DEFAULT 'pending'::status_type,
     order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT orders_pkey PRIMARY KEY (order_id),
-    CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES public.account (account_id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE NO ACTION,
-    CONSTRAINT fk_inventory FOREIGN KEY (inv_id) REFERENCES public.inventory (inv_id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE NO ACTION
+    CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES public.account (account_id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE NO ACTION
 );
 
 --- Create orderItems table
@@ -79,3 +78,7 @@ CREATE TABLE IF NOT EXISTS public.order_items(
     CONSTRAINT fk_orders FOREIGN KEY (order_id) REFERENCES public.orders (order_id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE NO ACTION,
     CONSTRAINT fk_inventory FOREIGN KEY (inv_id) REFERENCES public.inventory (inv_id) MATCH SIMPLE ON UPDATE CASCADE ON DELETE NO ACTION
 );
+
+---Add Icon field to the classification table
+AlTER TABLE public.classification
+ADD icon_class VARCHAR(100);

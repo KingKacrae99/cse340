@@ -107,9 +107,74 @@ async function getLikedInventorybyClass() {
     }
 }
 
+async function getBrandNames(){
+    try{
+        const sql = `SELECT DISTINCT inv_make FROM public.inventory
+                      ORDER BY inv_make ASC`
+        const result = await pool.query(sql)
+        return result.rows
+    } catch(error){
+        console.error("getBrandNames error" + error)
+    }
+}
+
+async function getCarsByLikes(){
+    try{
+
+        const sql = `SELECT * FROM inventory
+                     ORDER BY likes_count 
+                     LIMIT 10`;
+
+        const result = await pool.query(sql);
+
+        if (result.rows.length === 0) {
+            throw new Error("No data found!",404);
+        }
+
+        return result.rows;
+    }catch(error){
+        console.log("getCarsByLikes error :", error)
+    }
+}
+
+async function searchInventory(filters = {}) {
+
+    let sql = `
+        SELECT *
+        FROM inventory
+        WHERE 1=1
+    `;
+
+    const values = [];
+    let count = 1;
+
+    const allowedFields = {
+        invMake: 'inv_make',
+        invModel: 'inv_model',
+        invYear: 'inv_year',
+        invColor: 'inv_color'
+    };
+
+    Object.entries(filters).forEach(([key, value]) => {
+
+        if (!value || !allowedFields[key]) return;
+
+        sql += ` AND ${allowedFields[key]} ILIKE $${count}`;
+
+        values.push(`%${value}%`);
+
+        count++;
+    });
+
+    const result = await pool.query(sql, values);
+
+    return result.rows;
+}
+
 module.exports = {
     getClassifications, getInventoryByClassificationId,
     getInventoryRowById, addClassification,
     getClassificationName, addInventory,
-    getLikedInventorybyClass
+    getLikedInventorybyClass, getBrandNames,
+    getCarsByLikes, searchInventory
 }

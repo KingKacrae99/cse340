@@ -1,90 +1,148 @@
-<header id="top-header">
-    <span class="siteName">
-        <a href="/" title="Return to home page">
-            <img 
-                alt="CSE340 Motors" 
-                src="/images/site/cse340_logo_rmbg.webp" 
-                width="100" 
-                height="100"
-            />
-        </a> 
-    </span>
+<header class="bg-[var(--primary)] border-b-2 border-[var(--secondary)] shadow-sm sticky top-0 z-50">
 
-    <nav>
-        <ul class="flex gap-4">
+    <div class="max-w-7xl mx-auto px-4">
 
-            <!-- Home -->
-            <li class="group px-2 py-2 border-b-2 border-transparent transition-all duration-300
-                <%= currentPath === '/' 
-                    ? 'border-[color:var(--secondary)]' 
-                    : 'hover:border-[color:var(--secondary)]' %>">
+        <div class="flex items-center justify-between h-20">
 
-                <a href="/" class="transition group-hover:text-[color:var(--secondary)]">
+            <!-- Logo -->
+            <a href="/" title="Return to home page">
+                <img
+                    src="/images/site/cse340_logo_rmbg.webp"
+                    alt="CSE340 Motors"
+                    class="w-20 h-20 object-contain"
+                >
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:block">
+                <ul class="flex items-center text-sm gap-6">
+
+                    <li class="group border-b-2 border-transparent pb-1
+                        <%= currentPath === '/' ? 'border-[color:var(--secondary)]' : 'hover:border-[color:var(--secondary)]' %>">
+                        <a href="/" class="group-hover:text-[color:var(--secondary)]">
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="group border-b-2 border-transparent pb-1
+                        <%= currentPath === '/inv' ? 'border-[color:var(--secondary)]' : 'hover:border-[color:var(--secondary)]' %>">
+                        <a href="/inv" class="group-hover:text-[color:var(--secondary)]">
+                            Inventory
+                        </a>
+                    </li>
+
+                    <li class="group border-b-2 border-transparent pb-1
+                        <%= currentPath === '/sell' ? 'border-[color:var(--secondary)]' : 'hover:border-[color:var(--secondary)]' %>">
+                        <a href="/sell" class="group-hover:text-[color:var(--secondary)]">
+                            Sell Your Car
+                        </a>
+                    </li>
+
+                    <li class="group border-b-2 border-transparent pb-1
+                        <%= currentPath === '/finance' ? 'border-[color:var(--secondary)]' : 'hover:border-[color:var(--secondary)]' %>">
+                        <a href="/finance" class="group-hover:text-[color:var(--secondary)]">
+                            Finance
+                        </a>
+                    </li>
+
+                    <li class="group border-b-2 border-transparent pb-1
+                        <%= currentPath === '/service' ? 'border-[color:var(--secondary)]' : 'hover:border-[color:var(--secondary)]' %>">
+                        <a href="/service" class="group-hover:text-[color:var(--secondary)]">
+                            Service
+                        </a>
+                    </li>
+
+                    <li class="group border-b-2 border-transparent pb-1
+                        <%= currentPath === '/about' ? 'border-[color:var(--secondary)]' : 'hover:border-[color:var(--secondary)]' %>">
+                        <a href="/about" class="group-hover:text-[color:var(--secondary)]">
+                            About Us
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <!-- Right Side -->
+            <div class="flex items-center gap-4">
+
+                <!-- Desktop Account Button -->
+                <a
+                    href="/account/login"
+                    class="hidden lg:block bg-[var(--secondary)] text-white px-5 py-3 rounded-lg hover:bg-red-700 transition"
+                >
+                    My Account
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button
+                    id="menuBtn"
+                    class="lg:hidden text-2xl text-white"
+                    aria-label="Open Menu"
+                >
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+        id="mobileMenu"
+        class="hidden lg:hidden bg-[var(--primary)] border-t border-gray-300 shadow-md"
+    >
+
+        <ul class="flex flex-col text-center text-white p-4">
+
+            <li>
+                <a href="/" class="block py-3 border-b">
                     Home
                 </a>
             </li>
 
-            <!-- Inventory -->
-            <li class="group px-2 py-2 border-b-2 border-transparent transition-all duration-300
-                <%= currentPath === '/inv' 
-                    ? 'border-[color:var(--secondary)]' 
-                    : 'hover:border-[color:var(--secondary)]' %>">
-
-                <a href="/inv" class="transition group-hover:text-[color:var(--secondary)]">
+            <li>
+                <a href="/inv" class="block py-3 border-b">
                     Inventory
                 </a>
             </li>
 
-            <!-- Sell Your Car -->
-            <li class="group px-2 py-2 border-b-2 border-transparent transition-all duration-300
-                <%= currentPath === '/sell' 
-                    ? 'border-[color:var(--secondary)]' 
-                    : 'hover:border-[color:var(--secondary)]' %>">
-
-                <a href="/sell" class="transition group-hover:text-[color:var(--secondary)]">
+            <li>
+                <a href="/sell" class="block py-3 border-b">
                     Sell Your Car
                 </a>
             </li>
 
-            <!-- Finance -->
-            <li class="group px-2 py-2 border-b-2 border-transparent transition-all duration-300
-                <%= currentPath === '/finance' 
-                    ? 'border-[color:var(--secondary)]' 
-                    : 'hover:border-[color:var(--secondary)]' %>">
-
-                <a href="/finance" class="transition group-hover:text-[color:var(--secondary)]">
+            <li>
+                <a href="/finance" class="block py-3 border-b">
                     Finance
                 </a>
             </li>
 
-            <!-- Service -->
-            <li class="group px-2 py-2 border-b-2 border-transparent transition-all duration-300
-                <%= currentPath === '/service' 
-                    ? 'border-[color:var(--secondary)]' 
-                    : 'hover:border-[color:var(--secondary)]' %>">
-
-                <a href="/service" class="transition group-hover:text-[color:var(--secondary)]">
+            <li>
+                <a href="/service" class="block py-3 border-b">
                     Service
                 </a>
             </li>
 
-            <!-- About -->
-            <li class="group px-2 py-2 border-b-2 border-transparent transition-all duration-300
-                <%= currentPath === '/about' 
-                    ? 'border-[color:var(--secondary)]' 
-                    : 'hover:border-[color:var(--secondary)]' %>">
-
-                <a href="/about" class="transition group-hover:text-[color:var(--secondary)]">
+            <li>
+                <a href="/about" class="block py-3 border-b">
                     About Us
                 </a>
             </li>
 
-        </ul>
-    </nav>
+            <li class="mt-4">
+                <a
+                    href="/account/login"
+                    class="block text-center bg-[var(--secondary)] text-white py-3 rounded-lg"
+                >
+                    My Account
+                </a>
+            </li>
 
-    <div id="tools">
-        <a title="Click to log in" href="/account/login" class="bg-[color:var(--secondary)] p-5 border-2 border-[color:var(--secondary)] rounded transition-colors duration-300 hover:bg-[color:var(--secondary)] hover:text-[color:var(--accent)]">
-            My Account
-        </a>
+        </ul>
+
     </div>
+
 </header>

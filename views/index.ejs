@@ -1,135 +1,370 @@
 <main class="mt-5 grid grid-cols-1 lg:grid-cols-[1fr_3fr_1fr] gap-4">
-    <div class="border mx-2">
-    </div>
+
+    <!-- Left Sidebar -->
+        <!-- LEFT SIDEBAR -->
+    <aside class="hidden lg:flex lg:flex-col gap-15 ml-2">
+
+        <!-- TIME WIDGET -->
+        <div class="bg-white rounded-2xl p-5 shadow-lg border border-gray-200">
+
+            <div class="flex items-center gap-3 mb-4">
+
+                <div class="bg-[var(--secondary)]/10 p-3 rounded-xl">
+                    <i class="fa-regular fa-clock text-[var(--secondary)] text-xl"></i>
+                </div>
+
+                <div>
+                    <h2 class="font-bold text-[var(--primary)]">
+                        Live Time
+                    </h2>
+
+                    <p class="text-sm text-gray-500">
+                        Current Time & Date
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="space-y-2">
+
+                <p class="text-4xl font-bold text-[var(--primary)] leading-none">
+                    <%= new Date().toLocaleTimeString([], {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }) %>
+                </p>
+
+                <p class="text-sm text-gray-500">
+                    <%= new Date().toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    }) %>
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- FIRST 2 CARS -->
+        <% topCars.slice(0,2).forEach(vehicle => { %>
+
+            <a
+                href="/inv/details/<%= vehicle.inv_id %>"
+                class="relative overflow-hidden rounded-2xl h-[240px] group shadow-xl"
+            >
+
+                <img
+                    src="<%= vehicle.inv_image %>"
+                    alt="<%= vehicle.inv_make %>"
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                >
+
+                <!-- Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+
+                <!-- Content -->
+                <div class="absolute bottom-4 left-4 text-white z-10">
+
+                    <span class="text-xs uppercase tracking-widest text-[var(--secondary)]">
+                        Featured
+                    </span>
+
+                    <h2 class="text-xl font-bold">
+                        <%= vehicle.inv_make %>
+                        <%= vehicle.inv_model %>
+                    </h2>
+
+                    <p class="text-sm text-gray-300">
+                        Premium Collection
+                    </p>
+
+                </div>
+
+            </a>
+
+        <% }) %>
+
+        <!-- NEWS -->
+        <div class="bg-white rounded-2xl p-5 shadow-lg border border-gray-200">
+
+            <div class="flex justify-between items-center mb-5">
+
+                <h2 class="text-lg font-bold text-[var(--primary)]">
+                    Latest News
+                </h2>
+
+                <i class="fa-solid fa-newspaper text-[var(--secondary)]"></i>
+
+            </div>
+
+            <div class="space-y-5">
+
+                <a href="#" class="block group">
+
+                    <p class="text-sm font-semibold text-[var(--primary)] group-hover:text-[var(--secondary)] transition">
+                        CSE Motors Launches New Inventory System
+                    </p>
+
+                    <span class="text-xs text-gray-500">
+                        2 hours ago
+                    </span>
+
+                </a>
+
+                <a href="#" class="block group">
+
+                    <p class="text-sm font-semibold text-[var(--primary)] group-hover:text-[var(--secondary)] transition">
+                        New Mercedes Collection Arrives
+                    </p>
+
+                    <span class="text-xs text-gray-500">
+                        Today
+                    </span>
+
+                </a>
+
+                <a href="#" class="block group">
+
+                    <p class="text-sm font-semibold text-[var(--primary)] group-hover:text-[var(--secondary)] transition">
+                        Luxury SUV Deals This Week
+                    </p>
+
+                    <span class="text-xs text-gray-500">
+                        Yesterday
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- ANOTHER 2 CARS -->
+        <% topCars.slice(2,4).forEach(vehicle => { %>
+
+            <a
+                href="/inv/details/<%= vehicle.inv_id %>"
+                class="relative overflow-hidden rounded-2xl h-[240px] group shadow-xl"
+            >
+
+                <img
+                    src="<%= vehicle.inv_image %>"
+                    alt="<%= vehicle.inv_make %>"
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                >
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+
+                <div class="absolute bottom-4 left-4 text-white z-10">
+
+                    <span class="text-xs uppercase tracking-widest text-[var(--secondary)]">
+                        Deal
+                    </span>
+
+                    <h2 class="text-xl font-bold">
+                        <%= vehicle.inv_make %>
+                        <%= vehicle.inv_model %>
+                    </h2>
+
+                    <p class="text-sm text-gray-300">
+                        Drive Your Dream
+                    </p>
+
+                </div>
+
+            </a>
+
+        <% }) %>
+
+    </aside>
+
+    <!-- Main Content -->
     <div>
-        <!----Hero Section---->
+
+        <!---------------- HERO SECTION ---------------->
         <section class="relative w-full rounded-lg overflow-hidden bg-[var(--primary)]">
-        
-            <!-- Slides container -->
-            <div id="carousel" class=" flex transition-transform duration-500">
-            
-                <!-- Slide 1 -->
-                <div class="relative w-full flex-shrink-0">
-                    <div class="absolute inset-10 p-6">
-                        <h1 class="text-3xl font-bold text-[var(--accent)]">Welcome to CSE Motors!</h1>
-                        <div class="mt-1 flex gap-4">
-                            <span class="bg-white/60 px-3 py-1 rounded">Low Rates</span>
-                            <span class="bg-white/60 px-3 py-1 rounded">Fast Approval</span>
-                            <span class="bg-white/60 px-3 py-1 rounded">Trusted Dealers</span>
+
+            <div id="carousel" class="flex transition-transform duration-500">
+
+                <!-- Slides Here -->
+                <div class="relative w-full flex-shrink-0 min-h-[300px] sm:min-h-[400px] lg:min-h-[500px]">
+
+                    <!-- Overlay -->
+                    <div class="absolute inset-0 bg-black/35 z-10"></div>
+
+                    <!-- Content -->
+                    <div class="absolute inset-0 z-20 flex items-center px-4 sm:px-8 lg:px-16">
+
+                        <div class="max-w-xl text-white">
+
+                            <h1 class="text-2xl sm:text-4xl lg:text-5xl font-bold">
+                                Welcome to CSE Motors!
+                            </h1>
+
+                            <div class="flex flex-wrap gap-2 mt-4">
+
+                                <span class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
+                                    Low Rates
+                                </span>
+
+                                <span class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
+                                    Fast Approval
+                                </span>
+
+                                <span class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
+                                    Trusted Dealers
+                                </span>
+
+                            </div>
+
+                            <h2 class="mt-6 text-xl sm:text-3xl font-bold">
+                                Mercedes GLS 2025
+                            </h2>
+
+                            <p class="mt-2 text-sm sm:text-lg">
+                                Black Crystal SUV <br>
+                                LARTE Design Mercedes
+                            </p>
+
+                            <a href="#"
+                                class="inline-block mt-6 bg-[var(--secondary)] px-5 py-3 rounded-lg font-bold hover:bg-white hover:text-[var(--primary)] transition">
+
+                                Own Today
+
+                            </a>
+
                         </div>
-                        <div class="text-[var(--accent)]">
-                            <h2 class="text-2xl font-bold mt-4">Mercedes GLS 2025</h2>
-                            <p class="text-lg">Black Crystal SUV <br> LARTE Design Mercedes</p>
-                        </div>
-                        <div class="cta mt-4">
-                            <a href="" class="bg-[var(--secondary)] text-[var(--accent)] px-4 py-2 rounded-md font-bold hover:bg-[var(--accent)] hover:text-[var(--primary)]">Own Today</a>
-                        </div>
+
                     </div>
+
                     <picture>
-                        <source media="(max-width: 600px)" srcset="/images/vehicles/firstslidemercedes.webp">
-                        <source media="(min-width: 601px)" srcset="/images/vehicles/firstslidemercedes-bg.webp">
-                        <img src="/images/vehicles/firstslidemercedes-tn.webp" alt="Maybach" class=" w-full h-full object-cover ">
+                        <source media="(max-width:600px)"
+                            srcset="/images/vehicles/firstslidemercedes.webp">
+
+                        <source media="(min-width:601px)"
+                            srcset="/images/vehicles/firstslidemercedes-bg.webp">
+
+                        <img
+                            src="/images/vehicles/firstslidemercedes-tn.webp"
+                            alt="Mercedes GLS"
+                            class="w-full h-full object-cover">
                     </picture>
+
                 </div>
-                
-                <!-- Slide 2 -->
-                <div class="bento-container w-full h-[450px] flex-shrink-0">
-                    <div class="bento-grid">
-                        <!-- Featured Vehicle - Large -->
-                        <div class="bento-item bento-large">
-                            <img src="/images/vehicles/lexus.webp" alt="Featured Vehicle">
-                            <div class="bento-overlay">
-                                <h3>Classic Rides</h3>
-                                <p>Iconic Vehicles</p>
+
+                <!-- Slide 2: Bento Grid Showcase -->
+                <div class="w-full flex-shrink-0 min-h-[400px] md:h-[500px] p-4 sm:p-6 bg-gray-900">
+                    <!-- Custom responsive grid classes instead of strict bento styling -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 h-full">
+                        
+                        <!-- Large Feature Item -->
+                        <div class="relative col-span-2 row-span-1 md:row-span-2 rounded-xl overflow-hidden group min-h-[180px]">
+                            <img src="/images/vehicles/lexus.webp" alt="Classic Rides" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-4 flex flex-col justify-end">
+                                <h3 class="text-lg md:text-xl font-bold text-white">Classic Rides</h3>
+                                <p class="text-xs md:text-sm text-gray-300">Iconic Vehicles</p>
                             </div>
                         </div>
                         
-                        <!-- Feature Cards -->
-                        <div class="bento-item">
-                            <img src="/images/vehicles/kia-black-car-tn.webp" alt="Modern Performance">
-                            <div class="bento-overlay">
-                                <h4>Performance</h4>
-                            </div>
+                        <!-- Small Cards -->
+                        <div class="relative rounded-xl overflow-hidden group min-h-[90px]">
+                            <img src="/images/vehicles/kia-black-car-tn.webp" alt="Performance" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/50 p-3 flex items-end"><h4 class="text-sm font-semibold text-white">Performance</h4></div>
                         </div>
                         
-                        <div class="bento-item">
-                            <img src="/images/vehicles/hyundai-grandeur-tn.webp" alt="Adventure">
-                            <div class="bento-overlay">
-                                <h4>Adventure</h4>
-                            </div>
+                        <div class="relative rounded-xl overflow-hidden group min-h-[90px]">
+                            <img src="/images/vehicles/hyundai-grandeur-tn.webp" alt="Adventure" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/50 p-3 flex items-end"><h4 class="text-sm font-semibold text-white">Adventure</h4></div>
                         </div>
                         
-                        <div class="bento-item">
-                            <img src="/images/vehicles/red-small-benz-tn.webp" alt="Luxury">
-                            <div class="bento-overlay">
-                                <h4>Luxury</h4>
-                            </div>
+                        <div class="relative rounded-xl overflow-hidden group min-h-[90px]">
+                            <img src="/images/vehicles/red-small-benz-tn.webp" alt="Luxury" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/50 p-3 flex items-end"><h4 class="text-sm font-semibold text-white">Luxury</h4></div>
                         </div>
                         
-                        <div class="bento-item">
-                            <img src="/images/vehicles/yellow-car -tn.webp" alt="Unique">
-                            <div class="bento-overlay">
-                                <h4>Unique</h4>
-                            </div>
+                        <div class="relative rounded-xl overflow-hidden group min-h-[90px]">
+                            <img src="/images/vehicles/yellow-car -tn.webp" alt="Unique" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/50 p-3 flex items-end"><h4 class="text-sm font-semibold text-white">Unique</h4></div>
                         </div>
+
                     </div>
                 </div>
+                <!-- End Slide 2-->
 
-                <!-- Slide 3 -->
-                <div class="w-full h-[450px] inset-10 flex-shrink-0 bg-[var(--primary)] justify-center flex-col item-center text-white p-6">
+                <div class="w-full flex-shrink-0 p-4 sm:p-8 text-white">
 
-                    <!-- Title -->
-                    <h2 class="text-2xl font-bold mb-3 text-center">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6">
                         Explore Top Brands
                     </h2>
 
-                    <!-- Grid -->
-                    <div class="grid grid-cols-3 gap-4 h-[100%]">
-                        <div class="rounded-lg overflow-hidden relative">
-                            <img src="/images/vehicles/bmw-tn.webp" class="w-full h-full object-cover">
-                            <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+
+                        <!-- Brand Card -->
+
+                        <div class="relative rounded-lg overflow-hidden h-32 sm:h-40">
+                            <img src="/images/vehicles/bmw-tn.webp"
+                                class="w-full h-full object-cover">
+
+                            <div class="absolute inset-x-0 bottom-0 bg-black/60 p-2 text-center">
                                 BMW
                             </div>
                         </div>
-                        <div class="rounded-lg overflow-hidden relative">
-                            <img src="/images/brand-icon/tesla.webp" class="w-full h-full object-cover">
-                            <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+
+                        <div class="relative rounded-lg overflow-hidden h-32 sm:h-40">
+                            <img src="/images/brand-icon/tesla.webp"
+                                class="w-full h-full object-cover">
+
+                            <div class="absolute inset-x-0 bottom-0 bg-black/60 p-2 text-center">
                                 Tesla
                             </div>
                         </div>
 
-                        <div class="rounded-lg overflow-hidden relative">
-                            <img src="/images/vehicles/black-audi-tn.webp" class="w-full h-full object-cover">
-                            <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                        <div class="relative rounded-lg overflow-hidden h-32 sm:h-40">
+                            <img src="/images/vehicles/black-audi-tn.webp"
+                                class="w-full h-full object-cover">
+
+                            <div class="absolute inset-x-0 bottom-0 bg-black/60 p-2 text-center">
                                 Audi
                             </div>
                         </div>
 
-                        <div class="rounded-lg overflow-hidden relative">
-                            <img src="/images/brand-icon/ferrari.webp" class="w-full h-full object-cover">
-                            <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                        <div class="relative rounded-lg overflow-hidden h-32 sm:h-40">
+                            <img src="/images/brand-icon/ferrari.webp"
+                                class="w-full h-full object-cover">
+
+                            <div class="absolute inset-x-0 bottom-0 bg-black/60 p-2 text-center">
                                 Ferrari
                             </div>
                         </div>
 
-                        <div class="rounded-lg overflow-hidden relative">
-                            <img src="/images/vehicles/g-wagon-tn.webp" class="w-full h-full object-cover">
-                            <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+                        <div class="relative rounded-lg overflow-hidden h-32 sm:h-40">
+                            <img src="/images/vehicles/g-wagon-tn.webp"
+                                class="w-full h-full object-cover">
+
+                            <div class="absolute inset-x-0 bottom-0 bg-black/60 p-2 text-center">
                                 Mercedes
                             </div>
                         </div>
-                        <div class="rounded-lg overflow-hidden relative">
-                            <img src="/images/brand-icon/bmw-logo.webp" class="w-full h-full object-cover">
-                            <div class="absolute bottom-2 left-2 bg-black/60 px-2 py-1 text-sm rounded">
+
+                        <div class="relative rounded-lg overflow-hidden h-32 sm:h-40">
+                            <img src="/images/brand-icon/bmw-logo.webp"
+                                class="w-full h-full object-cover">
+
+                            <div class="absolute inset-x-0 bottom-0 bg-black/60 p-2 text-center">
                                 BMW
                             </div>
                         </div>
+
                     </div>
-                    
-                    <!-- CTA -->
-                    <div class="text-center mt-2">
-                        <a href="/inventory" class="bg-[var(--accent)] text-[var(--primary)] px-4 py-2 rounded-md font-bold">
-                        Browse All Cars
+
+                    <div class="text-center mt-6">
+                        <a href="/inventory"
+                            class="inline-block bg-[var(--accent)] text-[var(--primary)] px-5 py-3 rounded-lg font-bold hover:bg-white transition">
+
+                            Browse All Cars
+
                         </a>
                     </div>
 
@@ -137,33 +372,76 @@
 
             </div>
 
-            <!-- Navigation Controls -->
-            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
+            <!-- Dots -->
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 z-20">
                 <button class="dot w-3 h-3 rounded-full bg-[var(--accent)]" data-index="0"></button>
                 <button class="dot w-3 h-3 rounded-full bg-[var(--accent)]/50" data-index="1"></button>
                 <button class="dot w-3 h-3 rounded-full bg-[var(--accent)]/50" data-index="2"></button>
             </div>
 
+        </section>
+
+
+
+        <!---------------- SEARCH SECTION ---------------->
+        <section class="search-section my-6 px-4">
+
+            <div class="max-w-4xl mx-auto flex flex-col md:flex-row gap-4">
+
+                <!-- Search Inputs -->
+                <div
+                    class="flex flex-col sm:flex-row flex-1 items-center gap-3 bg-white rounded-xl shadow-lg border border-gray-200 p-4">
+
+                    <input
+                        type="text"
+                        id="make"
+                        placeholder="Make"
+                        class="w-full sm:flex-1 px-3 py-2 outline-none border border-gray-200 rounded-lg focus:border-[var(--secondary)]"
+                    >
+
+                    <input
+                        type="text"
+                        id="model"
+                        placeholder="Model"
+                        class="w-full sm:flex-1 px-3 py-2 outline-none border border-gray-200 rounded-lg focus:border-[var(--secondary)]"
+                    >
+
+                    <input
+                        type="text"
+                        id="year"
+                        placeholder="Year"
+                        class="w-full sm:flex-1 px-3 py-2 outline-none border border-gray-200 rounded-lg focus:border-[var(--secondary)]"
+                    >
+
+                </div>
+
+                <!-- Search Button -->
+                <button
+                    id="search-btn"
+                    type="button"
+                    class="bg-[var(--secondary)] text-white px-8 py-3 rounded-xl hover:bg-red-700 transition-colors duration-300 whitespace-nowrap"
+                >
+                    Browse Now
+                </button>
+
+            </div>
 
         </section>
 
-        <!---- Search Section ----->
-        <section class="search-section my-4 flex justify-center items-center py-4 px-4 gap-3">
-            <div class="border border-transparent rounded-lg inset-shadow-sm shadow-lg sm:py-2 sm:px-3 lg:py-3 lg:px-4">
-                <i class="search"></i>
-                <input type="text" id="make" placeholder="make" class="search-bar outline-none text-center">|
-                <input type="text" id="model" placeholder="model" class="search-bar outline-none text-center">|
-                <input type="text" id="year" placeholder="year" class="search-bar outline-none text-center">
-            </div>
-            <div>
-                <button class="search-btn bg-[var(--secondary)] sm:py-2 sm:px-3 lg:py-3 lg:px-4  text-white rounded-lg hover:bg-red-700" id="search-btn" type="button">Browser Now</button>
-            </div>
-        </section>
+
+
+        <!---------------- CONTENT WRAPPER ---------------->
         <div class="p-5 inset-shadow-sm shadow-lg rounded-lg">
+
+
+
+            <!---------------- FEATURED INVENTORY ---------------->
             <section class="featuredInv">
+
+                <!-- Heading -->
                 <div class="mb-6">
-        
-                    <span class="inline-block border-b-3 border-[var(--secondary)] text-sm font-medium uppercase tracking-wide  text-[var(--secondary)]">
+
+                    <span class="inline-block border-b-3 border-[var(--secondary)] text-sm font-medium uppercase tracking-wide text-[var(--secondary)]">
                         New
                     </span>
 
@@ -172,100 +450,279 @@
                     </h2>
 
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-3">
-                    <% featuredCars.forEach( car => { %>
-                    <div href="" class="relative border border-gray-300 shadow rounded-lg w-[250px] mb-20 tansition-transform duration-300 hover:scale-105">
-                        <div class="h-[200px] overflow-hidden rounded-lg">
-                            <img src="<%= car.inv_image %>" alt="<%= car.inv_make %>" class="w-full h-full object-cover object-center">
+
+
+
+                <!-- Inventory Grid -->
+                <div class="cardContainer grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+                    <% featuredCars.forEach(car => { %>
+
+                    <!-- Card -->
+                    <div class="relative border border-gray-300 shadow rounded-lg w-full max-w-[250px] mx-auto mb-20 transition-transform duration-300 hover:scale-105 bg-white">
+
+                        <!-- Heart Icon -->
+                        <div class="absolute top-3 right-3 z-10">
+
+                            <button class="like-btn text-white text-xl" title="Add to your favorite List" data-id="<%= car.inv_id %>">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+
                         </div>
+
+
+                        <!-- Image -->
+                        <div class="h-[200px] overflow-hidden rounded-lg">
+
+                            <img 
+                                src="<%= car.inv_image %>" 
+                                alt="<%= car.inv_make %>" 
+                                class="w-full h-full object-cover object-center"
+                            >
+
+                        </div>
+
+
+                        <!-- Content -->
                         <div class="w-[230px] bg-white absolute left-1/2 -translate-x-1/2 -bottom-20 rounded-lg p-4 text-[var(--primary)] shadow-lg">
-                            <h2 class="text-base font-bold"> 
+
+                            <h2 class="text-base font-bold">
+
                                 <%= car.inv_year %>
                                 <%= car.inv_make %>
-                                <%= car.inv_model %> 
+                                <%= car.inv_model %>
+
                             </h2>
+
                             <p class="text-gray-600 text-sm">
+
                                 <%= car.inv_miles.toLocaleString() %> miles
+
                             </p>
+
                             <div class="flex justify-between items-center mt-2">
-                                <a href="" class="bg-[var(--primary)] text-white text-sm py-1 px-3 rounded-lg hover:bg-[var(--secondary)]">
+
+                                <a href="/inv/details/<%= car.inv_id %>"
+                                    class="bg-[var(--secondary)] text-white text-sm py-1 px-3 rounded-lg hover:bg-[var(--primary)] transition-colors duration-300">
+
                                     View
+
                                 </a>
+
                                 <p class="text-base font-bold text-right">
-                                    <%= Number(car.inv_price).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) %>
+
+                                    <%= Number(car.inv_price).toLocaleString('en-US', {
+                                        style: 'currency',
+                                        currency: 'USD'
+                                    }) %>
+
                                 </p>
+
                             </div>
+
                         </div>
+
                     </div>
-                    <% })%>
-                </div>    
+
+                    <% }) %>
+
+                </div>
+
             </section>
+
+
+
+            <!---------------- CATEGORIES ---------------->
             <section class="mt-10 mb-5">
+
                 <div>
+
                     <h2 class="text-2xl font-bold mt-2 text-[var(--primary)] text-center">
                         Explore Categories
                     </h2>
+
                 </div>
-                <div class="grid xs:grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3 mt-4 ">
-                    <% classification.rows.forEach( category => { %>
-                        <a href="/inv/<%= category.classification_name %>/<%= category.classification_id %>" class="inline-block shadow rounded-lg inset-shadow-sm border text-center text-[var(--primary)] border-gray-300 p-4 mr-4 mt-4 hover:bg-[var(--primary)] hover:text-white transition-colors duration-300">
-                            <i class="<%= category.icon_class %> fa-solid"></i>
-                            <p class="py-1 px-2">
-                                <%= category.classification_name %>
-                            </p>
-                        </a>
-                    <% })%>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+
+                    <% classifications.rows.forEach(category => { %>
+
+                    <a href="/type/<%= category.classification_name %>/<%= category.classification_id %>"
+                        class="shadow rounded-lg inset-shadow-sm border text-center text-[var(--primary)] border-gray-300 p-4 hover:bg-[var(--primary)] hover:text-white transition-colors duration-300">
+
+                        <i class="fa-solid <%= category.icon_class %> text-2xl"></i>
+
+                        <p class="py-2 font-medium">
+                            <%= category.classification_name %>
+                        </p>
+
+                    </a>
+
+                    <% }) %>
+
                 </div>
+
             </section>
-            <section class="col-1 display-none">
-                <h2>Delorean Upgrades</h2>
-                <div class="upgrade">
-                    <figure>
-                        <div class="upgrade-imgs">
-                            <img src="/images/upgrades/flux-cap.png" alt="flux-capacitor">
-                        </div>
-                        <figcaption>
-                            <a href="">Flux-Capacitor</a>
-                        </figcaption>
-                    </figure>
-                    <figure>
-                        <div class="upgrade-imgs">
-                            <img src="/images/upgrades/flame.jpg" alt="flame-decals">
-                        </div>
-                        <figcaption>
-                            <a href="">flame Decals</a>
-                        </figcaption>
-                    </figure>
-                    <figure>
-                        <div class="upgrade-imgs">
-                            <img src="/images/upgrades/bumper_sticker.jpg" alt="bumper-sticker">
-                        </div>
-                        <figcaption>
-                            <a href="">bumper sticker</a>
-                        </figcaption>
-                    </figure>
-                    <figure>
-                        <div class="upgrade-imgs">
-                            <img src="/images/upgrades/hub-cap.jpg" alt="hub-cap">
-                        </div>
-                        <figcaption>
-                            <a href="">hub cap</a>
-                        </figcaption>
-                    </figure>
+            <section class="py-10 bg-white border-t border-gray-200">
+
+                <div class="text-center mb-10">
+
+                    <span class="text-sm uppercase tracking-wide text-[var(--secondary)] font-semibold underline underline-offset-4 ">
+                        Trusted Brands
+                    </span>
+
+                    <h2 class="text-2xl font-bold text-[var(--primary)] mt-2">
+                        Drive Your Favorite Brands
+                    </h2>
+
                 </div>
-            </section>
-            <section class="col-2">
-                <h2>DMC Delorean Reviews</h2>
-                <ul>
-                    <li>"So fast it's almost like traveling in time" (4/5)</li>
-                    <li>"Coolest ride on the road." (4/5)</li>
-                    <li>"I'm feeling McFly!"(5/5)</li>
-                    <li>"The most futuristic ride of our day"(4.5/5)</li>
-                    <li>"80's livin and I love it!"(5/5)</li>
-                </ul>
+
+                <div class="max-w-6xl w-full">
+
+                    <img 
+                        src="/images/brand-icon/car-brands_2_-removebg-preview.png" 
+                        alt="Car Brand Logos"
+                        class="w-full object-contain w-full h-full border-0  hover:transition-opacity duration-300"
+                    >
+
+                </div>
+
             </section>
         </div>
+
     </div>
-    <div class="border mx-2">
-    </div>
+
+
+
+        <!-- RIGHT SIDEBAR -->
+    <aside class="hidden lg:flex lg:flex-col gap-15 mr-2">
+
+        <!-- FIRST 2 CARS -->
+        <% topCars.slice(4,6).forEach(vehicle => { %>
+
+            <a
+                href="/inv/details/<%= vehicle.inv_id %>"
+                class="relative overflow-hidden rounded-2xl h-[240px] group shadow-xl"
+            >
+
+                <img
+                    src="<%= vehicle.inv_image %>"
+                    alt="<%= vehicle.inv_make %>"
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                >
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+
+                <div class="absolute bottom-4 left-4 text-white z-10">
+
+                    <span class="text-xs uppercase tracking-widest text-[var(--secondary)]">
+                        Trending
+                    </span>
+
+                    <h2 class="text-xl font-bold">
+                        <%= vehicle.inv_make %>
+                        <%= vehicle.inv_model %>
+                    </h2>
+
+                    <p class="text-sm text-gray-300">
+                        Luxury Edition
+                    </p>
+
+                </div>
+
+            </a>
+
+        <% }) %>
+
+        <!-- WEATHER GLASS WIDGET -->
+        <div class="weather relative overflow-hidden rounded-2xl h-[260px] shadow-xl">
+
+            <!-- Background -->
+            <div class="absolute inset-0 bg-[var(--primary)] w-full h-full object-cover"></div>
+
+            <!-- Glass Overlay -->
+            <div class="absolute inset-0 backdrop-blur-md bg-white/40"></div>
+
+            <!-- Content -->
+            <div class="relative z-10 h-full flex flex-col justify-between p-6 text-white">
+
+                <div class="flex justify-between items-start">
+
+                    <div>
+                        <p class="uppercase text-xs tracking-widest text-gray-200">
+                            Today's Weather
+                        </p>
+
+                        <p id="weather-city" class=" uppercase mt-2 text-xs tracking-widest text-gray-200">
+                            Location: Abuja, Nigeria
+                        </p>
+
+                        <h2 id="weather-temp" class="text-2xl font-bold mt-2">
+                            --° F
+                        </h2>
+                        <h3 id="weather-degree" class="text-2xl font-bold mt-2">
+                            --° F
+                        </h3>
+
+                    </div>
+
+                    <img id="weather-icon" src="" alt="Weather Icon" class="w-16 h-16 object-contain hidden">
+
+                </div>
+
+                <div>
+
+                    <p id="weather-text" class="text-lg font-semibold">
+                        Sunny Day
+                    </p>
+
+                    <p class="text-sm text-gray-200">
+                        High 80° • Low 65°
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- LAST 3 CARS -->
+        <% topCars.slice(6,9).forEach(vehicle => { %>
+
+            <a
+                href="/inv/details/<%= vehicle.inv_id %>"
+                class="relative overflow-hidden rounded-2xl h-[220px] group shadow-xl"
+            >
+
+                <img
+                    src="<%= vehicle.inv_image %>"
+                    alt="<%= vehicle.inv_make %>"
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                >
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+
+                <div class="absolute bottom-4 left-4 text-white z-10">
+
+                    <span class="text-xs uppercase tracking-widest text-[var(--secondary)]">
+                        Hot Deal
+                    </span>
+
+                    <h2 class="text-lg font-bold">
+                        <%= vehicle.inv_make %>
+                        <%= vehicle.inv_model %>
+                    </h2>
+
+                    <p class="text-xs text-gray-300">
+                        Special Offer Available
+                    </p>
+
+                </div>
+
+            </a>
+
+        <% }) %>
+
+    </aside>
+
 </main>

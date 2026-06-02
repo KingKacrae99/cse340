@@ -1,6 +1,258 @@
 <% const d = new Date()
 let year = d.getFullYear() %>
-<footer>
-    <p class="copyright">&copy; <%= year %>, CSE 340 App</p>
-    <a href="/../error/err/test" class="btn">quick links</a>
+<footer class="mt-10 relative overflow-hidden">
+
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+        <img 
+            src="/images/site/footer-bg(1).webp" 
+            alt="Luxury cars background"
+            class="w-full h-full object-cover"
+        >
+
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-br from-black/75 via-[var(--primary)]/80 to-black/80 backdrop-blur-[2px]"></div>
+    </div>
+
+    <!-- Footer Content -->
+    <section class="
+        relative z-10
+        grid
+        grid-cols-1
+        md:grid-cols-2
+        lg:grid-cols-3
+        gap-10
+        p-8
+        lg:p-16
+        text-white
+
+        [grid-template-areas:'newsletter''company''links']
+        md:[grid-template-areas:'newsletter_newsletter''company_links''social_social']
+        lg:[grid-template-areas:'company_links_newsletter_social']
+    ">
+
+        <!-- Company Info -->
+        <div class="[grid-area:company]">
+            <img 
+                src="/images/site/cse340_logo_rmbg.webp" 
+                alt="CSE Motors Logo" 
+                class="w-32 mb-4"
+            >
+
+            <h2 class="text-lg font-bold mb-3">
+                Contact Us
+            </h2>
+
+            <p class="text-gray-300">
+                123 Main Street, Anytown, USA
+            </p>
+
+            <p class="text-gray-300 mt-2">
+                Email: cse340_motors@info.com
+            </p>
+        </div>
+
+
+        <!-- Links Section -->
+        <div class="[grid-area:links] grid grid-cols-3 gap-8">
+
+            <!-- Quick Links -->
+            <div>
+
+                <h2 class="text-lg font-bold mb-4">
+                    Quick Links
+                </h2>
+
+                <ul class="space-y-3 text-sm text-gray-300">
+
+                    <li>
+                        <strong class="text-[var(--secondary)] mr-1">></strong>
+                        <a href="/" class="hover:text-[var(--secondary)] transition-colors duration-300">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <strong class="text-[var(--secondary)] mr-1">></strong>
+                        <a href="/inv" class="hover:text-[var(--secondary)] transition-colors duration-300">
+                            Inventory
+                        </a>
+                    </li>
+
+                    <li>
+                        <strong class="text-[var(--secondary)] mr-1">></strong>
+                        <a href="/account/login" class="hover:text-[var(--secondary)] transition-colors duration-300">
+                            Login
+                        </a>
+                    </li>
+
+                    <li>
+                        <strong class="text-[var(--secondary)] mr-1">></strong>
+                        <a href="/favorites" class="hover:text-[var(--secondary)] transition-colors duration-300">
+                            Favorites
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Brands -->
+            <div>
+
+                <h2 class="text-lg font-bold mb-4">
+                    Brands
+                </h2>
+
+                <ul class="space-y-3 text-sm">
+
+                    <% brandNames.forEach(make => { %>
+
+                        <li class="flex items-center">
+
+                            <span class="inline-block w-2 h-2 border border-2 border-[var(--secondary)] rounded-full mr-2"></span>
+
+                            <a href="" class="text-gray-300 hover:text-[var(--secondary)] transition-colors duration-300">
+                                <%= make.inv_make %>
+                            </a>
+
+                        </li>
+
+                    <% }) %>
+
+                </ul>
+
+            </div>
+
+            <div>
+
+                <h2 class="text-lg font-bold mb-4">
+                    Categories
+                </h2>
+
+                <ul class="space-y-3 text-sm">
+
+                    <% classifications.rows.forEach(classification => { %>
+
+                        <li>
+                            <strong class="text-[var(--secondary)] mr-1">></strong>
+                            <a href="" class=" text-gray-300 hover:text-[var(--secondary)] transition-colors duration-300">
+                                <%= classification.classification_name %>
+                            </a>
+                        </li>
+
+                    <% }) %>
+
+                </ul>
+
+            </div>
+        </div>
+
+
+        <!-- Newsletter -->
+        <div class="[grid-area:newsletter]">
+
+            <h2 class="text-lg font-bold mb-4">
+                Newsletter Sign Up
+            </h2>
+
+            <p class="text-gray-300 mb-5">
+                Get updates about new inventory and exclusive offers.
+            </p>
+
+            <form method="post" action="" class="flex flex-col sm:flex-row gap-3">
+
+                <input 
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                    class="
+                        flex-1
+                        px-4
+                        py-3
+                        rounded-lg
+                        bg-white/10
+                        border border-white/20
+                        backdrop-blur-md
+                        text-white
+                        placeholder:text-gray-300
+                        outline-none
+                        focus:border-[var(--secondary)]
+                    "
+                >
+
+                <button 
+                    type="submit"
+                    class="
+                        bg-[var(--secondary)]
+                        px-5
+                        py-3
+                        rounded-lg
+                        font-semibold
+                        hover:bg-red-700
+                        transition-colors
+                        duration-300
+                    "
+                >
+                    Sign Up
+                </button>
+
+            </form>
+
+            <!-- Social -->
+            <div class="[grid-area:social] mt-10">
+
+                <h2 class="text-lg font-bold mb-5">
+                    Follow Us
+                </h2>
+
+                <div class="flex items-center gap-5 text-2xl">
+
+                    <a href="https://facebook.com" class="hover:text-[var(--secondary)] transition-colors duration-300">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+
+                    <a href="https://x.com" class="hover:text-[var(--secondary)] transition-colors duration-300">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+
+                    <a href="https://instagram.com" class="hover:text-[var(--secondary)] transition-colors duration-300">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="https://tiktok.com" class="hover:text-[var(--secondary)] transition-colors duration-300">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Bottom Footer -->
+    <section class="
+        relative z-10
+        border-t border-white/10
+        bg-black/40
+        backdrop-blur-md
+        text-gray-300
+        px-8
+        py-4
+        flex
+        justify-center
+        items-center
+    ">
+
+        <p class="text-sm text-center">
+            &copy; <%= year %> CSE340 Motors. All rights reserved.
+        </p>
+
+    </section>
+
 </footer>

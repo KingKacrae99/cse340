@@ -629,13 +629,8 @@ Add classification view
 /*footer design*/
 footer{
   margin-top: 1rem;
-  padding: 1rem;
+}
 
-}
-footer p{
-  margin: 0%;
-  color: #333;
-}
 
 footer .btn{
   margin: 1rem;

@@ -11,21 +11,30 @@ const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
+const classificationRoute = require("./routes/classificationRoute")
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require('./routes/accountRoute')
+const favoriteRoute = require('./routes/favoriteRoute')
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
 // bodyParser make the application aware of that functionality
 // In order to colloect the values from the incoming
 const bodyParser = require("body-parser")
+const invModel = require("./models/inventory-model");
 
 /* ***********************
  * Middleware
  * ************************/
-app.use((req, res, next) => {
-  res.locals.currentPath = req.originalUrl
-  next()
+app.use(async(req, res, next) => {
+  try {
+    res.locals.currentPath = req.originalUrl;
+    res.locals.classifications = await invModel.getClassifications();
+    res.locals.brandNames = await invModel.getBrandNames();
+    next()
+  } catch (error) {
+    next(error)
+  }
 })
 
 app.use(session({
@@ -74,11 +83,18 @@ app.use(static)
 // Inventory routes
 app.use("/inv", inventoryRoute)
 
+// Classification routes
+app.use("/type", classificationRoute)
+
 // account login route
 app.use("/account", accountRoute)
 
+// favorite route
+app.use("/favorites", favoriteRoute)
+
 //Index route
 app.get("/", utilities.handlerErrors(baseController.buildHome))
+app.get("/api/weather", utilities.handlerErrors(baseController.currentWeather))
 app.get("/error/err/test", utilities.handlerErrors(baseController.quick))
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

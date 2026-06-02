@@ -160,5 +160,28 @@ invCont.processAddInventory = async function (req, res, next) {
     }
 }
 
+invCont.searchInv =async (req, res, next) => {
+    try {
+        const data = await invModel.searchInventory(req.body);
+
+        if (data.length < 0) {
+            return res.status(401).json({
+                success: false,
+                message:"No Car was found with the information provided",
+            });
+        }
+
+        return res.status(200).json({
+            success:true,
+            message:"Data found!",
+            result: data
+        });
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+
 
 module.exports = invCont

@@ -1,5 +1,6 @@
 const { name } = require("ejs")
 const invModel = require("../models/inventory-model")
+const detailsUtil = require("./car-detail")
 const Util = {}
 
 /* **************************************
@@ -59,36 +60,9 @@ Util.buildClassificationGrid = async function(data) {
 }
 
 Util.buildInventDetails = async function (data) {
-    let container
-    console.log(data.inv_image)
-    if (data) {
-        container = `<section class="inv-card">
-        <div class="inv-card-img">
-        <picture>
-            <source srcset="/${data.inv_image}" media="(min-width: 735px)">
-            <img src="/${data.inv_thumbnail}" alt="${data.inv_year} ${data.inv_make} ${data.inv_model}">
-        </picture>
-        </div>
-
-        <div class="inv-card-info">
-            <h2>${data.inv_make} ${data.inv_model} details</h2>
-            <p class="inv-spec"><strong>Price:</strong>
-                ${addCommasAndCurrency(data.inv_price)}
-            </p>
-            <p class="inv-describe"><strong>Description:</strong>
-               ${data.inv_description}
-            </p>
-            <p class="inv-spec"><strong>Color:</strong>
-               ${data.inv_color}
-            </p>
-            <p class="inv-describe"><strong>Miles:</strong>
-               ${data.inv_miles}
-            </p>
-        </div>
-        </section>`
-    }
-    return container
+    return detailsUtil.buildCarDetails(data)
 }
+
 Util.buildDropdown = async function (data) {
     let select
     if (data.length > 0) {

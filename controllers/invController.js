@@ -182,6 +182,27 @@ invCont.searchInv =async (req, res, next) => {
     }
 }
 
+invCont.getCarsByBrand = async (req, res, next) =>{
+    try{
+        const brandName = req.params.invMake;
+        const data = await invModel.getVehiclesByBrand(brandName);
+        if (!data || data.length < 1) {
+            return res.render("inventory/brand", {
+                title: "No Cars Found",
+                brandName,
+                cars: []
+            });
+        }
+        res.render("inventory/brand", {
+            title: `${brandName} Cars | Premium Showroom`,
+            brandName,
+            cars: data
+        });
+    }catch (err){
+        next(err)
+    }
+}
+
 
 
 module.exports = invCont

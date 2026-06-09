@@ -11,6 +11,7 @@ router.get("/details/:invId", utilities.handlerErrors(invController.buildByInven
 router.get("/mgt", invController.buildMgt);
 router.get("/create-classification", utilities.handlerErrors(invController.buildAddClassification));
 router.get("/create-inv", utilities.handlerErrors(invController.buildAddInventory));
+router.get("/:classificationName/:invMake", utilities.handlerErrors(invController.getCarsByBrand));
 
 router.post("/add-classification", invController.processAddClassification)
 router.post("/add-inventory",invValidate.addInventoryRules(), utilities.handlerErrors(invController.processAddInventory));

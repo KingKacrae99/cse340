@@ -109,8 +109,11 @@ async function getLikedInventorybyClass() {
 
 async function getBrandNames(){
     try{
-        const sql = `SELECT DISTINCT inv_make FROM public.inventory
-                      ORDER BY inv_make ASC`
+        const sql = `SELECT DISTINCT inv_make,classification_name 
+                     FROM public.inventory
+                     JOIN public.classification AS c
+                     ON inventory.classification_id = c.classification_id
+                    ORDER BY inv_make ASC`
         const result = await pool.query(sql)
         return result.rows
     } catch(error){
@@ -118,6 +121,22 @@ async function getBrandNames(){
     }
 }
 
+// Get all inventory items filtered by vehicle manufacturer/brand
+async function getVehiclesByBrand(inv_make) {
+    try {
+        const sql = `
+            SELECT * FROM public.inventory AS inv
+            WHERE LOWER(inv.inv_make) = LOWER($1)
+        `;
+        
+        const result = await pool.query(sql, [inv_make]);
+        console.log("getVehiclesByBrand result", result.rows);
+        return result.rows;
+    } catch (err) {
+        console.error("getVehiclesByBrand model database error: ", err);
+        throw err;
+    }
+}
 async function getCarsByLikes(){
     try{
 
@@ -176,5 +195,5 @@ module.exports = {
     getInventoryRowById, addClassification,
     getClassificationName, addInventory,
     getLikedInventorybyClass, getBrandNames,
-    getCarsByLikes, searchInventory
+     getVehiclesByBrand, getCarsByLikes, searchInventory
 }

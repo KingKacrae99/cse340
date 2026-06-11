@@ -1,0 +1,228 @@
+<div class="w-full bg-white antialiased text-black min-h-screen">
+
+    <header class="relative w-full overflow-hidden bg-black min-h-[320px] sm:min-h-[400px] flex items-end p-4 sm:p-12 mb-6 sm:mb-12 border-b border-neutral-950 shadow-2xl">
+        <% if (locals.cars && cars.length > 0) { %>
+            <div class="absolute inset-0 z-0 scale-105 pointer-events-none">
+                <img src="<%= cars[0].inv_image %>" alt="" class="w-full h-full object-cover opacity-35 blur-xl scale-110 select-none">
+                <img src="<%= cars[0].inv_image %>" alt="Featured Fleet Vehicle" class="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-luminosity">
+            </div>
+        <% } else { %>
+            <div class="absolute inset-0 bg-gradient-to-tr from-neutral-950 via-neutral-900 to-neutral-950 z-0"></div>
+        <% } %>
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10"></div>
+
+        <div class="relative z-20 max-w-2xl w-full bg-neutral-900/40 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-white/10 shadow-2xl space-y-3">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest bg-[#DC2626] text-white shadow-sm">
+                Live Showroom Portfolio
+            </span>
+            <h1 class="text-2xl sm:text-5xl font-black text-white tracking-tighter uppercase leading-none">
+                The Collection | <span class="text-neutral-400 font-light">Global Inventory</span>
+            </h1>
+            <p class="text-xs text-neutral-400 max-w-md font-normal leading-relaxed">
+                Experience an uncompromised catalog of masterfully engineered automotive platforms. Precision verified and performance ready.
+            </p>
+        </div>
+    </header>
+
+    <div class="lg:hidden px-4 mb-6 sticky top-4 z-40">
+        <button id="mobile-filter-trigger" type="button" class="w-full flex items-center justify-between bg-black/90 backdrop-blur-md text-white px-5 py-4 rounded-xl border border-neutral-800 shadow-xl active:scale-[0.99] transition-all">
+            <span class="text-xs font-black uppercase tracking-widest flex items-center">
+                <i class="fa-solid fa-sliders text-[#DC2626] mr-2.5"></i> Configure Filter Matrix
+            </span>
+            <span class="text-[10px] font-mono bg-neutral-800 px-2 py-0.5 rounded text-neutral-400" id="mobile-match-count">
+                <%= locals.cars ? cars.length : 0 %> Units
+            </span>
+        </button>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+        
+        <aside id="filter-sidebar" class="fixed inset-y-0 left-0 w-full max-w-xs sm:max-w-sm bg-neutral-950 lg:bg-transparent p-6 lg:p-0 z-50 lg:z-0 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out lg:static lg:col-span-3 space-y-6 lg:border-r lg:border-neutral-100 lg:pr-6 overflow-y-auto lg:overflow-visible h-full lg:h-auto lg:max-h-[calc(100vh-120px)] lg:sticky lg:top-24">
+            
+            <div class="flex items-center justify-between border-b border-neutral-800 lg:border-neutral-100 pb-4">
+                <h3 class="text-sm font-black uppercase tracking-widest text-white lg:text-black flex items-center">
+                    <i class="fa-solid fa-sliders text-xs mr-2 text-[#DC2626]"></i> Filters
+                </h3>
+                <div class="flex items-center space-x-4">
+                    <button type="button" class="text-[10px] font-bold uppercase tracking-wider text-neutral-400 hover:text-[#DC2626] transition-colors">
+                        Clear
+                    </button>
+                    <button id="mobile-filter-close" type="button" class="lg:hidden text-neutral-400 hover:text-white text-sm p-1">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <form id="luxury-filter-deck" method="GET" action="/inv" class="space-y-6">
+                <div class="space-y-2.5">
+                    <label class="block text-[11px] font-black uppercase tracking-wider text-neutral-400">Manufacturer</label>
+                    <div class="relative">
+                        <select name="make" class="w-full appearance-none bg-neutral-900 lg:bg-neutral-50 border border-neutral-800 lg:border-neutral-200 text-xs font-bold uppercase tracking-wider px-3.5 py-3 rounded-xl text-white lg:text-black focus:outline-none focus:border-[#DC2626] cursor-pointer transition-colors">
+                            <option value="">All Manufacturers</option>
+                            <% if (locals.brandNames) { %>
+                                <% brandNames.forEach(brand => { %>
+                                    <option value="<%= brand.inv_make %>"><%= brand.inv_make %></option>
+                                <% }); %>
+                            <% } %>
+                        </select>
+                        <div class="absolute inset-y-0 right-3.5 flex items-center pointer-events-none text-neutral-400 text-[9px]">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <label class="block text-[11px] font-black uppercase tracking-wider text-neutral-400">Body Style</label>
+                    <div class="relative">
+                        <select name="bodyStyle" class="w-full appearance-none bg-neutral-900 lg:bg-neutral-50 border border-neutral-800 lg:border-neutral-200 text-xs font-bold uppercase tracking-wider px-3.5 py-3 rounded-xl text-white lg:text-black focus:outline-none focus:border-[#DC2626] cursor-pointer transition-colors">
+                            <option value="">All Styles</option>
+                            <% if (locals.classNames) { %>
+                                <% classNames.forEach(classification => { %>
+                                    <option value="<%= classification.classification_name %>"><%= classification.classification_name %></option>
+                                <% }); %>
+                            <% } %>
+                        </select>
+                        <div class="absolute inset-y-0 right-3.5 flex items-center pointer-events-none text-neutral-400 text-[9px]">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <div class="flex justify-between items-center text-[11px] font-black uppercase tracking-wider text-neutral-400">
+                        <span>Price Range</span>
+                        <span class="text-white lg:text-black font-mono font-bold">$0 - $500k +</span>
+                    </div>
+                    <div class="pt-2 px-1">
+                        <input type="range" min="0" max="500000" step="25000" class="w-full accent-[#DC2626] h-1 bg-neutral-800 lg:bg-neutral-100 rounded-lg appearance-none cursor-pointer">
+                        <div class="flex justify-between text-[9px] font-mono text-neutral-500 mt-1.5">
+                            <span>$0</span>
+                            <span>$500k</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <label class="block text-[11px] font-black uppercase tracking-wider text-neutral-400">Fuel Type</label>
+                    <div class="relative">
+                        <select name="fuel" class="w-full appearance-none bg-neutral-900 lg:bg-neutral-50 border border-neutral-800 lg:border-neutral-200 text-xs font-bold uppercase tracking-wider px-3.5 py-3 rounded-xl text-white lg:text-black focus:outline-none focus:border-[#DC2626] cursor-pointer transition-colors">
+                            <option value="">All Configurations</option>
+                            <option value="petrol">Petrol Hybrid</option>
+                            <option value="electric">Full Electric</option>
+                            <option value="v8">Twin-Turbo V8</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-3.5 flex items-center pointer-events-none text-neutral-400 text-[9px]">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 bg-[#DC2626] hover:bg-red-700 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-colors duration-300 shadow-md">
+                    Apply Filter Deck
+                </button>
+            </form>
+        </aside>
+
+        <div id="filter-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden lg:hidden"></div>
+
+        <div class="col-span-1 lg:col-span-9 space-y-8">
+            
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-neutral-100">
+                <div>
+                    <h2 class="text-sm font-black uppercase tracking-widest text-black">Active Vault Listings</h2>
+                    <p class="text-xs text-neutral-400 font-mono mt-0.5">
+                        <%= locals.cars ? cars.length : 0 %> Records Match Criteria Matrix
+                    </p>
+                </div>
+                <div class="flex items-center flex-wrap gap-2 text-xs text-neutral-400">
+                    <span class="font-bold text-black uppercase text-[11px]">Sort By:</span>
+                    <button class="px-2.5 py-1 bg-neutral-100 text-black rounded-lg font-bold text-[11px]">Newest</button>
+                    <button class="px-2.5 py-1 hover:bg-neutral-50 hover:text-black rounded-lg transition-colors font-bold text-[11px]">Price</button>
+                </div>
+            </div>
+
+            <div id="car-grid-container">
+                <% if (locals.cars && cars.length > 0) { %>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+                        <% cars.forEach(function(car) { %>
+                            <article class="group bg-white border border-neutral-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
+                                
+                                <div class="relative aspect-[16/10] bg-neutral-950 overflow-hidden border-b border-neutral-100">
+                                    <img src="<%= car.inv_image %>" alt="" class="absolute inset-0 w-full h-full object-cover opacity-15 blur-xl scale-110 pointer-events-none transition-transform duration-500 group-hover:scale-125">
+                                    <img src="<%= car.inv_image %>" alt="<%= car.inv_make %> <%= car.inv_model %>" class="relative w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" loading="lazy">
+                                    
+                                    <div class="absolute top-3 left-3 bg-black text-white text-[8px] font-black tracking-widest uppercase px-2 py-0.5 rounded shadow border border-white/5 font-mono">
+                                        <%= car.inv_year %> RUN
+                                    </div>
+                                </div>
+
+                                <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                                    <div>
+                                        <h3 class="text-base font-black text-black tracking-tight uppercase group-hover:text-[#DC2626] transition-colors duration-200 truncate">
+                                            <%= car.inv_make %> <span class="text-neutral-500 font-light"><%= car.inv_model %></span>
+                                        </h3>
+                                        
+                                        <div class="mt-2.5 grid grid-cols-2 gap-y-1.5 gap-x-2 text-[10px] font-mono tracking-wider text-neutral-400 border-t border-neutral-50/80 pt-2.5">
+                                            <div class="truncate"><i class="fa-solid fa-gauge mr-1 text-neutral-300"></i> <%= Number(car.inv_miles).toLocaleString() %> MI</div>
+                                            <div class="text-right uppercase truncate"><i class="fa-solid fa-palette mr-1 text-neutral-300"></i> <%= car.inv_color %></div>
+                                            <div class="truncate"><i class="fa-solid fa-charging-station mr-1 text-neutral-300"></i>
+                                                <% if (car.classification_name === 'Electric') { %>
+                                                    <%= car.classification_name %>
+                                                <% } else { %>
+                                                    Petrol Hybrid
+                                                <% } %>
+                                            </div>
+                                            <div class="text-right truncate"><i class="fa-solid fa-gears mr-1 text-neutral-300"></i> Auto 8-Spd</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="pt-3 border-t border-neutral-100 flex items-center justify-between gap-2">
+                                        <div>
+                                            <span class="block text-[8px] font-black uppercase text-neutral-400 tracking-widest">Showroom MSRP</span>
+                                            <span class="text-sm sm:text-base font-black text-black tracking-tighter font-mono">
+                                                $<%= Number(car.inv_price).toLocaleString() %>
+                                            </span>
+                                        </div>
+                                        <a href="/inv/details/<%= car.inv_id %>" class="px-3 py-2 bg-black hover:bg-[#DC2626] text-white text-[9px] font-black uppercase tracking-widest rounded-lg shadow-sm transition-all duration-200">
+                                            Explore
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </article>
+                        <% }) %>
+                    </div>
+                <% } else { %>
+                    <div class="text-center py-20 bg-neutral-50 border border-dashed border-neutral-200 rounded-2xl max-w-sm mx-auto">
+                        <i class="fa-solid fa-circle-nodes text-3xl text-neutral-300 mb-3 block"></i>
+                        <h4 class="text-xs font-black uppercase tracking-wider text-black">Zero Matrix Matches</h4>
+                        <p class="text-xs text-neutral-400 mt-1 max-w-xs px-4">Try relaxing your sidebar filter selections or change manufacturer values.</p>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const trigger = document.getElementById('mobile-filter-trigger');
+        const sidebar = document.getElementById('filter-sidebar');
+        const backdrop = document.getElementById('filter-backdrop');
+        const closeBtn = document.getElementById('mobile-filter-close');
+
+        function toggleFilters() {
+            sidebar.classList.toggle('-translate-x-full');
+            backdrop.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        if(trigger && sidebar && backdrop && closeBtn) {
+            trigger.addEventListener('click', toggleFilters);
+            closeBtn.addEventListener('click', toggleFilters);
+            backdrop.addEventListener('click', toggleFilters);
+        }
+    });
+</script>
+<script src="../../js/ajax-filter.js?v=1.0.1" defer></script>

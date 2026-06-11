@@ -29,7 +29,7 @@ const invModel = require("./models/inventory-model");
 app.use(async(req, res, next) => {
   try {
     res.locals.currentPath = req.originalUrl;
-    res.locals.classifications = await invModel.getClassifications();
+    res.locals.footerClassLinks = await invModel.getClassifications();
     res.locals.brandNames = await invModel.getBrandNames();
     next()
   } catch (error) {
@@ -84,7 +84,7 @@ app.use(static)
 app.use("/inv", inventoryRoute)
 
 // Classification routes
-app.use("/type", classificationRoute)
+app.use("/category", classificationRoute)
 
 // account login route
 app.use("/account", accountRoute)

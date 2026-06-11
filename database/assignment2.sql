@@ -80,5 +80,10 @@ CREATE TABLE IF NOT EXISTS public.order_items(
 );
 
 ---Add Icon field to the classification table
-AlTER TABLE public.classification
-ADD icon_class VARCHAR(100);
+--AlTER TABLE public.classification
+--ADD icon_class VARCHAR(100);
+
+---- updating a mistaken image name in the `inventory table`
+--UPDATE public.inventory
+--SET inv_image = REPLACE(inv_image, 'vcamaro.jpg', 'camaro.jpg')
+--WHERE inv_model = 'Camaro';

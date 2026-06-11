@@ -113,7 +113,7 @@ let year = d.getFullYear() %>
 
                             <span class="inline-block w-2 h-2 border border-2 border-[var(--secondary)] rounded-full mr-2"></span>
 
-                            <a href="/inv/<%= make.classification_name %>/<%= make.inv_make %>" class="text-gray-300 hover:text-[var(--secondary)] transition-colors duration-300">
+                            <a href="/inv/<%= make.inv_make %>" class="text-gray-300 hover:text-[var(--secondary)] transition-colors duration-300">
                                 <%= make.inv_make %>
                             </a>
 
@@ -133,11 +133,11 @@ let year = d.getFullYear() %>
 
                 <ul class="space-y-3 text-sm">
 
-                    <% classifications.rows.forEach(classification => { %>
+                    <% footerClassLinks.rows.forEach(classification => { %>
 
                         <li>
                             <strong class="text-[var(--secondary)] mr-1">></strong>
-                            <a href="" class=" text-gray-300 hover:text-[var(--secondary)] transition-colors duration-300">
+                            <a href="/category/<%= classification.classification_name %>" class=" text-gray-300 hover:text-[var(--secondary)] transition-colors duration-300">
                                 <%= classification.classification_name %>
                             </a>
                         </li>

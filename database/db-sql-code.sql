@@ -70,7 +70,7 @@ VALUES (
         'Camaro',
         '2018',
         'If you want to look cool this is the ar you need! This car has great performance at an affordable price. Own it today!',
-        '/images/vehicles/vcamaro.jpg',
+        '/images/vehicles/camaro.jpg',
         '/images/vehicles/camaro-tn.jpg',
         25000,
         101222,

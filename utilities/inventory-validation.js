@@ -64,4 +64,5 @@ invValidate.addInventoryRules = () => {
             .withMessage("Provide the vehicle's color.")
     ]
 }
+
 module.exports = invValidate

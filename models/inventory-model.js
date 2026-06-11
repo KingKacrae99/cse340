@@ -15,14 +15,14 @@ async function getClassifications() {
 /* **************************************************
 * Get all inventoryitems and classification_name by classification_id
 ********************************************************************/
-async function getInventoryByClassificationId(classification_id ) {
+async function getInventoryByClassificationId(classification_name ) {
     try {
         const data = await pool.query(
             `SELECT * FROM public.inventory AS i
             JOIN public.classification AS c
-            ON i.classification_id = c.classification_id
-            WHERE i.classification_id = $1`,
-            [classification_id]
+            USING (classification_id)
+            WHERE c.classification_name = $1`,
+            [classification_name]
         )
         console.log("getInventoryByClassificationId :",data)
         return data.rows
@@ -107,20 +107,25 @@ async function getLikedInventorybyClass() {
     }
 }
 
-async function getBrandNames(){
-    try{
-        const sql = `SELECT DISTINCT inv_make,classification_name 
-                     FROM public.inventory
-                     JOIN public.classification AS c
-                     ON inventory.classification_id = c.classification_id
-                    ORDER BY inv_make ASC`
-        const result = await pool.query(sql)
-        return result.rows
-    } catch(error){
-        console.error("getBrandNames error" + error)
+async function getBrandNames() {
+    try {
+        const sql = `
+            SELECT DISTINCT ON (inv.inv_make) 
+                inv.inv_make,
+                c.classification_name 
+            FROM public.inventory AS inv
+            JOIN public.classification AS c
+              ON inv.classification_id = c.classification_id
+            ORDER BY inv.inv_make ASC, c.classification_name ASC
+        `;
+        
+        const result = await pool.query(sql);
+        return result.rows;
+    } catch (error) {
+        console.error("getBrandNames database function error: " + error);
+        throw error;
     }
 }
-
 // Get all inventory items filtered by vehicle manufacturer/brand
 async function getVehiclesByBrand(inv_make) {
     try {
@@ -189,11 +194,118 @@ async function searchInventory(filters = {}) {
 
     return result.rows;
 }
+/* ***************************
+ * Get All Inventory Items (Luxury Catalog)
+ * ************************** */
+async function getAllInventory() {
+    try {
+        const sql = `
+            SELECT 
+                inv.inv_id,
+                inv.inv_make,
+                inv.inv_model,
+                inv.inv_year,
+                inv.inv_description,
+                inv.inv_image,
+                inv.inv_thumbnail,
+                inv.inv_price,
+                inv.inv_miles,
+                inv.inv_color,
+                inv.likes_count,
+                c.classification_name
+            FROM public.inventory AS inv
+            JOIN public.classification AS c
+              ON inv.classification_id = c.classification_id
+            ORDER BY inv.inv_make ASC, inv.inv_model ASC
+        `;
+        
+        const result = await pool.query(sql);
+        console.log("getAllInventory total records fetched:", result.rowCount);
+        return result.rows;
+    } catch (err) {
+        console.error("Database Error inside inventoryModel.getAllInventory:", err);
+        throw err;
+    }
+};
+
+/* ***************************
+ * Get Filtered Inventory (Dynamic Parameters Deck)
+ * ************************** */
+async function getFilteredInventory(filters) {
+    try {
+        let sql = `
+            SELECT inv.*, c.classification_name
+            FROM public.inventory AS inv
+            JOIN public.classification AS c ON inv.classification_id = c.classification_id
+            WHERE 1=1`;
+        
+        const queryParams = [];
+        let paramIndex = 1;
+
+        if (filters.make) {
+            sql += ` AND LOWER(inv.inv_make) = LOWER($${paramIndex})`;
+            queryParams.push(filters.make);
+            paramIndex++;
+        }
+
+        if (filters.bodyStyle) {
+            sql += ` AND LOWER(c.classification_name) = LOWER($${paramIndex})`;
+            queryParams.push(filters.bodyStyle);
+            paramIndex++;
+        }
+
+        sql += ` ORDER BY inv.inv_make ASC`;
+        
+        const result = await pool.query(sql, queryParams);
+        return result.rows;
+    } catch (err) {
+        console.error("Error executing dynamic getFilteredInventory matching query:", err);
+        throw err;
+    }
+};
+/**
+ * *******************************************************************
+ * Insert a newly consigned luxury vehicle configuration into inventory
+ * *******************************************************************
+ */
+async function insertConsignedVehicle(vehicle) {
+    try {
+        const sql = `
+            INSERT INTO public.inventory (
+                inv_make, inv_model, inv_year, inv_description, 
+                inv_image, inv_thumbnail, inv_price, inv_miles, 
+                inv_color, classification_id
+            ) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) 
+            RETURNING *;
+        `;
+        
+        const data = await pool.query(sql, [
+            vehicle.inv_make,
+            vehicle.inv_model,
+            vehicle.inv_year,
+            vehicle.inv_description,
+            vehicle.inv_image,
+            vehicle.inv_thumbnail,
+            vehicle.inv_price,
+            vehicle.inv_miles,
+            vehicle.inv_color,
+            vehicle.classification_id
+        ]);
+        
+        return data.rows[0]; // Return the successfully registered data entity row back
+    } catch (error) {
+        console.error("insertConsignedVehicle DB Error Details:", error);
+        return null;
+    }
+}
 
 module.exports = {
     getClassifications, getInventoryByClassificationId,
     getInventoryRowById, addClassification,
     getClassificationName, addInventory,
     getLikedInventorybyClass, getBrandNames,
-     getVehiclesByBrand, getCarsByLikes, searchInventory
+     getVehiclesByBrand, getCarsByLikes, 
+     searchInventory, getAllInventory,getFilteredInventory,
+     insertConsignedVehicle
 }

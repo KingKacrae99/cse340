@@ -23,7 +23,7 @@
             <!-- 1. Top Half: Dramatic Cover Image Area -->
             <div class="h-56 sm:h-72 w-full bg-neutral-900 relative overflow-hidden">
                 <% if (cars && cars.length > 0) { %>
-                    <img src="/<%= cars[0].inv_image %>" alt="<%= brandName %> Showroom" class="w-full h-full object-cover">
+                    <img src="<%= cars[0].inv_image %>" alt="<%= brandName %> Showroom" class="w-full h-full object-cover">
                 <% } else { %>
                     <div class="w-full h-full bg-gradient-to-r from-neutral-800 to-neutral-950"></div>
                 <% } %>
@@ -80,7 +80,7 @@
                         
                         <!-- Top Half: Image Container with Badge Layout -->
                         <div class="relative aspect-[16/10] bg-neutral-50 overflow-hidden border-b border-neutral-100">
-                            <img src="/<%= car.inv_image %>" alt="<%= car.inv_make %> <%= car.inv_model %>" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300 ease-out" loading="lazy">
+                            <img src="<%= car.inv_image %>" alt="<%= car.inv_make %> <%= car.inv_model %>" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300 ease-out" loading="lazy">
                             
                             <!-- Red Year Tag Badge -->
                             <div class="absolute top-3 left-3 bg-secondary px-2.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider text-white shadow">

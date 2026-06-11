@@ -360,7 +360,7 @@
                     </div>
 
                     <div class="text-center mt-6">
-                        <a href="/inventory"
+                        <a href="/inv"
                             class="inline-block bg-[var(--accent)] text-[var(--primary)] px-5 py-3 rounded-lg font-bold hover:bg-white transition">
 
                             Browse All Cars
@@ -545,9 +545,9 @@
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
 
-                    <% classifications.rows.forEach(category => { %>
+                    <% footerClassLinks.rows.forEach(category => { %>
 
-                    <a href="/type/<%= category.classification_name %>/<%= category.classification_id %>"
+                    <a href="/category/<%= category.classification_name %>"
                         class="shadow rounded-lg inset-shadow-sm border text-center text-[var(--primary)] border-gray-300 p-4 hover:bg-[var(--primary)] hover:text-white transition-colors duration-300">
 
                         <i class="fa-solid <%= category.icon_class %> text-2xl"></i>

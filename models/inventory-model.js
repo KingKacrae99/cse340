@@ -274,9 +274,9 @@ async function insertConsignedVehicle(vehicle) {
             INSERT INTO public.inventory (
                 inv_make, inv_model, inv_year, inv_description, 
                 inv_image, inv_thumbnail, inv_price, inv_miles, 
-                inv_color, classification_id
+                inv_color, classification_id, account_id, inv_approved
             ) 
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, FALSE) 
             RETURNING *;
         `;
         
@@ -290,10 +290,11 @@ async function insertConsignedVehicle(vehicle) {
             vehicle.inv_price,
             vehicle.inv_miles,
             vehicle.inv_color,
-            vehicle.classification_id
+            vehicle.classification_id,
+            vehicle.account_id // Bound safely to parameter marker $11
         ]);
         
-        return data.rows[0]; // Return the successfully registered data entity row back
+        return data.rows[0]; 
     } catch (error) {
         console.error("insertConsignedVehicle DB Error Details:", error);
         return null;

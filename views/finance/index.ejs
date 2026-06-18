@@ -1,0 +1,35 @@
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<div class="w-full bg-[var(--accent)] text-white antialiased min-h-screen font-sans overflow-x-hidden pb-16 selection:bg-red-500 selection:text-white">
+    
+    <main class="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-8 space-y-12">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+            <%- include('./partials/financeHero.ejs') %>
+
+            <%- include('./partials/capitalPortfolio') %>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch pt-4">
+            <%- include('./partials/approvalProtocol') %>
+
+            <%- include('./partials/qualificationCard') %>
+        </div>
+
+        <%- include('./partials/advisoryCards') %>
+
+        <%- include('./partials/ctaBanner') %>
+
+    </main>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        AOS.init({
+            once: true,
+            mirror: false,
+            anchorPlacement: 'top-bottom'
+        });
+    });
+</script>

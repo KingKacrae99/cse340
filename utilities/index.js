@@ -4,10 +4,22 @@ const detailsUtil = require("./car-detail")
 const classificationUtil = require("./classification")
 const Util = {}
 
+
+/* ******************************************
+* Check Login Status to Protect Routes
+* **************************************** */
+Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next() // User is authenticated! Move on to the next controller function.
+  } else {
+    req.flash("notice", "Please log in to access this feature.")
+    return res.redirect("/account/login")
+  }
+}
+
 /* **************************************
 * Constructs the nav HTML unordered list
 ************************************   */
-
 Util.getNav = async function (req, res, next) {
     let data = await invModel.getClassifications()
     let list = "<ul>"

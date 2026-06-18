@@ -1,12 +1,12 @@
 <% if (title) { %> <!-- EJS block to contain a JavaScript. Checks if a title variable exists-->
     <header class="w-full bg-black py-16 sm:py-24 px-4 mb-12 border-b border-neutral-900 shadow-xl flex flex-col items-center justify-center text-center">
-        <span class="text-[9px] tracking-[0.3em] uppercase text-neutral-400 font-mono mb-3 block animate-pulse">
-            Curated Vault Allocation
-        </span>
         <h1 class="text-4xl sm:text-6xl font-normal tracking-wide text-white uppercase" style="font-family: 'Times New Roman', Times, Baskerville, Georgia, serif;">
             <%= title %> <!-- Display variable -->
         </h1>
-        <div class="w-12 h-[1px] bg-[#DC2626] mt-6 tracking-widest"></div>
+        <div class="w-12 h-[1px] bg-[#DC2626] mt-3 tracking-widest"></div>
+        <span class="text-[9px] tracking-[0.3em] mt-6 uppercase text-neutral-400 font-mono mb-3 block animate-pulse">
+            Curated Vault Allocation
+        </span>
     </header>
 <% } else { 
     res.redirect('/') 

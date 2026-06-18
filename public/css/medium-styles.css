@@ -107,14 +107,69 @@
     }
 
     /*********Login Form **********/
-    .login-section #login-form {
-        max-width: 400px;
+    .login-container {
+        background-image: url('/images/site/login-bg-img.webp');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        padding: 2rem;
+        z-index: 1;
     }
-    .register {
-        min-width: 400px;
-        width: 50%;
+
+    /* Activate the dark blur glass cover sheet effect overlay layer */
+    .login-container::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        /* 1. We lightened the dark color gradient layer from 40%/100% down to 20%/70% */
+        background: radial-gradient(circle at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.7) 100%);
+        
+        /* 2. We toned down the blur radius from 12px to 4px and increased brightness to 0.7 */
+        backdrop-filter: blur(4px) brightness(0.7);
+        -webkit-backdrop-filter: blur(4px) brightness(0.7);
+        z-index: -1;
     }
-}
+
+    /* Transform the container into a floating frosted glass card design */
+    .login-card {
+        background: var(--neutral-glass-bg);
+        border: 1px solid var(--neutral-glass-border);
+        border-radius: 24px;
+        padding: 3rem 2.5rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+    }
+
+    /* Enable smooth interactive state transition micro-animations */
+    .login-card {
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .forgot-password-link, .registration-highlight-link {
+        transition: color 0.2s ease;
+    }
+
+    .forgot-password-link:hover {
+        color: var(--secondary);
+    }
+
+    .registration-highlight-link:hover {
+        color: var(--accent);
+        text-decoration: underline;
+    }
+
+    .primary-submit-btn {
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .primary-submit-btn:hover {
+        background: var(--secondary-red-hover);
+        box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+        transform: translateY(-1px);
+    }
+
+    .primary-submit-btn:active {
+        transform: translateY(1px);
+    }
 /*******************************************
 * Add Inventory 
 ********************************************/

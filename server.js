@@ -15,6 +15,8 @@ const classificationRoute = require("./routes/classificationRoute")
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require('./routes/accountRoute')
 const favoriteRoute = require('./routes/favoriteRoute')
+const sellRoute = require('./routes/sellRoute')
+const financeRoute = require('./routes/financeRoute')
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
@@ -91,6 +93,12 @@ app.use("/account", accountRoute)
 
 // favorite route
 app.use("/favorites", favoriteRoute)
+
+// sell route
+app.use("/sell", sellRoute)
+
+// Finance routes
+app.use("/finance", financeRoute)
 
 //Index route
 app.get("/", utilities.handlerErrors(baseController.buildHome))

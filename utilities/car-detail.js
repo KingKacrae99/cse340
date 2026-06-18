@@ -8,11 +8,14 @@ async function buildCarDetails (data) {
             : `$${Number(data.inv_price).toLocaleString()}`;
 
         const formattedMiles = Number(data.inv_miles).toLocaleString();
+        
+        // Evaluate initial favorited baseline indicator state parameters
+        const currentLikeHeartIconState = data.is_favorited ? `fa-solid text-[var(--secondary)]` : `fa-regular`;
 
         container = `
         <section class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start antialiased text-black bg-white">
             
-            <div class="lg:col-span-7 space-y-4">
+            <div class="lg:col-span-7 space-y-4 relative">
                 <div class="relative group aspect-[16/10] w-full rounded-2xl overflow-hidden bg-neutral-950 border border-neutral-100 shadow-sm cursor-zoom-in" 
                      onclick="openImageModal('${data.inv_image}', '${data.inv_year} ${data.inv_make} ${data.inv_model}')">
                     
@@ -23,11 +26,22 @@ async function buildCarDetails (data) {
                          class="relative w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                          loading="eager">
 
-                    <div class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg text-white text-xs font-medium flex items-center space-x-2 border border-white/10 shadow-lg">
+                    <div class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg text-white text-xs font-medium flex items-center space-x-2 border border-white/10 shadow-lg pointer-events-none">
                         <i class="fa-solid fa-magnifying-glass-plus text-[#DC2626]"></i>
                         <span>Click to expand high-res showcase</span>
                     </div>
                 </div>
+
+                <!--<button 
+                    type="button" 
+                    class="like-btn absolute top-3 right-3 w-11 h-11 flex items-center justify-center bg-black/60 backdrop-blur-md text-white rounded-full border border-white/10 shadow-xl hover:bg-black/90 hover:scale-110 active:scale-95 transition-all duration-200 z-20 cursor-pointer" 
+                    data-id="${data.inv_id}"
+                    title="Toggle vehicle collection favorite assignment tracking index status"
+                    aria-label="Bookmark vehicle details profile"
+                    onclick="event.stopPropagation();"
+                >
+                    <i class="${currentLikeHeartIconState} fa-heart text-base pointer-events-none transition-colors duration-200"></i>
+                </button>-->
 
                 <div class="flex items-center space-x-4">
                     <button class="w-24 aspect-[16/10] rounded-xl overflow-hidden border-2 border-[#DC2626] bg-neutral-900 shadow-md focus:outline-none transition-all"
@@ -114,7 +128,7 @@ async function buildCarDetails (data) {
 
                 <div class="max-w-5xl w-full max-h-[85vh] relative rounded-2xl overflow-hidden shadow-2xl scale-95 transform transition-transform duration-300 ease-out border border-white/10 bg-neutral-950"
                      onclick="event.stopPropagation()">
-                    <img id="modalTargetImg" src="${data.inv_image}" alt="${data.inv_name}" class="w-full h-full max-h-[85vh] object-contain mx-auto">
+                    <img id="modalTargetImg" src="${data.inv_image}" alt="${data.inv_year} ${data.inv_make} ${data.inv_model}" class="w-full h-full max-h-[85vh] object-contain mx-auto">
                     <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent p-6 text-white">
                         <p id="modalTargetCaption" class="text-lg font-black uppercase tracking-tight text-white"></p>
                     </div>

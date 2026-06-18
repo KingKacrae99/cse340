@@ -1,9 +1,11 @@
---- Remove Classification Table ---
-DROP TABLE IF EXISTS public.classification CASCADE;
+-- Drop tables in reverse order of dependencies to avoid foreign key constraint errors
+DROP TABLE IF EXISTS public.order_items;
+DROP TABLE IF EXISTS public.orders;
+DROP TABLE IF EXISTS public.favorites;
+DROP TABLE IF EXISTS public.inventory;
+DROP TABLE IF EXISTS public.account;
+DROP TABLE IF EXISTS public.classification;
 
---- Remove Inventory Table ---
-DROP TABLE IF EXISTS public.inventory CASCADE;
-
---- Remove Favorite Table ---
-DROP TABLE IF EXISTS public.favorites CASCADE;
-
+-- Drop custom types/enums
+DROP TYPE IF EXISTS public.status_type;
+DROP TYPE IF EXISTS public.account_type;

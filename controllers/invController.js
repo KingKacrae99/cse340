@@ -12,15 +12,17 @@ invCont.buildByClassificationId = async function (req, res, next) {
         const data = await invModel.getInventoryByClassificationId(classification_name)
         const grid = await utilities.buildClassificationGrid(data)
         let nav = await utilities.getNav()
+        let className;
         if (data.length < 1) {
-            const error = new Error("No vehicles for found this category.")
-            error.status = 404;
-            throw error
+            className = "No Cars Found"
+        } else {
+            className = data[0].classification_name
         }
-        const className = data[0].classification_name
+        if (data.length < 1) {
+            className = "No Cars Found"
+        }
         res.render("inventory/classification", {
-            title: className +" "+ "Vehicles",
-            nav,
+            title: className ,
             grid,
         })
     } catch(err) {
@@ -244,15 +246,26 @@ invCont.filterShowroomData = async function (req, res, next) {
     }
 };
 
+/* ******************************************
+ * Build Sell Your Car Landing Page View
+ * ****************************************** */
+invCont.buildSellLandingPage = async function (req, res, next) {
+  res.render("inventory/sell-landing", {
+    title: "Liquidate Vehicle Assets | Velocity Drives",
+    user: res.locals.accountData || req.session.user || null, 
+  })
+}
+
+/*****************************************************************
+ * Sell Vehicle Form Page View
+ ****************************************************************/
 invCont.buildSellVehiclePage = async function (req, res, next) {
     try {
-        // Fetch classification array to populate the drop-down (e.g., id and name)
-        // Adjust this model call to match your exact helper name (e.g., getClassifications())
         const classifications = await invModel.getClassifications();
 
         res.render("inventory/sell-vehicle", {
             title: "Asset Consignment Registry",
-            classifications: classifications.rows || classifications // Handle array formatting safety
+            classifications: classifications.rows || classifications 
         });
     } catch (error) {
         next(error);
@@ -267,9 +280,14 @@ invCont.buildSellVehiclePage = async function (req, res, next) {
  */
 invCont.handleVehicleConsignmentPost = async function (req, res, next) {
     try {
-        // 1. Check if Multer successfully processed and caught the uploaded file asset
+        // Security Guardrail: Block unauthenticated execution requests
+        if (!res.locals.loggedin || !req.session.accountData) {
+            req.flash("notice", "Authentication required. Please sign in to consign vehicles to the network.");
+            return res.status(401).redirect("/account/login");
+        }
+
+        // Check if Multer successfully processed and caught the uploaded file asset
         if (!req.file) {
-            // Re-render page with a warning notification if no image was supplied
             let nav = await utilities.getNav();
             const classifications = await invModel.getClassifications();
             
@@ -281,7 +299,7 @@ invCont.handleVehicleConsignmentPost = async function (req, res, next) {
             });
         }
 
-        // 2. Extract and sanitize incoming form payloads from req.body
+        // Extract and sanitize incoming form payloads from req.body
         const {
             inv_make,
             inv_model,
@@ -293,11 +311,14 @@ invCont.handleVehicleConsignmentPost = async function (req, res, next) {
             classification_id
         } = req.body;
 
-        // 3. Extract final asset string locations calculated cleanly by the image processor middleware
+        // Extract final asset string locations calculated cleanly by the image processor middleware
         const inv_image = req.body.inv_image;
         const inv_thumbnail = req.body.inv_thumbnail;
 
-        // 4. Pass sanitized parameters to your model's database insert sequence
+        // Extract the validated client key directly out of session storage
+        const account_id = req.session.accountData.account_id;
+
+        // Pass sanitized parameters to your model's database insert sequence
         const insertResult = await invModel.insertConsignedVehicle({
             inv_make,
             inv_model,
@@ -308,17 +329,17 @@ invCont.handleVehicleConsignmentPost = async function (req, res, next) {
             inv_price: parseInt(inv_price, 10),
             inv_miles: parseInt(inv_miles, 10),
             inv_color,
-            classification_id: parseInt(classification_id, 10)
+            classification_id: parseInt(classification_id, 10),
+            account_id: parseInt(account_id, 10) // Appending the tracking foreign key here
         });
 
-        // 5. Direct the client upon success or failure states
+        // Direct the client upon success or failure states
         if (insertResult) {
-            req.flash("notice", `Success: Your ${inv_year} ${inv_make} has been recorded into the vetting vault matrix.`);
-            res.redirect("/inv"); // Redirect straight to main inventory view catalog index
+            req.flash("notice", `Success: Your ${inv_year} ${inv_make} has been successfully submitted to our verification team. It will appear on the showroom once approved.`);
+            res.redirect("/inv"); 
         } else {
             req.flash("notice", "Database configuration failed to register your vehicle profile. Please try again.");
             
-            // Reload page states dynamically if query fails
             let nav = await utilities.getNav();
             const classifications = await invModel.getClassifications();
             res.status(500).render("inventory/sell-vehicle", {
@@ -333,6 +354,5 @@ invCont.handleVehicleConsignmentPost = async function (req, res, next) {
         next(error);
     }
 };
-
 
 module.exports = invCont

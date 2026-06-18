@@ -50,10 +50,15 @@
         background: #f5f7fa;
         padding: 1rem;
     }
+
     /*********Login Form **********/
-    .login-section #login-form {
-        max-width: 500px;
+    /* Shift the floating element cleanly to the right side quadrant of the viewport */
+    .login-container {
+        justify-content: flex-end;
+        padding: 2rem 8%;
     }
+
+    /*********Registration Page**********/
     .register {
         min-width: 500px;
         width: 50%;

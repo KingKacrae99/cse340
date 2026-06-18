@@ -1,0 +1,83 @@
+<section id="qualification-hub" class="flex flex-col space-y-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+    <div class="w-full flex items-center justify-center space-x-4 py-2">
+        <div class="h-[1px] bg-gradient-to-r from-transparent to-red-500/50 flex-grow"></div>
+        <h2 class="text-xs font-black tracking-[0.2em] uppercase text-neutral-400 font-mono">Smart Qualification</h2>
+        <div class="h-[1px] bg-gradient-to-l from-transparent to-red-500/50 flex-grow"></div>
+    </div>
+
+    <div class="w-full bg-neutral-900/40 border border-red-500/20 rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 relative overflow-hidden shadow-2xl">
+        <div class="absolute -top-24 -left-24 w-48 h-48 bg-red-500/5 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <span class="text-[10px] font-mono tracking-widest text-neutral-500 uppercase block">// ESTIMATE YOUR CAPITAL RANGE</span>
+
+        <div class="space-y-4">
+            <div>
+                <label class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block mb-1.5">Desired Capital Range</label>
+                <div class="relative">
+                    <select class="w-full bg-neutral-950 border border-white/10 text-xs text-neutral-300 rounded-xl px-4 py-3 appearance-none focus:outline-none focus:border-red-500 transition-colors">
+                        <option>$50,000 – $250,000</option>
+                        <option>$250,000 – $500,000</option>
+                        <option>$500,000 – $1,000,000+</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 text-xs">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block mb-1.5">Preferred Term Velocity</label>
+                    <div class="relative">
+                        <select class="w-full bg-neutral-950 border border-white/10 text-xs text-neutral-300 rounded-xl px-4 py-3 appearance-none focus:outline-none focus:border-red-500 transition-colors">
+                            <option>Select Term</option>
+                            <option>24 Months</option>
+                            <option>36 Months</option>
+                            <option>48 Months</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 text-xs">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block mb-1.5">Purpose</label>
+                    <div class="relative">
+                        <select class="w-full bg-neutral-950 border border-white/10 text-xs text-neutral-300 rounded-xl px-4 py-3 appearance-none focus:outline-none focus:border-red-500 transition-colors">
+                            <option>Select Purpose</option>
+                            <option>Collection Growth</option>
+                            <option>Corporate Fleet Expansion</option>
+                            <option>Equity Unlock Program</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 text-xs">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full bg-neutral-950 border border-white/5 rounded-xl p-4 text-center space-y-1">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-neutral-500 block">Estimated Monthly Commitment</span>
+            <div class="text-2xl font-black text-red-500 tracking-tight">$1,425 <span class="text-xs text-neutral-400 font-light font-mono">/ month</span></div>
+            <span class="text-[9px] text-neutral-600 block">*This is a soft estimate and does not impact your credit score.</span>
+        </div>
+
+        <div class="w-full pt-1">
+            <% if (locals.user) { %>
+                <a href="/finance/apply" class="w-full text-center flex items-center justify-center space-x-2 py-4 bg-red-500 hover:bg-white text-white hover:text-black text-xs font-black uppercase tracking-widest rounded-xl transition-all duration-300 shadow-lg border border-red-500">
+                    <i class="fa-solid fa-lock text-[10px]"></i>
+                    <span>Submit Pre-Qualification Portfolio Now</span>
+                </a>
+            <% } else { %>
+                <a href="/account/login?redirect=/finance/apply" class="w-full text-center flex items-center justify-center space-x-2 py-4 bg-red-500 hover:bg-white text-white hover:text-black text-xs font-black uppercase tracking-widest rounded-xl transition-all duration-300 shadow-lg border border-red-500">
+                    <i class="fa-solid fa-lock text-[10px]"></i>
+                    <span>Submit Pre-Qualification Portfolio Now</span>
+                </a>
+                <div class="text-center pt-2">
+                    <span class="text-[10px] text-neutral-500 font-light">Already have an account? <a href="/account/login" class="text-red-500 hover:underline">Login here</a></span>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</section>

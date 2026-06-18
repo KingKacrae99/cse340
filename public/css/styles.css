@@ -2,7 +2,12 @@
 :root{
   --primary:#000000;
   --secondary:#E60012;
+  --secondary-red-hover: #dc2626;
   --accent:#FFFFFF;
+  --neutral-glass-bg: rgba(0, 0, 0, 0.75);
+  --neutral-glass-border: rgba(255, 255, 255, 0.08);
+  --input-bg-fill: rgba(255, 255, 255, 0.05);
+  --text-muted: #a3a3a3;
 }
 *,
 *:before,
@@ -353,12 +358,10 @@ li .namePrice span{
 /**** Error Page ****/
 .err-container{
   background: linear-gradient(to bottom, rgba(0,0,0,0.7),rgba(0,0,0,0.5)),url("../images/site/bg-error.webp");
-  min-height: 100vh;
-  max-height: 100%;
+  height: 80vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  font-size: 1rem;
   padding: 2rem;
   color: #fff;
 }
@@ -367,16 +370,16 @@ li .namePrice span{
   color: #fff;
 }
 .err-container section{
-  margin-top: 2rem;
+  margin-top: 3rem;
+  font-family: 'Merriweather', serif;
 }
-.err-container h2{
+/*.err-container h2{
   text-align: left;
-}
-
+}*/
 .err-container  a{
   padding: 0.5rem 1rem;
-  background: #007bff;
-  border: 1px solid #007bff;
+  background: var(--secondary);
+  border: 1px solid var(--secondary);
   border-radius: 8px;
   color: #fff;
 }
@@ -391,60 +394,180 @@ li .namePrice span{
 
 
 /*********Login Form **********/
-.login-section{
+.login-container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  margin: 2rem 0;
+  justify-content: center;
+  box-sizing: border-box;
+  background: var(--primary); /* Save battery processing power on mobile devices */
+  overflow-x: hidden;
 }
-.login-section h1{
-  color: #007bff;
-  margin-bottom: 1rem;
+
+.login-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--primary);
+  padding: 2.5rem 1.5rem;
+  box-sizing: border-box;
 }
-.login-section #login-form{
-  box-shadow: 1px 1px 0.5rem 0px;
-  padding: 2rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  min-width:300px;
+
+/* Typography & Layout Blueprint */
+.brand-title {
+  font-family: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+  color: var(--accent);
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-align: center;
+  margin: 0 0 0.25rem 0;
+}
+
+.brand-tagline {
+  color: var(--secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.form-intent-title {
+  color: var(--accent);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+}
+
+.form-intent-subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0 0 2rem 0;
+}
+
+.auth-form-matrix {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: auto;
-  background: #fff;
+  gap: 1.25rem;
 }
-#login-form input{
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 0.7rem;
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
-#login-form label{
-  color: #007bff;
-  margin-top: .3rem ;
+
+.label-row-split {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.logbtn-div{
+
+.field-label {
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.forgot-password-link {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* Highly Interactive Input and Button Assets */
+.form-input-element {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: var(--input-bg-fill);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: var(--accent);
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-input-element:focus {
+  outline: none;
+  background: rgba(0, 0, 0, 0.8);
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+}
+
+.password-complexity-compliance-deck {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+.form-options-row {
+  display: flex;
+  align-items: center;
+}
+
+.custom-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.checkbox-label-text {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.primary-submit-btn {
+  width: 100%;
+  padding: 1.1rem;
+  background: var(--secondary);
+  border: none;
+  border-radius: 12px;
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+.card-footer-redirection {
   text-align: center;
-  margin: 0.8rem 0;
+  margin-top: 1rem;
 }
-.logbtn-div #login-btn{
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 8px;
-  border: 1px solid #007bff;
-  padding: 0.5rem 1rem;
-  width: 60%;
+
+.no-account-notice {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
 }
-.logbtn-div #login-btn:hover{
-  background-color: #153557;
+
+.registration-highlight-link {
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 700;
 }
-#login-form .no_account{
-  color: #007bff;
-  text-align: center;
-  font-size: 1.1rem;
-  a{
-    color: #007bff;
-  }
+
+.flash-messages-matrix {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid var(--secondary);
+  color: var(--accent);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
 }
+
+/* Registration Form */
 .register{
   display: flex;
   flex-direction: column;
@@ -627,9 +750,9 @@ Add classification view
 
 }
 /*footer design*/
-footer{
+/*footer{
   margin-top: 1rem;
-}
+}*/
 
 
 footer .btn{

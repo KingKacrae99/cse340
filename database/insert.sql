@@ -59,3 +59,15 @@ SELECT inv_make, inv_model, classification_name
 FROM public.inventory
 JOIN public.classification USING(classification_id)
 WHERE classification_name = 'Sport';
+
+INSERT INTO public.tier_classifications_catalog (classification_name) 
+    VALUES ('LEASE'),
+    ('FINANCE'),
+    ('EQUITY_LINE')
+    ON CONFLICT (classification_name) DO NOTHING;
+
+INSERT INTO public.tier_names_catalog (display_name)
+    VALUES ('Bespoke Asset Leasing'),
+    ('Direct Capital Acquisition'),
+    ('Equity Line Access')
+    ON CONFLICT (display_name) DO NOTHING;

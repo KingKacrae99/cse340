@@ -5,7 +5,7 @@ async function toggleFavorite(req,res,next) {
         if (!req.session.account){
             return res.status(401).json({
                 success:false,
-                message: "Please login first",
+                message: `Please login first ${req.session.account ? req.session.account.account_firstname : ''} to use the favorite feature!`,
                 redirect: "/account/login"
             });
         }

@@ -1,10 +1,47 @@
-<% if (title) { %>
-    <h1 class="text-3xl lg:text-4xl font-black tracking-tight uppercase text-[var(--primary)] mb-3 mt-10 ml-10">
-        <%= title  %>
-    </h1>
-<% } else { 
-    res.redirect('/')
-} %>
+<% if (locals.title && title !== "Vehicle Details") { %>
+    <header class="w-full bg-[#050505] text-white antialiased relative overflow-hidden pt-20 pb-10" data-aos="fade-up" data-aos-duration="1000">
+        
+        <div class="absolute top-0 left-1/4 w-[600px] h-[300px] bg-red-600/5 rounded-full blur-[130px] pointer-events-none"></div>
+        <div class="absolute top-0 right-0 w-[300px] h-[300px] bg-neutral-900/30 rounded-full blur-[90px] pointer-events-none"></div>
 
-<%- dataDetails %>
- 
+        <div class="max-w-7xl mx-auto px-6 sm:px-12 lg:px-16">
+            <div class="w-full grid grid-cols-1 md:grid-cols-12 gap-6 items-start border-b border-white/5 pb-12">
+                
+                <div class="md:col-span-3 flex flex-row md:flex-col items-center md:items-start justify-between md:justify-start md:space-y-4 h-full">
+                    <div class="space-y-1">
+                        <span class="text-[9px] font-mono tracking-[0.4em] uppercase text-neutral-500 font-black block">
+                            // SHOWROOM REGISTRY
+                        </span>
+                        <span class="text-[10px] font-mono text-red-500 uppercase tracking-widest font-bold block">
+                            SYS_REF // C340_MTR
+                        </span>
+                    </div>
+                    <div class="hidden md:block w-12 h-[1px] bg-white/40 mt-2"></div>
+                </div>
+
+                <div class="md:col-span-9 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+                    <div class="space-y-3">
+                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight uppercase text-white leading-[0.85]">
+                            <%= title %>
+                        </h1>
+                        <p class="text-[11px] font-mono tracking-widest text-neutral-400 uppercase font-light">
+                            Curated Fleet Allocation Registry & Portfolio Analytics
+                        </p>
+                    </div>
+
+                    <div class="hidden sm:flex flex-col items-end border border-white/10 rounded px-4 py-2 font-mono text-[9px] tracking-widest text-neutral-500 uppercase bg-neutral-900/40 backdrop-blur-md select-none">
+                        <span>SECURE NODE</span>
+                        <span class="text-white font-bold mt-0.5">EST. 2026</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+<% } else if (!locals.title) { %>
+    <% res.redirect('/') %>
+<% } %>
+
+<div class="w-full mt-10 min-h-screen">
+    <%- dataDetails %>
+</div>

@@ -1,0 +1,185 @@
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<div class="w-full bg-black text-white antialiased min-h-screen font-sans overflow-x-hidden pb-24 selection:bg-red-500 selection:text-white">
+    
+    <div class="absolute top-0 right-1/4 w-[500px] h-[500px] bg-red-500/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-10 left-1/4 w-[400px] h-[400px] bg-neutral-900/40 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <main class="max-w-[1200px] mx-auto px-4 sm:px-8 lg:px-12 pt-12">
+        
+        <div class="mb-8" data-aos="fade-right" data-aos-duration="600">
+            <a href="/finance" class="inline-flex items-center space-x-2 text-xs font-mono text-neutral-500 hover:text-red-500 uppercase tracking-widest transition-colors group">
+                <i class="fa-solid fa-arrow-left-long transform group-hover:-translate-x-1 transition-transform"></i>
+                <span>Return to Capital Hub</span>
+            </a>
+        </div>
+
+        <div class="border-b border-white/5 pb-8 mb-12" data-aos="fade-up" data-aos-duration="800">
+            <span class="text-xs font-mono tracking-widest text-red-500 uppercase font-black block mb-2">
+                // SECURE UNDERWRITING PORTAL
+            </span>
+            <h1 class="text-3xl sm:text-4xl font-black tracking-tight uppercase text-white">
+                Capital Setup & Portfolio <span class="text-red-500">Ingestion</span>
+            </h1>
+            <p class="text-xs text-neutral-400 font-light mt-2 max-w-xl leading-relaxed">
+                Provide your baseline corporate or individual financial parameters below. Our asset risk mitigation engine will map your snapshot against live premium market matrices.
+            </p>
+        </div>
+
+        <% if (locals.errors) { %>
+            <div class="bg-red-950/20 border border-red-500/30 text-neutral-200 text-xs p-5 rounded-xl mb-8 font-mono space-y-1" data-aos="shake">
+                <span class="text-red-500 font-bold block">// PIPELINE VALIDATION EXCEPTION DETECTED:</span>
+                <ul class="list-disc pl-5 space-y-1 text-neutral-400">
+                    <% errors.array().forEach(error => { %>
+                        <li><%= error.msg %></li>
+                    <% }) %>
+                </ul>
+            </div>
+        <% } %>
+        <form action="/finance/apply" method="POST" class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+            
+            <div class="lg:col-span-2 space-y-8" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                
+                <div class="bg-neutral-900/20 border border-white/5 rounded-2xl p-6 sm:p-8 space-y-6 backdrop-blur-md">
+                    <div class="flex items-center space-x-3 border-b border-white/5 pb-4">
+                        <div class="w-8 h-8 rounded-lg bg-neutral-950 border border-white/10 flex items-center justify-center text-red-500 text-xs font-mono">01</div>
+                        <h3 class="text-xs font-black uppercase tracking-wider text-white font-mono">Plan Match Parameters</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="space-y-1.5">
+                            <label for="capital_amount" class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block">Desired Capital Amount ($)</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-4 flex items-center text-neutral-500 text-xs font-mono">$</span>
+                                <input type="number" id="capital_amount" name="capital_amount" required min="10000" step="1000" placeholder="150000"
+                                       class="w-full bg-neutral-950 border border-white/10 text-xs text-white rounded-xl pl-8 pr-4 py-3.5 focus:outline-none focus:border-red-500 transition-colors font-mono">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label for="tier_id" class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block">Preferred Program Structure</label>
+                            <div class="relative">
+                                <select id="tier_id" name="tier_id" required 
+                                        class="w-full bg-neutral-950 border border-white/10 text-xs text-neutral-300 rounded-xl px-4 py-3.5 appearance-none focus:outline-none focus:border-red-500 transition-colors">
+                                    <option value="" disabled selected>Select Active Financial Tier</option>
+                                    <option value="1">Bespoke Asset Leasing (Tier 1)</option>
+                                    <option value="2">Direct Capital Acquisition (Tier 2)</option>
+                                    <option value="3">Fractional Equity Lines (Tier 3)</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 text-xs">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="space-y-1.5">
+                            <label for="term_velocity" class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block">Term Horizon Velocity</label>
+                            <div class="relative">
+                                <select id="term_velocity" name="term_velocity" required
+                                        class="w-full bg-neutral-950 border border-white/10 text-xs text-neutral-300 rounded-xl px-4 py-3.5 appearance-none focus:outline-none focus:border-red-500 transition-colors font-mono">
+                                    <option value="" disabled selected>Select Repayment Lifespan</option>
+                                    <option value="24">24 Months (Short Term Lease/Payoff)</option>
+                                    <option value="36">36 Months (Standard Asset Cycle)</option>
+                                    <option value="48">48 Months (Balanced Capital Spread)</option>
+                                    <option value="60">60 Months (Extended Capital Retention)</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 text-xs">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label for="application_purpose" class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block">Strategic Acquisition Purpose</label>
+                            <div class="relative">
+                                <select id="application_purpose" name="application_purpose" required
+                                        class="w-full bg-neutral-950 border border-white/10 text-xs text-neutral-300 rounded-xl px-4 py-3.5 appearance-none focus:outline-none focus:border-red-500 transition-colors">
+                                    <option value="" disabled selected>Select Strategic Track</option>
+                                    <option value="COLLECTION_GROWTH">Collection Growth & Asset Expansion</option>
+                                    <option value="FLEET_EXPANSION">Corporate Fleet Diversification</option>
+                                    <option value="EQUITY_UNLOCK">Liquidity Capital Release Program</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-neutral-500 text-xs">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-neutral-900/20 border border-white/5 rounded-2xl p-6 sm:p-8 space-y-6 backdrop-blur-md">
+                    <div class="flex items-center space-x-3 border-b border-white/5 pb-4">
+                        <div class="w-8 h-8 rounded-lg bg-neutral-950 border border-white/10 flex items-center justify-center text-red-500 text-xs font-mono">02</div>
+                        <h3 class="text-xs font-black uppercase tracking-wider text-white font-mono">Financial Profile Snapshot</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="space-y-1.5">
+                            <label for="estimated_income" class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block">Estimated Annual Income / Corporate Revenue ($)</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-4 flex items-center text-neutral-500 text-xs font-mono">$</span>
+                                <input type="number" id="estimated_income" name="estimated_income" required min="30000" step="5000" placeholder="250000"
+                                       class="w-full bg-neutral-950 border border-white/10 text-xs text-white rounded-xl pl-8 pr-4 py-3.5 focus:outline-none focus:border-red-500 transition-colors font-mono">
+                            </div>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <label for="corporate_tax_id" class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block">Corporate Tax ID / SSN Token (Optional)</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-4 flex items-center text-neutral-500 text-xs"><i class="fa-solid fa-building-columns"></i></span>
+                                <input type="text" id="corporate_tax_id" name="corporate_tax_id" placeholder="XX-XXXXXXX"
+                                       class="w-full bg-neutral-950 border border-white/10 text-xs text-white rounded-xl pl-10 pr-4 py-3.5 focus:outline-none focus:border-red-500 transition-colors font-mono">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="space-y-6" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                
+                <div class="bg-neutral-900/40 border border-red-500/10 rounded-2xl p-6 space-y-4 shadow-xl">
+                    <div class="flex items-center space-x-2 text-red-500">
+                        <i class="fa-solid fa-shield-halved text-sm"></i>
+                        <span class="text-[10px] font-mono uppercase tracking-widest font-black">Underwriting Security Guard</span>
+                    </div>
+                    <p class="text-[11px] text-neutral-400 font-light leading-relaxed">
+                        Data ingestion routes use absolute standard AES-256 validation pipelines. Prequalification calculations are run as an internal soft query credit screening, avoiding impact to external commercial scores.
+                    </p>
+                    <div class="h-[1px] bg-white/5 w-full"></div>
+                    <div class="flex items-center space-x-3 text-[10px] font-mono text-neutral-500 uppercase tracking-wider">
+                        <div class="flex items-center space-x-1"><i class="fa-solid fa-check text-green-500"></i> <span>SSL Secure</span></div>
+                        <div class="flex items-center space-x-1"><i class="fa-solid fa-check text-green-500"></i> <span>Encrypted Data</span></div>
+                    </div>
+                </div>
+
+                <div class="bg-neutral-900/20 border border-white/5 rounded-2xl p-6 space-y-4 text-center">
+                    <span class="text-[9px] font-mono text-neutral-500 tracking-widest uppercase block">// CONTRACT MATRIX VERIFICATION</span>
+                    <p class="text-[11px] text-neutral-400 font-light leading-normal px-2">
+                        By deploying this portfolio to underwriting, you authorize CSE34 Motors to evaluate current platform asset structures against your verified account session.
+                    </p>
+                    
+                    <button type="submit" class="w-full flex items-center justify-center space-x-3 py-4 bg-red-500 hover:bg-white text-white hover:text-black text-xs font-black uppercase tracking-widest rounded-xl transition-all duration-300 shadow-lg group border border-red-500">
+                        <i class="fa-solid fa-lock text-[10px]"></i>
+                        <span>Lock In Portfolio Structure</span>
+                        <i class="fa-solid fa-chevron-right text-[9px] transform group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+
+    </main>
+</div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        AOS.init({
+            once: true,
+            mirror: false
+        });
+    });
+</script>

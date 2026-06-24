@@ -68,7 +68,8 @@ document.addEventListener('click', async (e) => {
             },
             body: JSON.stringify({
                 invId
-            })
+            }),
+            credentials: "include"
         });
 
         const data = await response.json();

@@ -4,6 +4,16 @@ const detailsUtil = require("./car-detail")
 const classificationUtil = require("./classification")
 const Util = {}
 
+Util.checkLoginStatus = (req, res, next) =>{
+    if (req.session.account && req.session.account){
+        res.locals.user= req.session.account;
+        res.locals.loggedin = true;
+    }else{
+        res.locals.user = null;
+        res.locals.loggedin = false;
+    }
+    next();
+}
 
 /* ******************************************
 * Check Login Status to Protect Routes

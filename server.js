@@ -33,6 +33,8 @@ app.use(async(req, res, next) => {
     res.locals.currentPath = req.originalUrl;
     res.locals.footerClassLinks = await invModel.getClassifications();
     res.locals.brandNames = await invModel.getBrandNames();
+    res.locals.featuredCars = await invModel.getLikedInventorybyClass();
+    res.locals.topCars = await invModel.getCarsByLikes();
     next()
   } catch (error) {
     next(error)
@@ -52,7 +54,7 @@ app.use(session({
   // name assigned to each Id when ceated
   name: 'sessionId',
 }))
-
+app.use(utilities.checkLoginStatus); // Check login status for all routes
 // Express Messages Middleware
 /* Import the connect-flash package */
 app.use(require('connect-flash')())

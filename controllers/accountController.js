@@ -1,5 +1,6 @@
 const utilities = require("../utilities/")
 const accountModel = require("../models/account-model");
+const invmodel = require("../models/inventory-model");
 const bcrypt = require("bcryptjs")
 
 /*************************************************
@@ -7,10 +8,8 @@ const bcrypt = require("bcryptjs")
  ***********************************************/
 
 async function buildLogin(req,res, next) {
-    let nav = await utilities.getNav()
     res.render("account/login", {
-        title: "Login",
-        nav,
+        title: "Login"
     })
 }
 
@@ -76,25 +75,32 @@ async function registerAccount(req, res) {
 *  Process Login
 * *************************************** */
 async function processLogin(req, res) {
-  const nav = await utilities.getNav()
-  const { account_email, account_password } = req.body
-  const loginResult = await accountModel.loginAccount(account_email, account_password)
-
   try {
-    if (loginResult) {
-      req.flash(
-        "notice",
-        `You've Logged In. Welcome ${loginResult.account_firstname}`
-      )
-      res.status(200).render("index", {
-        title: "Home",
-        nav,
-      })
+    const { account_email, account_password } = req.body
+    const accountData = await accountModel.loginAccount(account_email)
+
+    if (accountData) {
+      const passwordMatch = await bcrypt.compareSync(account_password, accountData.account_password)
+      if (passwordMatch) {
+        req.session.account = accountData
+        delete accountData.account_password
+        return req.session.save((err) => {
+                    if (err) return next(err);
+                    
+                    req.flash("notice", `Welcome back, ${accountData.account_firstname}`);
+                    return res.status(200).redirect("/");
+        });
+      } else {
+        req.flash("notice", "Sorry, the password you entered is incorrect.")
+        res.status(401).render("account/login", {
+          title: "Login",
+          account_email
+        })
+      }
     } else {
       req.flash("notice", "Sorry, no account exist with those credentials.")
       res.status(401).render("account/login", {
-        title: "Login",
-        nav,
+        title: "Login"
       })
     }
   } catch (error) {
@@ -102,7 +108,6 @@ async function processLogin(req, res) {
     req.flash("notice", "Login failed due to a server error.")
     res.status(500).render("account/login", {
       title: "Login",
-      nav,
       account_email
     })
   }

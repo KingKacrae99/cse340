@@ -47,6 +47,10 @@ async function toggleFavorite(account_id,inv_id){
     }
 }
 
+async function likedCar(params) {
+    
+}
+
 
 module.exports = {
     toggleFavorite,

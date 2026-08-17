@@ -26,7 +26,24 @@ Util.checkLogin = (req, res, next) => {
     return res.redirect("/account/login")
   }
 }
+/* ******************************************
+* Check Login Status to Protect Routes
+* **************************************** */
+Util.checkRole = (req, res, next) => {
+    if (res.locals.loggedin) {
+        const user = res.locals.user;
+        if(user.account_type === 'Admin'){
+            next();
+        }else{
+            req.flash("notice", "Unauthorized access! Please contact admin for access");
+            return res.redirect("/");
+        }
 
+    } else {
+        req.flash("notice", "Please log in to access this feature.")
+        return res.redirect("/account/login")
+    }
+}
 /* **************************************
 * Constructs the nav HTML unordered list
 ************************************   */
@@ -52,8 +69,8 @@ Util.getNav = async function (req, res, next) {
 /* ***************************************************************
 * Build the classification view HTML
 * ***************************************************************/
-Util.buildClassificationGrid = async function(data) {
-    let grid = await classificationUtil.buildClassificationPage(data);
+Util.buildClassificationGrid = async function(data,likedCars) {
+    let grid = await classificationUtil.buildClassificationPage(data,likedCars);
     return grid;
 }
 

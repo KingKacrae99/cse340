@@ -5,140 +5,108 @@
 /* ***********************
  * Require Statements
  *************************/
-const express = require("express")
-const expressLayouts = require("express-ejs-layouts")
-const env = require("dotenv").config()
-const app = express()
-const static = require("./routes/static")
-const baseController = require("./controllers/baseController")
-const classificationRoute = require("./routes/classificationRoute")
-const inventoryRoute = require("./routes/inventoryRoute")
-const accountRoute = require('./routes/accountRoute')
-const favoriteRoute = require('./routes/favoriteRoute')
-const sellRoute = require('./routes/sellRoute')
-const financeRoute = require('./routes/financeRoute')
-const utilities = require("./utilities/")
-const session = require("express-session")
-const pool = require('./database/')
-// bodyParser make the application aware of that functionality
-// In order to colloect the values from the incoming
-const bodyParser = require("body-parser")
+const express = require("express");
+const expressLayouts = require("express-ejs-layouts");
+const env = require("dotenv").config();
+const app = express();
+const static = require("./routes/static");
+const baseController = require("./controllers/baseController");
+const classificationRoute = require("./routes/classificationRoute");
+const inventoryRoute = require("./routes/inventoryRoute");
+const accountRoute = require('./routes/accountRoute');
+const favoriteRoute = require('./routes/favoriteRoute');
+const sellRoute = require('./routes/sellRoute');
+const financeRoute = require('./routes/financeRoute');
+const utilities = require("./utilities/");
+const session = require("express-session");
+const pool = require('./database/');
+const bodyParser = require("body-parser");
 const invModel = require("./models/inventory-model");
 
 /* ***********************
  * Middleware
- * ************************/
-app.use(async(req, res, next) => {
+ *************************/
+app.use(async (req, res, next) => {
   try {
     res.locals.currentPath = req.originalUrl;
     res.locals.footerClassLinks = await invModel.getClassifications();
     res.locals.brandNames = await invModel.getBrandNames();
     res.locals.featuredCars = await invModel.getLikedInventorybyClass();
     res.locals.topCars = await invModel.getCarsByLikes();
-    next()
+    next();
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
 app.use(session({
-   // refering to where the session data will be stored
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
     pool,
   }),
-  // the secret name-value pair that will be used to protect the session.
   secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true,
-  // name assigned to each Id when ceated
   name: 'sessionId',
-}))
-app.use(utilities.checkLoginStatus); // Check login status for all routes
-// Express Messages Middleware
-/* Import the connect-flash package */
-app.use(require('connect-flash')())
+}));
+
+app.use(utilities.checkLoginStatus);
+app.use(require('connect-flash')());
 app.use(function (req, res, next) {
-  // to assign the response object, using the "locals" option and a name of "messages"
-  res.locals.messages = require('express-messages')(req, res)
-  next()
-})
-//  tells the express application to use the body parser to work with JSON data
-app.use(bodyParser.json())
-/*
-*tells the express application to read and work with data sent via a URL as well as from a form, 
-stored in the request object's body. The "extended: true" object is a configuration that allows rich
- objects and arrays to be parsed. The final part is an inline comment pertaining to the entire line.
-*/
-app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 /* ***********************
  * View Engine and Templates
  *************************/
-app.set("view engine", "ejs")
-app.use(expressLayouts)
-app.set("layout", "./layouts/layout") // not as view root
+app.set("view engine", "ejs");
+app.use(expressLayouts);
+app.set("layout", "./layouts/layout");
 
 /* ***********************
  * Routes
  *************************/
-app.use(static)
+app.use(static);
+app.use("/inv", inventoryRoute);
+app.use("/category", classificationRoute);
+app.use("/account", accountRoute);
+app.use("/favorites", favoriteRoute);
+app.use("/sell", sellRoute);
+app.use("/finance", financeRoute);
 
-// Inventory routes
-app.use("/inv", inventoryRoute)
+app.get("/", utilities.handlerErrors(baseController.buildHome));
+app.get("/api/weather", utilities.handlerErrors(baseController.currentWeather));
+app.get("/error/err/test", utilities.handlerErrors(baseController.quick));
 
-// Classification routes
-app.use("/category", classificationRoute)
-
-// account login route
-app.use("/account", accountRoute)
-
-// favorite route
-app.use("/favorites", favoriteRoute)
-
-// sell route
-app.use("/sell", sellRoute)
-
-// Finance routes
-app.use("/finance", financeRoute)
-
-//Index route
-app.get("/", utilities.handlerErrors(baseController.buildHome))
-app.get("/api/weather", utilities.handlerErrors(baseController.currentWeather))
-app.get("/error/err/test", utilities.handlerErrors(baseController.quick))
-// File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
-  next({status:404, message:'Sorry we appear to have lost the page!'})
-})
-
-
+  next({ status: 404, message: 'Sorry we appear to have lost the page!' });
+});
 
 /* ***********************
 * Express Error Handler
-* Place after all other middleware
 *************************/
 app.use(async (err, req, res, next) => {
-  //let nav = await utilities.getNav()
-  //let message
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if (err.status == 404){message = err.message} else{message='Oh no! There was a crash. Maybe try a different route?'}
+  const message = err.status == 404 ? err.message : 'Oh no! There was a crash. Maybe try a different route?';
+  console.log("error message:",err)
   res.render("errors/error", {
     title: err.status || 'Server Error',
-    message: err.message,
-    //nav
-  })
-})
+    message: message,
+  });
+});
 
 /* ***********************
  * Local Server Information
- * Values from .env (environment) file
  *************************/
-const port = process.env.PORT
-const host = process.env.HOST
+const port = process.env.PORT;
+const host = process.env.HOST;
 
 /* ***********************
- * Log statement to confirm server operation
+ * Confirm server operation
  *************************/
 app.listen(port, () => {
-  console.log(`app listening on ${host}:${port}`)
-})
+  console.log(`Server running at ${host}:${port}`);
+});

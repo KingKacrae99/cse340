@@ -155,13 +155,17 @@
                                         <%= car.inv_year %> RUN
                                     </div>
 
+                                    <%
+                                        const isLiked = likedCars && likedCars.some(liked=> liked.inv_id === car.inv_id)
+                                    %>
                                     <button 
                                         type="button" 
-                                        class="like-btn absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-black/60 backdrop-blur-md text-white rounded-full border border-white/10 shadow-md hover:bg-black/80 hover:scale-110 active:scale-95 transition-all duration-200 z-10 cursor-pointer" 
+                                        class="like-btn absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-black/60 backdrop-blur-md text-white rounded-full border border-white/10 shadow-md hover:bg-black/80 hover:scale-110 active:scale-95 transition-all duration-200 z-10 cursor-pointer"
+                                        title="<%= isLiked ? 'Remove from favorites' : 'Add to your favorite List' %>"
                                         data-id="<%= car.inv_id %>"
                                         aria-label="Toggle favorite status"
                                     >
-                                        <i class="<%= car.is_favorited ? 'fa-solid text-[var(--secondary)]' : 'fa-regular' %> fa-heart text-xs pointer-events-none transition-colors duration-200"></i>
+                                        <i class="<%= isLiked ? 'fa-solid text-[var(--secondary)]' : 'fa-regular' %> fa-heart text-xs pointer-events-none transition-colors duration-200"></i>
                                     </button>
                                 </div>
 

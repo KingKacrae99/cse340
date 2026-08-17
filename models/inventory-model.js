@@ -1,21 +1,17 @@
-/** imports the database connection file
- * (named index.js)**/
-
 const { Pool } = require("pg");
 const pool = require("../database/");
 
 /* **********************************
 * Get all classification data
 *************************************/
-
 async function getClassifications() {
     return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
 }
 
-/* **************************************************
-* Get all inventoryitems and classification_name by classification_id
+/* ******************************************************************
+* Get all inventory items and classification_name by classification_id
 ********************************************************************/
-async function getInventoryByClassificationId(classification_name ) {
+async function getInventoryByClassificationId(classification_name) {
     try {
         const data = await pool.query(
             `SELECT * FROM public.inventory AS i
@@ -24,10 +20,9 @@ async function getInventoryByClassificationId(classification_name ) {
             WHERE c.classification_name = $1`,
             [classification_name]
         )
-        console.log("getInventoryByClassificationId :",data)
         return data.rows
     } catch (error) {
-        console.error("getclassificationbyid error " + error)
+        console.error("getClassificationById error:", error)
     }
 }
 
@@ -43,35 +38,37 @@ async function getInventoryRowById(inv_id) {
         )
         return data.rows[0]
      } catch (error) {
-        console.error("getInventoryRowById error " + error)
+        console.error("getInventoryRowById error:", error)
     }
 }
+
 /*******************************************************************
  *  Add Classification
- *******************************************************************/
+*******************************************************************/
 async function addClassification(classification_name, icon_class) {
     try {
          const sql = "INSERT INTO public.classification(classification_name, icon_class) VALUES($1, $2) RETURNING *"
          return await pool.query(sql,[classification_name, icon_class])   
     } catch (error) {
-        console.error("addClassification error" + error.message)
+        console.error("addClassification error:", error.message)
     }
 }
 
 /***********************************************************
  *  Get Classification Name
- **********************************************************/
+**********************************************************/
 async function getClassificationName() {
     try {
         const sql = await pool.query("SELECT * FROM public.classification")
         return sql.rows
     } catch (error) {
-        console.log("getClassificationName error" + error)
+        console.error("getClassificationName error:", error)
     }
 }
+
 /**********************************************************
  *  Add Inventory
- **********************************************************/
+**********************************************************/
 async function addInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail,
             inv_price, inv_miles, inv_color, classification_id) {
     try {
@@ -84,7 +81,7 @@ async function addInventory(inv_make, inv_model, inv_year, inv_description, inv_
         ])
         return result.rows[0]
     } catch (error) {
-        console.log("addInventory Error", error)
+        console.error("addInventory error:", error)
         throw error
     }
 }
@@ -101,9 +98,8 @@ async function getLikedInventorybyClass() {
         LIMIT 6`
         const result = await pool.query(sql)
         return result.rows
-        console.log("getLikedInventorybyClass result", result.rows)
     } catch(error){
-        console.error("getlikedInventorybyClass error" + error)
+        console.error("getLikedInventoryByClass error:", error)
     }
 }
 
@@ -122,10 +118,11 @@ async function getBrandNames() {
         const result = await pool.query(sql);
         return result.rows;
     } catch (error) {
-        console.error("getBrandNames database function error: " + error);
+        console.error("getBrandNames error:", error);
         throw error;
     }
 }
+
 // Get all inventory items filtered by vehicle manufacturer/brand
 async function getVehiclesByBrand(inv_make) {
     try {
@@ -135,16 +132,15 @@ async function getVehiclesByBrand(inv_make) {
         `;
         
         const result = await pool.query(sql, [inv_make]);
-        console.log("getVehiclesByBrand result", result.rows);
         return result.rows;
     } catch (err) {
-        console.error("getVehiclesByBrand model database error: ", err);
+        console.error("getVehiclesByBrand error:", err);
         throw err;
     }
 }
+
 async function getCarsByLikes(){
     try{
-
         const sql = `SELECT * FROM inventory
                      ORDER BY likes_count 
                      LIMIT 10`;
@@ -157,18 +153,12 @@ async function getCarsByLikes(){
 
         return result.rows;
     }catch(error){
-        console.log("getCarsByLikes error :", error)
+        console.error("getCarsByLikes error:", error)
     }
 }
 
 async function searchInventory(filters = {}) {
-
-    let sql = `
-        SELECT *
-        FROM inventory
-        WHERE 1=1
-    `;
-
+    let sql = `SELECT * FROM inventory WHERE 1 = 1`;
     const values = [];
     let count = 1;
 
@@ -180,20 +170,16 @@ async function searchInventory(filters = {}) {
     };
 
     Object.entries(filters).forEach(([key, value]) => {
-
         if (!value || !allowedFields[key]) return;
-
         sql += ` AND ${allowedFields[key]} ILIKE $${count}`;
-
         values.push(`%${value}%`);
-
         count++;
     });
 
     const result = await pool.query(sql, values);
-
     return result.rows;
 }
+
 /* ***************************
  * Get All Inventory Items (Luxury Catalog)
  * ************************** */
@@ -220,10 +206,9 @@ async function getAllInventory() {
         `;
         
         const result = await pool.query(sql);
-        console.log("getAllInventory total records fetched:", result.rowCount);
         return result.rows;
     } catch (err) {
-        console.error("Database Error inside inventoryModel.getAllInventory:", err);
+        console.error("getAllInventory error:", err);
         throw err;
     }
 };
@@ -259,10 +244,11 @@ async function getFilteredInventory(filters) {
         const result = await pool.query(sql, queryParams);
         return result.rows;
     } catch (err) {
-        console.error("Error executing dynamic getFilteredInventory matching query:", err);
+        console.error("getFilteredInventory error:", err);
         throw err;
     }
 };
+
 /**
  * *******************************************************************
  * Insert a newly consigned luxury vehicle configuration into inventory
@@ -291,12 +277,12 @@ async function insertConsignedVehicle(vehicle) {
             vehicle.inv_miles,
             vehicle.inv_color,
             vehicle.classification_id,
-            vehicle.account_id // Bound safely to parameter marker $11
+            vehicle.account_id
         ]);
         
         return data.rows[0]; 
     } catch (error) {
-        console.error("insertConsignedVehicle DB Error Details:", error);
+        console.error("insertConsignedVehicle error:", error);
         return null;
     }
 }
@@ -306,7 +292,7 @@ module.exports = {
     getInventoryRowById, addClassification,
     getClassificationName, addInventory,
     getLikedInventorybyClass, getBrandNames,
-     getVehiclesByBrand, getCarsByLikes, 
-     searchInventory, getAllInventory,getFilteredInventory,
-     insertConsignedVehicle
+    getVehiclesByBrand, getCarsByLikes, 
+    searchInventory, getAllInventory, getFilteredInventory,
+    insertConsignedVehicle
 }

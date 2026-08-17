@@ -1,4 +1,4 @@
-export async function buildClassificationPage(data) {
+export async function buildClassificationPage(data,likedCars) {
     /* ***************************************************************
     * Build the luxury classification view HTML with dynamic header banner
     * ***************************************************************/
@@ -20,8 +20,14 @@ export async function buildClassificationPage(data) {
             const formattedMiles = Number(vehicle.inv_miles || 0).toLocaleString();
             const fuelBadge = vehicle.classification_name === 'Electric' ? 'Full Electric' : 'Petrol Hybrid';
             
+            let currentLikeHeartIconState;
             // Check if the backend already flagged this vehicle item entity as liked by the current session user
-            const currentLikeHeartIconState = vehicle.is_favorited ? `fa-solid text-[var(--secondary)]` : `fa-regular`;
+            if (Array.isArray(likedCars) && likedCars.length > 0){
+                const isLiked = likedCars.some(liked => liked.inv_id === vehicle.inv_id);
+                currentLikeHeartIconState = isLiked? `fa-solid text-[var(--secondary)]` : `fa-regular`;
+            }else{
+                currentLikeHeartIconState =  `fa-regular`;
+            }
 
             viewHtml += `
                 <article class="group bg-[#0D0D0D] border border-neutral-900 rounded-2xl overflow-hidden shadow-2xl hover:border-neutral-800 transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between relative">

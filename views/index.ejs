@@ -338,16 +338,13 @@
                                 Ferrari
                             </div>
                         </div>
-
                         <div class="relative rounded-lg overflow-hidden h-32 sm:h-40">
                             <img src="/images/vehicles/g-wagon-tn.webp"
                                 class="w-full h-full object-cover">
-
                             <div class="absolute inset-x-0 bottom-0 bg-black/60 p-2 text-center">
                                 Mercedes
                             </div>
                         </div>
-
                         <div class="relative rounded-lg overflow-hidden h-32 sm:h-40">
                             <img src="/images/brand-icon/bmw-logo.webp"
                                 class="w-full h-full object-cover">
@@ -356,76 +353,57 @@
                                 BMW
                             </div>
                         </div>
-
                     </div>
-
                     <div class="text-center mt-6">
                         <a href="/inv"
                             class="inline-block bg-[var(--accent)] text-[var(--primary)] px-5 py-3 rounded-lg font-bold hover:bg-white transition">
-
                             Browse All Cars
-
                         </a>
                     </div>
-
                 </div>
-
             </div>
-
             <!-- Dots -->
             <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3 z-20">
                 <button class="dot w-3 h-3 rounded-full bg-[var(--accent)]" data-index="0"></button>
                 <button class="dot w-3 h-3 rounded-full bg-[var(--accent)]/50" data-index="1"></button>
                 <button class="dot w-3 h-3 rounded-full bg-[var(--accent)]/50" data-index="2"></button>
             </div>
-
         </section>
-
-
 
         <!---------------- SEARCH SECTION ---------------->
         <section class="search-section my-6 px-4">
-
             <div class="max-w-4xl mx-auto flex flex-col md:flex-row gap-4">
-
                 <!-- Search Inputs -->
                 <div
                     class="flex flex-col sm:flex-row flex-1 items-center gap-3 bg-white rounded-xl shadow-lg border border-gray-200 p-4">
-
                     <input
                         type="text"
                         id="make"
                         placeholder="Make"
                         class="w-full sm:flex-1 px-3 py-2 outline-none border border-gray-200 rounded-lg focus:border-[var(--secondary)]"
                     >
-
                     <input
                         type="text"
                         id="model"
                         placeholder="Model"
                         class="w-full sm:flex-1 px-3 py-2 outline-none border border-gray-200 rounded-lg focus:border-[var(--secondary)]"
                     >
-
                     <input
                         type="text"
                         id="year"
                         placeholder="Year"
                         class="w-full sm:flex-1 px-3 py-2 outline-none border border-gray-200 rounded-lg focus:border-[var(--secondary)]"
                     >
-
                 </div>
-
                 <!-- Search Button -->
                 <button
                     id="search-btn"
                     type="button"
                     class="bg-[var(--secondary)] text-white px-8 py-3 rounded-xl hover:bg-red-700 transition-colors duration-300 whitespace-nowrap"
                 >
-                    Browse Now
+                  Browse Now
                 </button>
-
             </div>
-
         </section>
 
 
@@ -433,29 +411,20 @@
         <!---------------- CONTENT WRAPPER ---------------->
         <div class="p-5 inset-shadow-sm shadow-lg rounded-lg">
 
-
-
             <!---------------- FEATURED INVENTORY ---------------->
             <section class="featuredInv">
-
                 <!-- Heading -->
                 <div class="mb-6">
-
                     <span class="inline-block border-b-3 border-[var(--secondary)] text-sm font-medium uppercase tracking-wide text-[var(--secondary)]">
                         New
                     </span>
-
                     <h2 class="text-2xl font-bold mt-2 text-[var(--primary)]">
                         Featured Inventory
                     </h2>
-
                 </div>
-
-
 
                 <!-- Inventory Grid -->
                 <div class="cardContainer grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-
                     <% featuredCars.forEach(car => { %>
 
                     <!-- Card -->
@@ -463,11 +432,15 @@
 
                         <!-- Heart Icon -->
                         <div class="absolute top-3 right-3 z-10">
-
-                            <button class="like-btn text-white text-xl" title="Add to your favorite List" data-id="<%= car.inv_id %>">
-                                <i class="fa-regular fa-heart"></i>
+                            <% 
+                                // Check if likedCars exists and contains the current car's inv_id
+                                const isLiked = likedCars && likedCars.some(liked => liked.inv_id === car.inv_id); 
+                            %>
+                            <button class="like-btn text-xl <%= isLiked ? 'text-red-500' : 'text-white' %>" 
+                                    title="<%= isLiked ? 'Remove from favorites' : 'Add to your favorite List' %>" 
+                                    data-id="<%= car.inv_id %>">
+                                <i class="<%= isLiked ? 'fa-solid fa-heart' : 'fa-regular' %> fa-heart"></i>
                             </button>
-
                         </div>
 
 

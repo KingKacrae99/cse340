@@ -484,3 +484,8 @@ SET inv_image = REPLACE(inv_image, '/images/', 'images/vehicles/'),
 
 
 SELECT * FROM account;
+
+DELETE FROM public.account
+WHERE account_firstname = 'CSE340'
+AND account_lastname = 'Motors'
+AND account_type = 'Admin'

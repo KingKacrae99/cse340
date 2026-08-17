@@ -11,7 +11,7 @@ router.get("", utilities.handlerErrors(invController.buildFullShowroom));
 router.get("/details/:invId", utilities.handlerErrors(invController.buildByInventId));
 router.get("/filter", utilities.handlerErrors(invController.filterShowroomData));
 router.get("/mgt", invController.buildMgt);
-router.get("/create-classification", utilities.handlerErrors(invController.buildAddClassification));
+
 router.get("/create-inv", utilities.handlerErrors(invController.buildAddInventory));
 router.get("/:invMake", utilities.handlerErrors(invController.getCarsByBrand));
 

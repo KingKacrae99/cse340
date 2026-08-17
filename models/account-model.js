@@ -42,5 +42,14 @@ async function checkExistingEmail(account_email) {
         throw error;
     }
 }
+async function checkUpdateEmail(account_id, account_email){
+  try {
+    const sql = "SELECT * FROM public.account WHERE account_id != $1 AND account_email = $2"
+    const email = await pool.query(sql, [account_id,account_email])
+    return email.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
 
 module.exports = { registerAccount, checkExistingEmail, loginAccount };

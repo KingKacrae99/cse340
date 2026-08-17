@@ -97,6 +97,25 @@ Util.buildDropdown = async function (data) {
     return select
 }
 
+Util.buildUpdateDropdown = async function (data, selectedId) {
+  let select = `<select id="classification_id" name="classification_id" required>
+                <option value="">Choose a Classification</option>`;
+  if (data.length > 0) {
+    data.forEach(row => {
+      const selected = row.classification_id === selectedId ? ' selected' : '';
+      select += `<option value="${row.classification_id}"${selected}>
+                 ${row.classification_name}
+                 </option>`;
+    });
+  } else {
+    select = `<select id="classification_id" disabled>
+              <option>No options available</option>
+              </select>`;
+  }
+  select += `</select>`;
+  return select;
+}
+
 function addCommasAndCurrency(dataprice){
     price = Number(dataprice).toLocaleString('en-US', {
         style: 'currency',
@@ -114,5 +133,51 @@ function addCommasAndCurrency(dataprice){
  * Promise.resolve(fn(req, res, next)) a "wrapper" accepts a function as a parameter of the "Promise.resolve" function
  **************************************** */
 Util.handlerErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next).catch(next))
+
+
+/**************************************************
+ * Check Login
+ **************************************************/
+Util.checkLogin = (req, res, next) => {
+    if (res.locals.loggedin) {
+        next()
+    } else {
+        req.flash("notice", "Please log in.")
+        return res.redirect("/account/login")
+    }
+}
+
+/***********************************************
+ * Check Rights 
+************************************************/
+Util.checkRights = (req, res, next) => {
+    const staff = ['Employee', 'Admin']
+    console.log("account type :", res.locals.accountData.account_type)
+    const account_type = res.locals.accountData.account_type
+    console.log("account type result:",account_type) 
+    if (isStaff(account_type)) {
+        next()
+    } else {
+        if (res.locals.loggedin) {
+            req.flash("unauthorized", "Unauthorized Access!")
+            return res.redirect("/account/")
+        } else {
+           req.flash("notice", "Access Denied! Please log in.")
+           return res.redirect("/account/login") 
+        }
+    }
+}
+
+/********************************************
+ * Checks account role
+********************************************/
+function isStaff(accountType){
+    const role = ['Employee', 'Admin']
+    let staff = false;
+    if (role.includes(accountType)) {
+     staff = true;
+    }
+    return staff
+}
 
 module.exports = Util

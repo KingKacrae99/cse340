@@ -3,6 +3,7 @@ const router = new express.Router()
 const utilities = require('../utilities/')
 const Validate = require('../utilities/account-validation')
 const accountController= require('../controllers/accountController')
+const validate = require("../utilities/account-validation")
 
 router.get('/login', utilities.handlerErrors(accountController.buildLogin))
 router.get('/registration', utilities.handlerErrors(accountController.buildRegister))

@@ -1,0 +1,69 @@
+<div class="register">
+<h1 id="reg-head">
+    <%= title %>
+</h1>
+<%- messages() %>
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error=> { %>
+            <li>
+                <%= error.msg %>
+            </li>
+            <% }) %>
+    </ul>
+<% } %>
+    
+    <!-----------------------------Account Info------------------------------>
+    <form action="/account/update/" method="post" id="reg-form">
+        <h2>Account Update</h2>
+        <label for="first_name" id="account_firstname"> First Name </label>
+        <br>
+        <input type="text" id="first_name" name="account_firstname" 
+        autocomplete="first-name" required value="<%= locals.account_firstname %>">
+        <br>
+        <label for="last_name" id="account_lastname"> Last Name </label><br>
+        <input type="text" id="last_name" name="account_lastname" 
+        autocomplete="last-name" required value="<%= locals.account_lastname %>">
+        <br>
+        <label for="email" id="eaddress"> Email Address </label><br>
+        <input type="email" id="email" name="account_email" autocomplete="email"
+         required placeholder="Enter a valid email address"
+         value="<%= locals.account_email %>"
+         >
+        <div class="logbtn-div">
+            <button type="submit" id="reg-btn">Update profile</button>
+        </div>
+        <input type="hidden" id="account_id1" name="account_id" <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>>
+    </form>
+
+    <!-------------------------------- Change Password -------------------------------->
+    <form id="change-pswrd" method="post" action="/account/update-password/">
+        <h2>Change Password</h2>
+        <label for="password1" id="password1">Current Password </label><br>
+        <div class="pass-msg">
+            <small>Password must be at least 12 characters long, with at least 1 uppercase letter, 1 digit, and 1 special
+                character.
+            </small>
+        </div>
+        <input type="password" id="password1" name="account_password" autocomplete="new-password"
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required>
+        <br>
+        <label for="password2" id="password2"> New Password </label><br>
+        <div class="pass-msg">
+            <small>Password must be at least 12 characters long, with at least 1 uppercase letter, 1 digit, and 1 special
+                character.
+            </small>
+        </div>
+        <input type="password" id="password2" name="new_account_password"
+        autocomplete="new-password"
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+        required>
+       <span id="shwpwrd">Show Password</span>
+        <div class="logbtn-div">
+            <button type="submit" id="change-pswrd-btn">Change password</button>
+        </div>
+        <input type="hidden" id="account_id2" name="account_id" <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>>
+    </form>
+<script src="../../js/profile-settings.js" defer></script>

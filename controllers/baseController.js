@@ -9,23 +9,20 @@ baseController.buildHome = async function (req, res) {
 
     const featuredCars = res.locals.featuredCars;
     const topCars = res.locals.topCars;
+    let likedCars;
 
     if (res.locals.loggedin) {
         const account_id = res.locals.user.account_id;
         likedCars = await favModel.likedCars(account_id)
-
-        return res.render("index", {
-            title: "Home",
-            featuredCars,
-            topCars,
-            likedCars,
-            currentPath: req.originalUrl,
-        });
+    }else{
+        likedCars = []
     }
+
     res.render("index", {
         title: "Home",
         featuredCars,
         topCars,
+        likedCars,
         currentPath: req.originalUrl,
     });
 };

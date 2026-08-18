@@ -209,24 +209,20 @@ invCont.buildFullShowroom = async function (req, res, next) {
         const data = await invModel.getAllInventory();
         const brandNames = await invModel.getBrandNames();
         const classNames = await invModel.getClassificationName();
+        let likedCars;
         if(res.locals.loggedin){
             const accountId = res.locals.user.account_id;
-            const likedCars = await favModel.likedCars(accountId);
-
-            return res.render("inventory/index",{
-                title:"The Elite Fleet Showroom",
-                cars: data || [],
-                brandNames: brandNames || [],
-                classNames: classNames || [],
-                likedCars: likedCars
-            })
+            likedCars = await favModel.likedCars(accountId);
         }
         
+        likedCars = [];
+
         res.render("inventory/index", {
             title: "The Elite Fleet Showroom",
             cars: data || [],
             brandNames: brandNames || [],
-            classNames: classNames || []
+            classNames: classNames || [],
+            likedCars: likedCars
         });
     } catch (err) {
         next(err);
